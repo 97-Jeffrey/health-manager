@@ -1,26 +1,60 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import HealthMetrics from './pages/HealthMetrics';
 import Wellness from './pages/Wellness';
-import { UserProvider } from './context/UserContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import useAppData from './hooks/useApp';
+
+import { useCallback } from 'react';
 
 
 function App() {
 
 
+  const { state, setIsAuth } = useAppData()
+
+  const { isAuth } = state
+
+  const validateAuth = useCallback(() => setIsAuth(), [])
+
+  const signOutApp = useCallback(() => setIsAuth(), [])
+
+
   return (
 
-    <UserProvider>
+
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
+            <Route 
+              path="/signin" 
+              element={
+                <SignIn 
+                  isAuthenticated={isAuth}
+                  handleAuthentication={validateAuth}
+                />
+              } 
+
+            />
+
+            <Route 
+              path="/signup" 
+              element={
+                <SignUp   
+                  isAuthenticated={isAuth}
+                />} 
+            />
+
+            <Route 
+              path="/" 
+              element={
+                <ProtectedRoute>
+                  <MainLayout signOutApp={signOutApp} />
+                </ProtectedRoute>}
+            >
             <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="metrics" element={<ProtectedRoute><HealthMetrics /></ProtectedRoute>} />
@@ -28,7 +62,6 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </UserProvider>
   );
 }
 

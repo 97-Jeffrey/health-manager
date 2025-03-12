@@ -6,31 +6,7 @@ import { FetchUserAttributesOutput } from '../types/userInterface';
 const Profile = () => {
 
 
-  const [attributes, setAttributes] = useState<FetchUserAttributesOutput>({
-    email: '',
-    name: '',
-    birthdate: '',
-    address: "",
-    phone_number: "",
-    email_verified:"",
-    phone_number_verified:"",
-    sub:""
-  })
 
-  useEffect(()=>{
-    const fetchUser = async () => {
-      const attr = await fetchUserAttributes();
-      setAttributes(attr as FetchUserAttributesOutput)
-    }
-
-    fetchUser()
-    
-  },[])
-
-
-
-  console.log("attributes", attributes)
-  
 
 
   const [isEditing, setIsEditing] = useState(false);
@@ -86,7 +62,7 @@ const Profile = () => {
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
-              value={attributes.email}
+              // value={attributes.email}
               disabled={!isEditing}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
@@ -96,7 +72,7 @@ const Profile = () => {
             <label className="block text-sm font-medium text-gray-700">First Name</label>
             <input
               type="text"
-              value={attributes.name}
+              // value={attributes.name}
               disabled={!isEditing}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
@@ -109,7 +85,7 @@ const Profile = () => {
             <label className="block text-sm font-medium text-gray-700">Birth Date</label>
             <input
               type="date"
-              value={attributes.birthdate}
+              // value={attributes.birthdate}
               disabled={!isEditing}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
@@ -118,7 +94,7 @@ const Profile = () => {
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700">Address</label>
             <textarea
-              value={attributes.address}
+              // value={attributes.address}
               disabled={!isEditing}
               rows={3}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"

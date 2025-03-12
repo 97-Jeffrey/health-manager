@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "amazon-cognito-identity-js": "^6.3.12",
     "autoprefixer": "^10.4.20",
     "aws-amplify": "^6.11.0",
     "aws-amplify-react": "^5.1.43",
@@ -21,6 +22,7 @@
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@eslint/js": "^9.17.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",

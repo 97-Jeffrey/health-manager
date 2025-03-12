@@ -1,12 +1,20 @@
+import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { HomeIcon, ChartBarIcon, UserIcon, HeartIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
-import { signOut } from 'aws-amplify/auth';
-import { useUser } from '../context/UserContext';
+import { signout } from '../lib/Auth/index';
 
-const Sidebar = () => {
+interface SidebarInterface{
+  signOutApp: ()=> void
+}
+
+const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setUser } = useUser();
+
+  const handleSignOut = () =>{
+      signout()
+      signOutApp()
+  }
   
   const menuItems = [
     { title: 'Dashboard', icon: HomeIcon, path: '/dashboard' },
@@ -16,11 +24,10 @@ const Sidebar = () => {
     { 
       title: 'Sign Out', 
       icon: ArrowLeftOnRectangleIcon, 
-      path: '/login',
+      path: '/signin',
       onClick: async () => {
-        await signOut();
-        setUser({});
-        navigate('/login');
+        handleSignOut()
+        navigate('/signin');
       }
     }
   ];
@@ -37,7 +44,7 @@ const Sidebar = () => {
             <button
               key={item.path}
               onClick={item.onClick}
-              className={`w-full flex items-center px-6 py-2.5 text-sm transition-colors duration-200 text-blue-100 hover:bg-white/5`}
+              className={`font-bold text-white bg-inherit rounded-none w-full flex items-center px-6 py-2.5 text-sm transition-colors duration-200  hover:bg-white/5`}
             >
               <item.icon className="w-3.5 h-3.5 mr-3" />
               <span className="font-medium">{item.title}</span>
@@ -46,14 +53,14 @@ const Sidebar = () => {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex items-center px-6 py-2.5 text-sm transition-colors duration-200 ${
+              className={`flex items-center px-6 py-2.5 text-sm transition-colors duration-200 font-bold  ${
                 isActive 
                   ? 'bg-white/10 text-white border-r-4 border-white' 
                   : 'text-blue-100 hover:bg-white/5'
               }`}
             >
               <item.icon className="w-3.5 h-3.5 mr-3" />
-              <span className="font-medium">{item.title}</span>
+              <span className="font-heavy">{item.title}</span>
             </Link>
           );
         })}

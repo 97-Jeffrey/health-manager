@@ -1,39 +1,54 @@
+import React from 'react';
 import { useState } from 'react';
-import { signIn, fetchUserAttributes } from 'aws-amplify/auth';
-import { FetchUserAttributesOutput } from '../types/userInterface';
-import { useNavigate } from 'react-router-dom';
-import { useUser } from '../context/UserContext';
+import { useNavigate, Navigate } from 'react-router-dom';
 
-const Login = () => {
+import signin from '../lib/Auth/signin';
+import { UserSignInCredentials } from '../types/userSignInCredentials';
+
+
+interface signinProps {
+  isAuthenticated: boolean,
+  handleAuthentication: ()=> void
+}
+
+const SignIn: React.FC <signinProps> = ({ isAuthenticated, handleAuthentication }) => {
+  
+
+
   const navigate = useNavigate();
 
-  const { setUser } = useUser();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError]= useState<string>('')
+
+  const [credentials, setCredentials] = useState<UserSignInCredentials>({
+    email: '',
+    password:''
+  })
+
+  const handleCredentialChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    const {name, value} = e.target;
+    setCredentials(prev=> ({...prev, [name]: value}))
+  }
+ 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    
-    try {
-      await signIn({
-        username: email,
-        password: password
-      });
-       // Get the user's sub (unique identifier) from the authenticated user
-      //  const currentUser = await getCurrentUser();
-       const userAttributes = await fetchUserAttributes();
-       console.log('User Attributes:', userAttributes);
+    setLoading(true)
 
-       setUser(userAttributes as FetchUserAttributesOutput);
-      navigate('/dashboard');
-    } catch (error) {
-      console.error('Login error:', error);
-    } finally {
-      setLoading(false);
+
+    try{
+      await signin(credentials.email, credentials.password)
+      handleAuthentication()
+
+    }catch(err){
+       setError(err as string)
     }
+
+
+  
   };
+
+  if(isAuthenticated) return <Navigate replace to='/dashboard'/>
 
   return (
     <div className=" w-screen min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -42,6 +57,13 @@ const Login = () => {
           <h2 className="text-center text-3xl font-extrabold text-gray-900">
             Sign in to your account
           </h2>
+
+          {
+            error 
+              &&
+            <div className='bg-red-200 rounded-lg text-center p-3 font-bold'>{error}</div>
+          }
+
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
@@ -54,8 +76,9 @@ const Login = () => {
                 name="email"
                 type="email"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={credentials.email}
+                placeholder='Email'
+                onChange={handleCredentialChange}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
@@ -68,8 +91,9 @@ const Login = () => {
                 name="password"
                 type="password"
                 required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={credentials.password}
+                placeholder='Password'
+                onChange={handleCredentialChange}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
@@ -90,4 +114,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;

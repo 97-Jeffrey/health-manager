@@ -1,9 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import signin from '../lib/Auth/signin';
 import { UserSignInCredentials } from '../types/userSignInCredentials';
+
+import { DASHBOARD } from '../constants/routes';
+import * as ROUTES from '../constants/routes'
+
+import SignInForm from '../components/Auth/SignInForm';
+import AuthError from '../elements/error/authError';
 
 
 interface signinProps {
@@ -15,10 +21,9 @@ const SignIn: React.FC <signinProps> = ({ isAuthenticated, handleAuthentication 
   
 
 
-  const navigate = useNavigate();
-
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError]= useState<string>('')
+  const navigate = useNavigate()
 
   const [credentials, setCredentials] = useState<UserSignInCredentials>({
     email: '',
@@ -48,7 +53,11 @@ const SignIn: React.FC <signinProps> = ({ isAuthenticated, handleAuthentication 
   
   };
 
-  if(isAuthenticated) return <Navigate replace to='/dashboard'/>
+  const handleSignUp = () =>{
+    navigate(ROUTES.SIGN_UP)
+  }
+
+  if(isAuthenticated) return <Navigate replace to={DASHBOARD} />
 
   return (
     <div className=" w-screen min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -59,56 +68,20 @@ const SignIn: React.FC <signinProps> = ({ isAuthenticated, handleAuthentication 
           </h2>
 
           {
-            error 
+            error
               &&
-            <div className='bg-red-200 rounded-lg text-center p-3 font-bold'>{error}</div>
+            <AuthError text={error}/>
           }
 
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={credentials.email}
-                placeholder='Email'
-                onChange={handleCredentialChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                value={credentials.password}
-                placeholder='Password'
-                onChange={handleCredentialChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >
-              {loading ? 'Signing in...' : 'Sign in'}
-            </button>
-          </div>
-        </form>
+        <SignInForm 
+          loading={loading}
+          credentials={credentials}
+          handleCredentialChange={handleCredentialChange}
+          handleSubmit={handleSubmit}
+          handleSignUp={handleSignUp}
+        />
+        
       </div>
     </div>
   );

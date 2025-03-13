@@ -6,7 +6,6 @@ let userPool: any, currentUser: any
 const UserPoolId = import.meta.env.VITE_COGNITO_USER_POOL_ID;
 const ClientId =import.meta.env.VITE_COGNITO_CLIENT_ID;
 
-console.log(UserPoolId, ClientId)
 
 const initAuth = () =>{
     userPool = new CognitoUserPool({

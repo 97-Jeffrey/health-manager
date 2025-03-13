@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { fetchUserAttributes } from 'aws-amplify/auth';
 import { FetchUserAttributesOutput } from '../types/userInterface';
 
+import * as COLORS from '../constants/color'
+
 
 const Profile = () => {
 
@@ -114,7 +116,8 @@ const Profile = () => {
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
+                className={
+                  `px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${COLORS.ACTIONS_COLOR} hover:bg-blue-700`}
               >
                 Save Changes
               </button>
@@ -123,7 +126,8 @@ const Profile = () => {
             <button
               type="button"
               onClick={() => setIsEditing(true)}
-              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
+              className={
+                `px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${COLORS.ACTIONS_COLOR} hover:bg-blue-700`}
             >
               Edit Profile
             </button>

@@ -1,0 +1,1 @@
+export const ACTIONS_COLOR: string ='blue-600'

@@ -10,6 +10,7 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import useAppData from './hooks/useApp';
 
 import { useCallback } from 'react';
+import * as ROUTES from './constants/routes'
 
 
 function App() {
@@ -24,13 +25,14 @@ function App() {
   const signOutApp = useCallback(() => setIsAuth(), [])
 
 
+
   return (
 
 
       <BrowserRouter>
         <Routes>
             <Route 
-              path="/signin" 
+              path={ROUTES.SIGN_IN}
               element={
                 <SignIn 
                   isAuthenticated={isAuth}
@@ -41,7 +43,7 @@ function App() {
             />
 
             <Route 
-              path="/signup" 
+              path={ROUTES.SIGN_UP} 
               element={
                 <SignUp   
                   isAuthenticated={isAuth}
@@ -55,10 +57,29 @@ function App() {
                   <MainLayout signOutApp={signOutApp} />
                 </ProtectedRoute>}
             >
-            <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-            <Route path="metrics" element={<ProtectedRoute><HealthMetrics /></ProtectedRoute>} />
-            <Route path="wellness" element={<ProtectedRoute><Wellness /></ProtectedRoute>} />
+
+            <Route 
+              path={ROUTES.DASHBOARD} 
+              element={<ProtectedRoute><Dashboard /></ProtectedRoute>} 
+            />
+
+
+            <Route 
+              path={ROUTES.PROFILE} 
+              element={<ProtectedRoute><Profile /></ProtectedRoute>} 
+            />
+            
+           
+            <Route 
+              path={ROUTES.METRICS} 
+              element={<ProtectedRoute><HealthMetrics /></ProtectedRoute>} 
+            />
+
+            <Route 
+              path={ROUTES.WELLNESS} 
+              element={<ProtectedRoute><Wellness /></ProtectedRoute>} 
+            />
+            
           </Route>
         </Routes>
       </BrowserRouter>

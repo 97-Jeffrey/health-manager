@@ -1,0 +1,5 @@
+export const DASHBOARD: string = 'Dashboard'
+export const PROFILE: string = 'Profile'
+export const HEALTH_METRIC: string = 'Health Metric'
+export const WELLNESS: string = 'Wellness'
+export const SIGN_OUT: string = 'Sign Out'

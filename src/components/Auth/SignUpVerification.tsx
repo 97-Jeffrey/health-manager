@@ -50,7 +50,7 @@ const SignUpVerification: React.FC<SignUpVerificationInterface> =({
                     <button
                         type="submit"
                         disabled={loading}
-                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${COLORS.ACTIONS_COLOR} hover:bg-blue-700`}
+                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${COLORS.ACTIONS_BG_COLOR} hover:bg-blue-700`}
                         onClick={handleVerification}
                     >
                         Verify

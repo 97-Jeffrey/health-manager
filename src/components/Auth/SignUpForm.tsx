@@ -208,7 +208,7 @@ const SignUpForm: React.FC<SigUpFormInterface>  = ({
                 <button
                 type="submit"
                 disabled={loading}
-                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${COLORS.ACTIONS_COLOR} hover:bg-blue-700`}
+                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${COLORS.ACTIONS_BG_COLOR} hover:bg-blue-700`}
                 >
                 {loading ? 'Creating account...' : 'Create account'}
                 </button>
@@ -217,7 +217,7 @@ const SignUpForm: React.FC<SigUpFormInterface>  = ({
                     <div>Already Have An Account Yet</div>
     
                     <button 
-                    className={`bg-white text-${COLORS.ACTIONS_COLOR} border-none`} 
+                    className={`bg-white ${COLORS.ACTIONS_TEXT_COLOR} border-none`} 
                     onClick={handleSignIn}
                     >
                         Login

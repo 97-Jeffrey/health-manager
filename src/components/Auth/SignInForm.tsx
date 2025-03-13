@@ -58,7 +58,7 @@ const SignInForm: React.FC<SignInFormInterface> = ({
                 <button
                     type="submit"
                     disabled={loading}
-                    className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${COLORS.ACTIONS_COLOR} hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+                    className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${COLORS.ACTIONS_BG_COLOR} hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
                 >
                     {loading ? 'Signing in...' : 'Sign in'}
                 </button>
@@ -67,7 +67,7 @@ const SignInForm: React.FC<SignInFormInterface> = ({
                 <div className=' flex flex-col justify-center items-center gap-1'>
                     <div>Don't Have An Account Yet ?</div>
     
-                    <button className={`bg-white text-${COLORS.ACTIONS_COLOR} border-none`} onClick={handleSignUp}>Sign Up Today</button>
+                    <button className={`bg-white ${COLORS.ACTIONS_TEXT_COLOR} border-none`} onClick={handleSignUp}>Sign Up Today</button>
     
                 </div>
             </form>

@@ -37,7 +37,7 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
   ];
 
   return (
-    <div className={`w-64 min-h-screen bg-gradient-to-b from-${COLORS.ACTIONS_COLOR} via-blue-700 to-blue-800`}>
+    <div className={`w-64 min-h-screen bg-gradient-to-b ${COLORS.ACTIONS_COLOR} via-blue-700 to-blue-800`}>
       <div className="p-6">
         <h1 className="text-xl font-bold text-white">Health Manager</h1>
       </div>

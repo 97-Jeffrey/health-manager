@@ -117,7 +117,7 @@ const Profile = () => {
               <button
                 type="submit"
                 className={
-                  `px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${COLORS.ACTIONS_COLOR} hover:bg-blue-700`}
+                  `px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${COLORS.ACTIONS_BG_COLOR} hover:bg-blue-700`}
               >
                 Save Changes
               </button>
@@ -127,7 +127,7 @@ const Profile = () => {
               type="button"
               onClick={() => setIsEditing(true)}
               className={
-                `px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${COLORS.ACTIONS_COLOR} hover:bg-blue-700`}
+                `px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${COLORS.ACTIONS_BG_COLOR} hover:bg-blue-700`}
             >
               Edit Profile
             </button>

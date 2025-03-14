@@ -1,3 +1,7 @@
+import { UserInterface } from "./userInterface"
+
 export interface AppDataInterface {
-    isAuth: boolean
+    isFirstLogin: boolean,
+    isAuth: boolean,
+    userInfo:  UserInterface
 }

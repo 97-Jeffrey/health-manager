@@ -50,7 +50,7 @@ const getSession = ():Promise<AuthSessionInterface> => {
                 } else {
                     // console.log('Session: ', session);
                     const id: string = session.accessToken.payload.sub;
-                    const accessToken: string= session.accessToken.jwtTokenp;
+                    const accessToken: string= session.accessToken.jwtToken;
                     const email: string =  session.idToken.payload.email;
                     resolve({
                         id,

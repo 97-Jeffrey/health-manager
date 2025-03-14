@@ -1,13 +1,13 @@
 
-export interface FetchUserAttributesOutput {
-    email:  string,
+export interface UserInterface {
     name: string,
+    email:string,
+    address:string,
     birthdate: string,
-    address: string,
     phone_number: string,
-    email_verified:string,
-    phone_number_verified:string,
-    sub:string
+    specialty: string,
+    website:string,
+    userId: string,
   }
 
   

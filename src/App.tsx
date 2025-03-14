@@ -20,6 +20,7 @@ function App() {
 
   const { isAuth } = state
 
+
   const validateAuth = useCallback(() => setIsAuth(), [])
 
   const signOutApp = useCallback(() => setIsAuth(), [])

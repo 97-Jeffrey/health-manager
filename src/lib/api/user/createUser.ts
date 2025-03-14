@@ -2,6 +2,7 @@ import axios from 'axios';
 import { getAuthSession } from '../../Auth';
 import { baseUrl } from '../../../config';
 import { AuthSessionInterface } from '../../../types/authInterface';
+import { UserSignUpInterface } from '../../../types/userSignUpCredentials';
 
 /**
  * Replace the element at @param attribute with @param value for the current signed in practitioner info.
@@ -12,21 +13,22 @@ import { AuthSessionInterface } from '../../../types/authInterface';
  */
 
 
+const createUser = async (credentials: UserSignUpInterface) => {
 
 
-const updateUser = (attribute: string, value: string) => {
     return new Promise((resolve, reject) => {
         getAuthSession()
             .then((session: AuthSessionInterface ) => {
                 const { id, accessToken } = session;
-                const params = { attribute, value }
+
+                const params = { credentials }
                 const reqBody = {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 }
 
                 axios
-                    .put(
-                        `${baseUrl}/practitioner/${id}/update`,
+                    .post(
+                        `${baseUrl}/user/${id}/create`,
                         params,
                         reqBody
                     )
@@ -39,5 +41,5 @@ const updateUser = (attribute: string, value: string) => {
     })
 }
 
-export default updateUser
+export default createUser
 

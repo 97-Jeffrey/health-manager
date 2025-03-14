@@ -1,6 +1,8 @@
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js'
 import { getUserPool } from './config'
 import { UserSignUpInterface } from '../../types/userSignUpCredentials'
+import createUser from '../api/user/createUser'
+import { UserInterface } from '../../types/userInterface'
 
 /**
  * Sign up practitioner in Cognito User Pool with @param credentials
@@ -16,7 +18,8 @@ import { UserSignUpInterface } from '../../types/userSignUpCredentials'
  */
 
 
-const signup = (credentials: UserSignUpInterface)  => {
+const signup = (
+    credentials: UserSignUpInterface)  => {
     const userPool = getUserPool()
 
     const attributeList = [
@@ -62,13 +65,18 @@ const signup = (credentials: UserSignUpInterface)  => {
             credentials.password,
             attributeList,
             null,
-            (err:any, result:any) => {
+            async (err:any, result:any) => {
                 if (err) {
                     console.log(err)
                     reject(err.message || JSON.stringify(err))
                 } else {
                     console.log('ACCOUNT CREATED')
-                    console.log(result)
+                    console.log('res',result)
+                    // const info = {
+                    //     userId: result.userSub,
+                    //     ...credentials
+                    // }
+                    // setUserInfo(info)
                     resolve(result)
                 }
             }

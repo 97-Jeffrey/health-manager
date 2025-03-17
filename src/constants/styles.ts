@@ -1,0 +1,1 @@
+export const PROFILE_INPUT: string = "p-3 mt-1 block w-full rounded-md  shadow-sm focus:outline-none"

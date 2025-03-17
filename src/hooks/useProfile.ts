@@ -1,30 +1,46 @@
-import { useState } from 'react';
-import { UserProfile } from '../types/user';
+import { useState, useEffect } from 'react';
+import { UserInterface } from '../types/userInterface';
+import getUser from '../lib/api/user/getUser';
 
-export const useProfile = (initialProfile: UserProfile) => {
-  const [profile, setProfile] = useState<UserProfile>(initialProfile);
+export const useProfile = () => {
+  const [profile, setProfile] = useState<UserInterface>({
+    name: "",
+    email:"",
+    address:"",
+    birthdate: "",
+    phone_number: "",
+    specialty: "",
+    website:"",
+    userId: ""
+  });
 
-  const updateProfile = (updates: Partial<UserProfile>) => {
+  const handleProfileFieldChange  = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>{
+      const {name, value} = e.target;
+      setProfile(prev=>({...prev, [name]: value}))
+
+  }
+
+  const updateProfile = (updates: Partial<UserInterface>) => {
     setProfile(prev => ({
       ...prev,
       ...updates
     }));
   };
 
-  const saveProfile = async () => {
-    try {
-      // Add your API call here
-      // await api.updateProfile(profile);
-      return true;
-    } catch (error) {
-      console.error('Failed to update profile:', error);
-      return false;
+
+  useEffect(()=>{
+    const getProfile = async () =>{
+        const res: any = await getUser()
+        const profile = res?.data;
+        setProfile(profile)
+        
     }
-  };
+   getProfile()
+  },[])
 
   return {
     profile,
     updateProfile,
-    saveProfile
+    handleProfileFieldChange
   };
 };

@@ -1,29 +1,31 @@
-import { useState, useEffect } from 'react';
-import { fetchUserAttributes } from 'aws-amplify/auth';
-import { FetchUserAttributesOutput } from '../types/userInterface';
+import { useState } from 'react';
+import { useProfile } from '../hooks/useProfile';
 
 import * as COLORS from '../constants/color'
+import * as STYLES from '../constants/styles'
 
 
 const Profile = () => {
 
 
-
+  const { profile, handleProfileFieldChange } = useProfile() 
+  const { email, name, phone_number, specialty, birthdate, website, address } = profile
 
 
   const [isEditing, setIsEditing] = useState(false);
-  const [previewImage, setPreviewImage] = useState<string | undefined>('');
+  // const [previewImage, setPreviewImage] = useState<string | undefined>('');
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setPreviewImage(reader.result as string);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,7 +37,7 @@ const Profile = () => {
     <div className="w-full bg-white rounded-lg shadow-md p-8">
       <h1 className="text-3xl font-bold mb-8">My Profile</h1>
       
-      <div className="mb-8 flex justify-center">
+      {/* <div className="mb-8 flex justify-center">
         <div className="relative">
           <img 
             src={previewImage || '/default-avatar.png'} 
@@ -56,7 +58,7 @@ const Profile = () => {
             </label>
           )}
         </div>
-      </div>
+      </div> */}
 
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -64,9 +66,11 @@ const Profile = () => {
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
-              // value={attributes.email}
-              disabled={!isEditing}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              value={email}
+              name='email'
+              // disabled={!isEditing}
+              onChange={handleProfileFieldChange}
+              className={STYLES.PROFILE_INPUT}
             />
           </div>
 
@@ -74,32 +78,72 @@ const Profile = () => {
             <label className="block text-sm font-medium text-gray-700">First Name</label>
             <input
               type="text"
-              // value={attributes.name}
-              disabled={!isEditing}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              value={name}
+              name='name'
+              // disabled={!isEditing}
+              onChange={handleProfileFieldChange}
+              className={STYLES.PROFILE_INPUT}
             />
           </div>
 
+          <div>
+            <label className="block text-sm font-medium text-gray-700">First Name</label>
+            <input
+              type="text"
+              value={phone_number}
+              name='phone_number'
+              // disabled={!isEditing}
+              onChange={handleProfileFieldChange}
+              className={STYLES.PROFILE_INPUT}
+            />
+          </div>
 
-          
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Birth Date</label>
             <input
               type="date"
-              // value={attributes.birthdate}
-              disabled={!isEditing}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              value={birthdate}
+              name='birthdate'
+              // disabled={!isEditing}
+              onChange={handleProfileFieldChange}
+              className={STYLES.PROFILE_INPUT}
             />
           </div>
 
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700">Address</label>
             <textarea
-              // value={attributes.address}
-              disabled={!isEditing}
+              value={address}
+              name='address'
+              // disabled={!isEditing}
+              onChange={handleProfileFieldChange}
               rows={3}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className={STYLES.PROFILE_INPUT}
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700">specialty</label>
+            <textarea
+              value={specialty}
+              name='specialty'
+              // disabled={!isEditing}
+              onChange={handleProfileFieldChange}
+              rows={3}
+              className={STYLES.PROFILE_INPUT}
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700">Website</label>
+            <textarea
+              value={website}
+              name='website'
+              // disabled={!isEditing}
+              onChange={handleProfileFieldChange}
+              rows={3}
+              className={STYLES.PROFILE_INPUT}
             />
           </div>
         </div>

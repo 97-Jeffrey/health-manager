@@ -13,23 +13,20 @@ import { UserSignUpInterface } from '../../../types/userSignUpCredentials';
  */
 
 
-const createUser = async (credentials: UserSignUpInterface) => {
+const getUser = () => {
 
 
     return new Promise((resolve, reject) => {
         getAuthSession()
             .then((session: AuthSessionInterface ) => {
                 const { id, accessToken } = session;
-
-                const params = { credentials }
                 const reqBody = {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 }
 
                 axios
-                    .post(
-                        `${baseUrl}/user/${id}/create`,
-                        params,
+                    .get(
+                        `${baseUrl}/user/${id}`,
                         reqBody
                     )
                     .then((res) => resolve(res))
@@ -41,5 +38,5 @@ const createUser = async (credentials: UserSignUpInterface) => {
     })
 }
 
-export default createUser
+export default getUser
 

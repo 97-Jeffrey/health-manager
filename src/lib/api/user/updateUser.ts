@@ -26,7 +26,7 @@ const updateUser = (attribute: string, value: string) => {
 
                 axios
                     .put(
-                        `${baseUrl}/practitioner/${id}/update`,
+                        `${baseUrl}/user/${id}/update`,
                         params,
                         reqBody
                     )

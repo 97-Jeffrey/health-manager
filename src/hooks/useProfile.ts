@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { UserInterface } from '../types/userInterface';
 import getUser from '../lib/api/user/getUser';
+import updateUser from '../lib/api/user/updateUser';
 
 export const useProfile = () => {
   const [profile, setProfile] = useState<UserInterface>({
@@ -13,18 +14,30 @@ export const useProfile = () => {
     website:"",
     userId: ""
   });
+   const [updateNotify, setUpdateNotify] = useState(false)
 
   const handleProfileFieldChange  = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>{
-      const {name, value} = e.target;
+      setUpdateNotify(false)
+      const { name, value } = e.target;
       setProfile(prev=>({...prev, [name]: value}))
 
   }
 
-  const updateProfile = (updates: Partial<UserInterface>) => {
-    setProfile(prev => ({
-      ...prev,
-      ...updates
-    }));
+  const updateProfile = async (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    try{
+      const res = await updateUser(name, value)
+      console.log('update', res)
+      setUpdateNotify(true)
+
+    }
+    catch(err){
+      console.log('err', err)
+    }
+
+    
+   
   };
 
 
@@ -41,6 +54,8 @@ export const useProfile = () => {
   return {
     profile,
     updateProfile,
-    handleProfileFieldChange
+    handleProfileFieldChange,
+    updateNotify,
+    setUpdateNotify
   };
 };

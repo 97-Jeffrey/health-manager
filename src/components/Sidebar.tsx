@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { HomeIcon, ChartBarIcon, UserIcon, HeartIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
+import {  HomeIcon, ChartBarIcon, UserIcon, HeartIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
 import { signout } from '../lib/Auth/index';
 
 import * as ROUTES from '../constants/routes';
@@ -25,6 +25,7 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
     { title: MENU_ITEMS.PROFILE, icon: UserIcon, path: ROUTES.PROFILE },
     { title: MENU_ITEMS.HEALTH_METRIC, icon: ChartBarIcon, path: ROUTES.METRICS },
     { title: MENU_ITEMS.WELLNESS, icon: HeartIcon, path: ROUTES.WELLNESS },
+    { title: MENU_ITEMS.RECIPES, icon: HeartIcon, path: ROUTES.RECIPES},
     { 
       title: MENU_ITEMS.SIGN_OUT, 
       icon: ArrowLeftOnRectangleIcon, 

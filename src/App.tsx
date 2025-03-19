@@ -11,6 +11,7 @@ import useAppData from './hooks/useApp';
 
 import { useCallback } from 'react';
 import * as ROUTES from './constants/routes'
+import Recipe from './pages/Recipe';
 
 
 function App() {
@@ -58,6 +59,12 @@ function App() {
                   <MainLayout signOutApp={signOutApp} />
                 </ProtectedRoute>}
             >
+
+
+            <Route 
+              path={"/recipes/*"} 
+              element={<ProtectedRoute><Recipe /></ProtectedRoute>} 
+            />    
 
             <Route 
               path={ROUTES.DASHBOARD} 

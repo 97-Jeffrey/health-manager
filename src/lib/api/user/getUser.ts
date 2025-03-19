@@ -2,7 +2,6 @@ import axios from 'axios';
 import { getAuthSession } from '../../Auth';
 import { baseUrl } from '../../../config';
 import { AuthSessionInterface } from '../../../types/authInterface';
-import { UserSignUpInterface } from '../../../types/userSignUpCredentials';
 
 /**
  * Replace the element at @param attribute with @param value for the current signed in practitioner info.

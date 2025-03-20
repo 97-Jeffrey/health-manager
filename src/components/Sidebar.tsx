@@ -43,7 +43,7 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
         <h1 className="text-xl font-bold text-white">Health Manager</h1>
       </div>
 
-      <div className={` h-3/4 flex flex-col justify-between items-start w-full`}>
+      <div className={` min-h-96 flex flex-col justify-between items-start w-full flex-shrink-0`}>
         <nav className="mt-6 w-full">
           {
           menuItems

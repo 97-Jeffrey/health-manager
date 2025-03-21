@@ -1,24 +1,37 @@
-import React , { useState }from 'react'
+import { useState }from 'react'
 import * as STYLES from '../../constants/styles'
 import * as COLORS from '../../constants/color'
 import { useRecipe } from '../../hooks/useRecipe'
+import Success from '../../elements/banner/success'
+
 
 
 const RecipeCreate = () =>{
 
     const { 
+        loading,
+        success,
         recipe, 
+        setSuccess,
         handleRecipeFieldsChange, 
         handleIngredientAdd,
         handleStepAdd,
-        handleRecipeStep
+        handleRecipeStep,
+        handleRecipeCreate
     } = useRecipe()
     const { name, description, ingredients, steps} = recipe;
-    console.log('recipe', recipe)
 
     const [ingredient, setIngredient] = useState<string>('')
     return (
         <>
+          {
+                  success
+                    &&
+                  <Success  
+                    text='Update Successful' 
+                    onClose={()=> setSuccess(false)} 
+                  />
+                }
           <div className="w-full bg-white rounded-lg shadow-md p-8">
                <div className=' flex flex-row justify-between items-center'>
 
@@ -29,7 +42,7 @@ const RecipeCreate = () =>{
                </div>
 
 
-               <form className='mt-3 flex flex-col gap-5' onSubmit={()=>{}}>
+               <form className='mt-3 flex flex-col gap-5' onSubmit={handleRecipeCreate}>
                     
                         <div className='flex flex-col gap-3'>
                             <label className="block text-sm font-medium text-gray-700">Recipe Name</label>
@@ -138,8 +151,9 @@ const RecipeCreate = () =>{
                             type="submit"
                             className={
                             `px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${COLORS.ACTIONS_BG_COLOR} hover:bg-blue-700`}
+                            disabled={loading}
                         >
-                            Save Changes
+                            {loading ? 'Creating...':'Create'}
                         </button>
                     
                     </div>

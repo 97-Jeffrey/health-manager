@@ -1,6 +1,7 @@
 
 import { useState } from "react"
 import { RecipeInterface } from "../types/recipe"
+import createRecipe from "../lib/api/recipe/createRecipe"
 
 export const useRecipe = () =>{
 
@@ -10,6 +11,9 @@ export const useRecipe = () =>{
         ingredients: [],
         steps:[""],
     })
+
+    const [loading, setLoading] = useState<boolean>(false)
+    const [success, setSuccess] = useState<boolean>(false)
 
 
     const handleRecipeFieldsChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>{
@@ -36,13 +40,34 @@ export const useRecipe = () =>{
 
     }
 
+    const handleRecipeCreate = async (e: React.FormEvent) =>{
+       e.preventDefault()
+       setLoading(true)
+       try{
+            const res=  await createRecipe(recipe)
+            console.log('recipe', res)
+            setSuccess(true)
+        }
+        catch(err){
+          console.log('create recipe failed:', err)
+        }
+        finally{
+            setLoading(false)
+        }
+       
+    }
+
 
     return {
+        loading,
+        success,
         recipe,
+        setSuccess,
         handleRecipeFieldsChange,
         handleIngredientAdd,
         handleStepAdd,
-        handleRecipeStep
+        handleRecipeStep,
+        handleRecipeCreate
     }
 }
 

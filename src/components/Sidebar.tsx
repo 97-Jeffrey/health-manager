@@ -54,7 +54,7 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center px-6 py-2.5 text-sm transition-colors duration-200 font-bold  ${
+                className={`flex items-center px-6 py-2.5 text-sm transition-colors duration-200 font-bold  no-underline ${
                   isActive 
                     ? 'bg-white/10 text-white border-r-4 border-white' 
                     : 'text-blue-100 hover:bg-white/5'

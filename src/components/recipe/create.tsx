@@ -32,7 +32,7 @@ const RecipeCreate = () =>{
     const navigate = useNavigate()
 
     const handleGoBack =()=>{
-         navigate(ROUTES.RECIPES.MAIN)
+         navigate("/")
     }
     return (
         <>

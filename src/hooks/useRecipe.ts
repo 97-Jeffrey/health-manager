@@ -63,7 +63,7 @@ export const useRecipe = () =>{
             setSuccess(true)
 
             setTimeout(()=>{
-                navigate(ROUTES.RECIPES.MAIN)
+                navigate('/recipes')
             }, 1000)
             
         }

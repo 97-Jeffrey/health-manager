@@ -14,7 +14,7 @@ const Main = () =>{
 
     const handleCreateRecipeClick = () => {
         // Navigate to the "/recipes/create" path
-        navigate(ROUTES.RECIPES.CREATE);
+        navigate(ROUTES.RECIPE_CREATE);
     };
 
     

@@ -12,16 +12,16 @@ const Recipe = () =>{
         <>  
             <Routes>
                 <Route              
-                    path={ROUTES.RECIPES.MAIN}
+                    path={"/"}
                     element={<ProtectedRoute><Main /></ProtectedRoute>}
                 />
                 <Route
-                    path={ROUTES.RECIPES.CREATE}
+                    path={'/create'}
                     element={<ProtectedRoute><RecipeCreate/></ProtectedRoute>}
                 />
 
                 <Route
-                    path={ROUTES.RECIPES.EDIT}
+                    path={'edit/:id'}
                     element={<ProtectedRoute><RecipeEdit/></ProtectedRoute>}
                 />
             </Routes>

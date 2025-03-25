@@ -5,6 +5,7 @@ import { useRecipe } from '../../hooks/useRecipe'
 import Success from '../../elements/banner/success'
 import { useNavigate } from 'react-router-dom'
 import Tag from '../../elements/tag/tag';
+import DeleteIcon from '../../elements/remove/deleteIcon';
 
 
 
@@ -21,6 +22,7 @@ const RecipeCreate = () =>{
         handleRecipeStep,
         handleRecipeCreate,
         handleIngredientRemove,
+        handleStepRemove
     } = useRecipe()
     const { name, description, ingredients, steps} = recipe;
 
@@ -130,7 +132,7 @@ const RecipeCreate = () =>{
                                 <label className="block text-sm font-medium text-gray-700">Steps</label>
                                 {
                                     steps.map((step, index)=>(
-                                    <div key={index}>
+                                    <div key={index} className='flex flex-row justify-center items-center gap-2'>
                                         <input
                                             type="text"
                                             value={step}
@@ -140,6 +142,12 @@ const RecipeCreate = () =>{
                                             onChange={(e)=>{handleRecipeStep(index, e)}}
                                             className={STYLES.RECIPE_INPUT}
                                         />
+                                        {index >0
+                                           &&
+                                        <DeleteIcon 
+                                           onDelete={()=>handleStepRemove(index)}
+                                        />
+                                        }
                                     </div>
 
                                 ))

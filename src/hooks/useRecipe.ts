@@ -1,10 +1,12 @@
 
 import { useState, useEffect } from "react"
 import { RecipeInterface } from "../types/recipe"
-import createRecipe from "../lib/api/recipe/createRecipe"
-import getRecipes from "../lib/api/recipe/getRecipes"
 import { useNavigate } from "react-router-dom"
+
+import getRecipes from "../lib/api/recipe/getRecipes"
+import createRecipe from "../lib/api/recipe/createRecipe"
 import updateRecipe from "../lib/api/recipe/updateRecipe"
+import removeRecipe from "../lib/api/recipe/removeRecipe"
 
 export const useRecipe = () =>{
 
@@ -54,6 +56,12 @@ export const useRecipe = () =>{
 
     }
 
+    const handleStepRemove = (index: number) =>{
+        setRecipe(prev=>({
+            ...prev, steps: prev.steps.filter((_, idx)=> idx !==index)
+        }))
+    }
+
     const handleRecipeCreate = async (e: React.FormEvent) =>{
        e.preventDefault()
        setLoading(true)
@@ -90,7 +98,29 @@ export const useRecipe = () =>{
              
          }
          catch(err){
-           console.log('create recipe failed:', err)
+           console.log('update recipe failed:', err)
+         }
+         finally{
+             setLoading(false)
+         }
+        
+    }
+
+    const handleRecipeRemove = async (e: React.FormEvent, id: string| undefined) =>{
+        e.preventDefault()
+        setLoading(true)
+        try{
+             const res=  await removeRecipe(id)
+             console.log('res', res)
+             setSuccess(true)
+ 
+             setTimeout(()=>{
+                 navigate('/recipes')
+             }, 1000)
+             
+         }
+         catch(err){
+           console.log('remove recipe failed:', err)
          }
          finally{
              setLoading(false)
@@ -132,9 +162,11 @@ export const useRecipe = () =>{
         handleIngredientAdd,
         handleStepAdd,
         handleRecipeStep,
+        handleIngredientRemove,
+        handleStepRemove,
         handleRecipeCreate,
         handleRecipeUpdate,
-        handleIngredientRemove
+        handleRecipeRemove,
     }
 }
 

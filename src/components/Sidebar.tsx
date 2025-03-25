@@ -25,7 +25,7 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
     { title: MENU_ITEMS.PROFILE, icon: UserIcon, path: ROUTES.PROFILE },
     { title: MENU_ITEMS.HEALTH_METRIC, icon: ChartBarIcon, path: ROUTES.METRICS },
     { title: MENU_ITEMS.WELLNESS, icon: HeartIcon, path: ROUTES.WELLNESS },
-    { title: MENU_ITEMS.RECIPES, icon: HeartIcon, path: ROUTES.RECIPES},
+    { title: MENU_ITEMS.RECIPES, icon: HeartIcon, path: ROUTES.RECIPE},
     { 
       title: MENU_ITEMS.SIGN_OUT, 
       icon: ArrowLeftOnRectangleIcon, 
@@ -54,7 +54,7 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center px-6 py-2.5 text-sm transition-colors duration-200 font-bold  ${
+                className={`flex items-center px-6 py-2.5 text-sm transition-colors duration-200 font-bold  no-underline ${
                   isActive 
                     ? 'bg-white/10 text-white border-r-4 border-white' 
                     : 'text-blue-100 hover:bg-white/5'

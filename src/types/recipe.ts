@@ -1,7 +1,8 @@
 export interface RecipeInterface {
-    id?: string | number,
+    id?: string,
     name: string, 
     description: string,
     ingredients: string[],
-    steps: string[]
+    steps: string[],
+    lastUpdatedAt?: string
 }

@@ -62,7 +62,7 @@ function App() {
 
 
             <Route 
-              path={"/recipes/*"} 
+              path={ROUTES.RECIPE} 
               element={<ProtectedRoute><Recipe /></ProtectedRoute>} 
             />    
 

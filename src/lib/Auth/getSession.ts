@@ -25,7 +25,6 @@ const updateLastRequestDate = () => {
             return false; // Session expired
         } else {
             // Update the last request date
-            console.log("less 6 hours")
             localStorage.setItem('lastRequestDate', now.toISOString());
             return true; // Session is valid
         }

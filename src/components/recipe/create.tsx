@@ -1,7 +1,6 @@
 import { useState }from 'react'
 import * as STYLES from '../../constants/styles'
 import * as COLORS from '../../constants/color';
-import * as ROUTES from '../../constants/routes'
 import { useRecipe } from '../../hooks/useRecipe'
 import Success from '../../elements/banner/success'
 import { useNavigate } from 'react-router-dom'
@@ -32,7 +31,7 @@ const RecipeCreate = () =>{
     const navigate = useNavigate()
 
     const handleGoBack =()=>{
-         navigate("/")
+         navigate("/recipes")
     }
     return (
         <>

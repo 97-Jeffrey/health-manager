@@ -17,6 +17,10 @@ const Main = () =>{
         navigate(ROUTES.RECIPE_CREATE);
     };
 
+    const handleEdit = (id: string|undefined ) =>{
+        navigate(`/recipes/edit/${id}`);
+    }
+
     
 
 
@@ -41,6 +45,7 @@ const Main = () =>{
                             className={
                                 `p-3 bg-[#E7DDFF] w-[300px] min-h-[300px] rounded-lg cursor-pointer flex flex-col justify-around`
                             }
+                            onClick={()=>handleEdit(recipe.id)}
                         >
 
                             <div className=' text-[30px] font-bold'>{recipe.name}</div>

@@ -4,7 +4,7 @@ import { RecipeInterface } from "../types/recipe"
 import createRecipe from "../lib/api/recipe/createRecipe"
 import getRecipes from "../lib/api/recipe/getRecipes"
 import { useNavigate } from "react-router-dom"
-import * as ROUTES from '../constants/routes'
+import updateRecipe from "../lib/api/recipe/updateRecipe"
 
 export const useRecipe = () =>{
 
@@ -76,6 +76,28 @@ export const useRecipe = () =>{
        
     }
 
+    const handleRecipeUpdate = async (e: React.FormEvent) =>{
+        e.preventDefault()
+        setLoading(true)
+        try{
+             const res=  await updateRecipe(recipe)
+             console.log('recipe', res)
+             setSuccess(true)
+ 
+             setTimeout(()=>{
+                 navigate('/recipes')
+             }, 1000)
+             
+         }
+         catch(err){
+           console.log('create recipe failed:', err)
+         }
+         finally{
+             setLoading(false)
+         }
+        
+     }
+
     useEffect(()=>{
         
         const handleFetchRecipes = async()=>{
@@ -103,12 +125,15 @@ export const useRecipe = () =>{
         success,
         recipe,
         recipes,
+        setRecipe,
+        setLoading,
         setSuccess,
         handleRecipeFieldsChange,
         handleIngredientAdd,
         handleStepAdd,
         handleRecipeStep,
         handleRecipeCreate,
+        handleRecipeUpdate,
         handleIngredientRemove
     }
 }

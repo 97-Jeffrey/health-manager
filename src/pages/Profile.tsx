@@ -6,6 +6,8 @@ import * as STYLES from '../constants/styles'
 import Success from '../elements/banner/success';
 
 
+
+
 const Profile = () => {
 
 
@@ -14,32 +16,15 @@ const Profile = () => {
     handleProfileFieldChange, 
     updateProfile,
     updateNotify,
-    setUpdateNotify
+    setUpdateNotify,
+    handleUploadProfileImage
   } 
   = useProfile() 
-  const { email, name, phone_number, specialty, birthdate, website, address } = profile
+  const { email, name, phone_number, 
+    specialty, birthdate, website, address, image } = profile
 
 
   const [isEditing, setIsEditing] = useState(false);
-  // const [previewImage, setPreviewImage] = useState<string | undefined>('');
-
-  // const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = event.target.files?.[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setPreviewImage(reader.result as string);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
-
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsEditing(false);
-    // Add API call to update profile
-  };
 
   return (
     <>
@@ -54,30 +39,39 @@ const Profile = () => {
       <div className="w-full bg-white rounded-lg shadow-md p-8">
         <h1 className="text-3xl font-bold mb-8">My Profile</h1>
         
-        {/* <div className="mb-8 flex justify-center">
-          <div className="relative">
-            <img 
-              src={previewImage || '/default-avatar.png'} 
-              alt="Profile" 
-              className="w-32 h-32 rounded-full object-cover"
+        <div className="mb-8 flex flex-col justify-center items-center gap-2">
+            {
+            image ?
+              <img 
+                src={image} 
+                alt="Profile Image" 
+                className="w-[200px] h-[200px] rounded-full object-cover border border-black"
+              />
+                :
+              <div className="font-bold w-[200px] h-[200px] rounded-full object-cover border border-black flex flex-row justify-center items-center">
+                  No Profile 
+              </div>
+            }
+            
+            <input
+              type="file"
+              id="bootstrap-file-upload"
+              onChange={handleUploadProfileImage}
+              className="d-none"
             />
-            {isEditing && (
-              <label className="absolute bottom-0 right-0 bg-blue-500 p-2 rounded-full cursor-pointer">
-                <input 
-                  type="file" 
-                  className="hidden" 
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                />
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                </svg>
-              </label>
-            )}
-          </div>
-        </div> */}
+      
+            {/* Label styled as Bootstrap button */}
+            <label
+              htmlFor="bootstrap-file-upload"
+              className="btn btn-secondary"
+            >
+              Upload Profile
+            </label>
+      
+          
+        </div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={()=>{}}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700">Email</label>

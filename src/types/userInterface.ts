@@ -8,6 +8,7 @@ export interface UserInterface {
     specialty: string,
     website:string,
     userId: string,
+    image?: string,
   }
 
   

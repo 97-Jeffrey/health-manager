@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { UserInterface } from '../types/userInterface';
 import getUser from '../lib/api/user/getUser';
 import updateUser from '../lib/api/user/updateUser';
+import uploadImage from '../lib/api/image/uploadImage';
 
 export const useProfile = () => {
   const [profile, setProfile] = useState<UserInterface>({
@@ -12,9 +13,16 @@ export const useProfile = () => {
     phone_number: "",
     specialty: "",
     website:"",
-    userId: ""
+    userId: "",
+    image:""
   });
-   const [updateNotify, setUpdateNotify] = useState(false)
+  const [updateNotify, setUpdateNotify] = useState(false)
+  const [trigger, setTrigger] = useState(false)
+
+
+  const handleFetchData =() => {
+    setTrigger(prev=> !prev)
+  }
 
   const handleProfileFieldChange  = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>{
       setUpdateNotify(false)
@@ -40,6 +48,23 @@ export const useProfile = () => {
    
   };
 
+  const handleUploadProfileImage  = async (e:React.ChangeEvent<HTMLInputElement>) =>{
+    const files = e.target.files;
+    if (!files || files.length<1) return;
+
+    const imageType = 'profile-photo';
+    const file: File = files[0];
+
+    console.log('file', file)
+
+    const res = await uploadImage(imageType, file)
+    console.log(res)
+    handleFetchData()
+
+
+
+  }
+
 
   useEffect(()=>{
     const getProfile = async () =>{
@@ -49,12 +74,13 @@ export const useProfile = () => {
         
     }
    getProfile()
-  },[])
+  },[trigger])
 
   return {
     profile,
     updateProfile,
     handleProfileFieldChange,
+    handleUploadProfileImage,
     updateNotify,
     setUpdateNotify
   };

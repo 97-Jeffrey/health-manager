@@ -7,6 +7,7 @@ import { useRecipe } from '../../hooks/useRecipe';
 import getRecipe from '../../lib/api/recipe/getRecipe';
 import { RecipeInterface } from '../../types/recipe';
 import Success from '../../elements/banner/success'
+import DeleteIcon from '../../elements/remove/deleteIcon';
 
 
 
@@ -25,7 +26,9 @@ const RecipeEdit = () =>{
             handleStepAdd,
             handleRecipeStep,
             handleRecipeUpdate,
+            handleRecipeRemove,
             handleIngredientRemove,
+            handleStepRemove
         } = useRecipe()
     const { name, description, ingredients, steps} = recipe;
 
@@ -74,7 +77,7 @@ const RecipeEdit = () =>{
            <div className="w-full bg-white rounded-lg shadow-md p-8">
                 <div className=' flex flex-row justify-between items-center'>
 
-                    <div className='font-bold text-xl'>Update A Recipe</div>
+                    <div className='font-bold text-xl'>Update the {recipe.name ?`"${recipe.name}"`:`recipe`}</div>
                     <button className={STYLES.ACTION_BUTTON} onClick={handleGoBack}>Go Back</button>
 
                     
@@ -155,23 +158,29 @@ const RecipeEdit = () =>{
 
                             <div>
 
-                                <label className="block text-sm font-medium text-gray-700">Steps</label>
-                                {
-                                    steps.map((step, index)=>(
-                                    <div key={index}>
-                                        <input
-                                            type="text"
-                                            value={step}
-                                            name='steps'
-                                            placeholder={`Step ${index +1}`}
-                                            onBlur={()=>{}}
-                                            onChange={(e)=>{handleRecipeStep(index, e)}}
-                                            className={STYLES.RECIPE_INPUT}
-                                        />
-                                    </div>
+                              <label className="block text-sm font-medium text-gray-700">Steps</label>
+                              {
+                                  steps.map((step, index)=>(
+                                  <div key={index} className='flex flex-row justify-center items-center gap-2'>
+                                      <input
+                                          type="text"
+                                          value={step}
+                                          name='steps'
+                                          placeholder={`Step ${index +1}`}
+                                          onBlur={()=>{}}
+                                          onChange={(e)=>{handleRecipeStep(index, e)}}
+                                          className={STYLES.RECIPE_INPUT}
+                                      />
+                                      {index >0
+                                        &&
+                                      <DeleteIcon 
+                                        onDelete={()=>handleStepRemove(index)}
+                                      />
+                                      }
+                                  </div>
 
-                                ))
-                                }
+                              ))
+                              }
                             </div>
 
                             <button 
@@ -191,7 +200,14 @@ const RecipeEdit = () =>{
                 
                         <div className="mt-8 flex justify-end space-x-4">
                         
-                        
+                            <button
+                                className={
+                                `px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${COLORS.REMOVE_BG_COLOR} hover:bg-red-700`}
+                                disabled={loading}
+                                onClick={(e)=>handleRecipeRemove(e, recipe.id)}
+                            >
+                                {loading ? 'Deleting...':'Delete'}
+                            </button>
                             <button
                                 type="submit"
                                 className={

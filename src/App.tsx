@@ -4,7 +4,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
-import HealthMetrics from './pages/HealthMetrics';
+import  HealthJourney from './pages/HealthJourney';
 import Wellness from './pages/Wellness';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import useAppData from './hooks/useApp';
@@ -79,8 +79,8 @@ function App() {
             
            
             <Route 
-              path={ROUTES.METRICS} 
-              element={<ProtectedRoute><HealthMetrics /></ProtectedRoute>} 
+              path={ROUTES.HEALTH_JOURNEY} 
+              element={<ProtectedRoute><HealthJourney /></ProtectedRoute>} 
             />
 
             <Route 

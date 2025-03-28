@@ -6,9 +6,32 @@
 */
 
 export function formatDate(dateString: string| undefined): string {
-    const date = dateString ? new Date(dateString): new Date()
+
+
+  if (!dateString) {
+    return new Date().toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+  }
+
+    // Check if it's a date-only string (YYYY-MM-DD)
+  const isDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(dateString);
+
+
+  let date: Date;
+    if (isDateOnly) {
+        // Manually parse YYYY-MM-DD in local time (no timezone shift)
+        const [year, month, day] = dateString.split('-').map(Number);
+        date = new Date(year, month - 1, day); // months are 0-indexed
+    } else {
+        // Parse normally (for ISO strings with time)
+        date = new Date(dateString);
+    }
+        
     
-   return dateString?.split('T').length ===2 ?
+   return dateString?.includes('T')?
     
     date.toLocaleString('en-US', {
       year: 'numeric',

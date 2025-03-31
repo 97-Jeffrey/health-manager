@@ -1,4 +1,4 @@
-export const DASHBOARD: string = 'Dashboard'
+export const BODY: string = 'Body'
 export const PROFILE: string = 'Profile'
 export const HEALTH_JOURNEY: string = 'Health Journey'
 export const WELLNESS: string = 'Wellness'

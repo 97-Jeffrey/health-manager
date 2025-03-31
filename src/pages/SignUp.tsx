@@ -90,7 +90,7 @@ const SignUp: React.FC<SignUpProps> = ({ isAuthenticated }) => {
     }
   };
 
-  if(isAuthenticated) return <Navigate replace to={ROUTES.DASHBOARD}/>
+  if(isAuthenticated) return <Navigate replace to={ROUTES.BODY}/>
 
   if (showVerification) {
     return (

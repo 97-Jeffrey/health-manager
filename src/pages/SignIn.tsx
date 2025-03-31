@@ -5,7 +5,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import signin from '../lib/Auth/signin';
 import { UserSignInCredentials } from '../types/userSignInCredentials';
 
-import { DASHBOARD } from '../constants/routes';
+import { BODY } from '../constants/routes';
 import * as ROUTES from '../constants/routes'
 
 import SignInForm from '../components/Auth/SignInForm';
@@ -57,7 +57,7 @@ const SignIn: React.FC <signinProps> = ({ isAuthenticated, handleAuthentication 
     navigate(ROUTES.SIGN_UP)
   }
 
-  if(isAuthenticated) return <Navigate replace to={DASHBOARD} />
+  if(isAuthenticated) return <Navigate replace to={BODY} />
 
   return (
     <div className=" w-screen min-h-screen flex items-center justify-center bg-gray-50 px-4">

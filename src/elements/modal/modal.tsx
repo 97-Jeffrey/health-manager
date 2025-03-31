@@ -6,22 +6,25 @@ interface EditModalInterface {
   title: string,
   open: boolean,
   handleClose: ()=> void,
-  children: ReactNode
+  children: ReactNode,
+  updateActionText: string,
 }
 
-const ToggleModal: React.FC<EditModalInterface> =({ title, open, handleClose, children })=> {
+const ToggleModal: React.FC<EditModalInterface> =({ 
+  title, 
+  open, 
+  handleClose, 
+  updateActionText,
+  children })=> {
   
 
 
   return (
     <>
-      {/* <Button variant="primary" onClick={handleOpen}>
-        Launch demo modal
-      </Button> */}
 
       <Modal show={open} onHide={handleClose} className='w-[1200px]'>
         <Modal.Header closeButton>
-          <Modal.Title>{title}</Modal.Title>
+          <Modal.Title className='font-bold'>{title}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -32,7 +35,7 @@ const ToggleModal: React.FC<EditModalInterface> =({ title, open, handleClose, ch
             Close
           </Button>
           <Button variant="primary" onClick={handleClose}>
-            Save Changes
+            {updateActionText}
           </Button>
         </Modal.Footer>
       </Modal>

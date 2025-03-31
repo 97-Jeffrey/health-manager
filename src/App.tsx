@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import Dashboard from './pages/Dashboard';
+import Body from './pages/Body';
 import Profile from './pages/Profile';
 import  HealthJourney from './pages/HealthJourney';
 import Wellness from './pages/Wellness';
@@ -67,8 +67,8 @@ function App() {
             />    
 
             <Route 
-              path={ROUTES.DASHBOARD} 
-              element={<ProtectedRoute><Dashboard /></ProtectedRoute>} 
+              path={ROUTES.BODY} 
+              element={<ProtectedRoute><Body /></ProtectedRoute>} 
             />
 
 

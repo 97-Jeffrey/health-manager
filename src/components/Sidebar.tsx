@@ -21,7 +21,7 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
   }
   
   const menuItems = [
-    { title: MENU_ITEMS.DASHBOARD, icon: HomeIcon, path: ROUTES.DASHBOARD },
+    { title: MENU_ITEMS.BODY, icon: HomeIcon, path: ROUTES.BODY },
     { title: MENU_ITEMS.HEALTH_JOURNEY, icon: ChartBarIcon, path: ROUTES.HEALTH_JOURNEY },
     { title: MENU_ITEMS.WELLNESS, icon: HeartIcon, path: ROUTES.WELLNESS },
     { title: MENU_ITEMS.RECIPES, icon: HeartIcon, path: ROUTES.RECIPE},

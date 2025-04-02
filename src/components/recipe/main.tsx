@@ -8,6 +8,7 @@ import LoadingSpinner from "../../elements/loading/loadingSpinner";
 
 import * as STYLES from '../../constants/styles'
 import * as ROUTES from '../../constants/routes'
+import Info from "../../elements/info/info";
 
 const Main = () =>{
     const navigate = useNavigate();
@@ -28,12 +29,20 @@ const Main = () =>{
     return (
         <>
            <div className="w-full bg-white rounded-lg shadow-md p-8">
-               <div className=' flex flex-row justify-between items-center'>
+               <div className=' flex flex-row justify-between items-center mb-3'>
 
-                  <div className='font-bold text-[30px]'>My Recipes</div>
+                  <div className='font-bold text-[30px]'>My Recipes 👨‍🍳</div>
                   <button className={STYLES.ACTION_BUTTON} onClick={handleCreateRecipeClick}>Create Recipe</button>
                    
                </div>
+
+               <Info 
+                  text={`Save, organize, and recreate your favorite dishes 
+                    effortlessly—whether it’s a family heirloom, 
+                    a restaurant-inspired creation, or a healthy meal 
+                    prep idea. A recipe that truly matters to you, and your health.
+                    `}
+               />
 
                {
                 loading ?

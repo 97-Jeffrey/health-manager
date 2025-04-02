@@ -3,6 +3,7 @@ import { useJourney } from '../hooks/useJourney';
 
 import JourneyVertcialTimeLine from '../elements/timeline/JourneyTimeLine';
 import HealthJourneyForm from '../components/journey/form';
+import Info from '../elements/info/info';
 
 const HealthMetrics: React.FC= () => {
 
@@ -33,11 +34,17 @@ const HealthMetrics: React.FC= () => {
         />
 
       }
-      <div className='flex flex-col justify-center items-center gap-5'>
+      <div className='flex flex-col justify-center items-center gap-3'>
 
           <div className='flex flex-row justify-start items-center w-100'>
             <div className='font-bold text-[30px]'>Wellness Journey ⛰️</div> 
           </div>
+
+          <Info
+              text={`Track, understand, and celebrate your wellness progress—all
+                 in one place. Whether you're managing a condition, improving 
+                 fitness, or just prioritizing self-care.`}
+          />
 
           <div className="flex flex-row justify-center items-start gap-2 w-100">
             <div className='flex-1 rounded-lg border border-grey w-[40%] min-h-[680px] bg-white' >

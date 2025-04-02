@@ -3,7 +3,6 @@ import { BodySymptomInterface } from '../types/bodySymptom';
 import createBodySymptom from '../lib/api/body/createBodySymptom';
 
 
-
 export const useBodySymptom = () => {
 
     const INITIAL_BODY_SYMPTOM: BodySymptomInterface = {

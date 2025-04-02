@@ -5,40 +5,51 @@ import Dropdown from "../../elements/dropdown/dropdown"
 import Progress from "../../elements/progressBar/progressBar"
 
 import { BodySymptomInterface } from "../../types/bodySymptom"
+import CheckBox from "../../elements/form/checkBox"
 
 
 interface BodyModalInterface {
     open: boolean,
+    isEdit: boolean,
+    toDelete: boolean,
     handleClose: ()=> void,
     bodySymptom: BodySymptomInterface,
     handleFieldChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>void,
-    handleRatingChange: (rating: number)=> void
+    handleRatingChange: (rating: number)=> void,
+    handleResolvedStatus: (e: React.ChangeEvent<HTMLInputElement>)=> void,
     handleDropdownFieldChange: (name: string, value: string| null)=> void
-    hanldleSymptomCreate: (e: React.FormEvent) => Promise<void>,
+    asyncAction: (e: React.FormEvent) => Promise<void>,
+    asyncDeleteAction?: (e: React.FormEvent) => Promise<void>,
 
 }
 
 const BodyModal : React.FC<BodyModalInterface>= ({ 
     open,
+    isEdit,
+    toDelete,
     bodySymptom,
     handleClose,
     handleFieldChange,
     handleRatingChange,
+    handleResolvedStatus,
     handleDropdownFieldChange,
-    hanldleSymptomCreate,
+    asyncAction,
+    asyncDeleteAction
+
 }) =>{
 
-
-    console.log(bodySymptom)
 
     return (
         <>
             <ToggleModal 
-                title={'Update A Body Symptom'}
+                title={`${isEdit? 'Update': 'Create'} A Body Symptom`}
                 open={open}
+                toDelete={toDelete}
                 handleClose={handleClose}
-                updateActionText={'Update'}
-                asyncAction={hanldleSymptomCreate}
+                updateActionText={isEdit? 'Update':'Create'}
+                deleteActionText={'Delete'}
+                asyncAction={asyncAction}
+                asyncDeleteAction={asyncDeleteAction}
             > 
                 <div className='flex flex-col gap-3'>
                     <div className='flex flex-col gap-2 '>
@@ -68,6 +79,16 @@ const BodyModal : React.FC<BodyModalInterface>= ({
                             name={'symptom'}
                             value={bodySymptom.symptom}
                             onChange={handleDropdownFieldChange}
+                        />
+                    </div>
+
+                    <div className='flex flex-col gap-2 '>
+                        
+                        <CheckBox
+                           text={'Is it Resolved?'}
+                           status={bodySymptom.isResolved}
+                           onChange={handleResolvedStatus}
+
                         />
                     </div>
         

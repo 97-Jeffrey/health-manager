@@ -1,6 +1,9 @@
 import React, { useState, useEffect} from 'react';
 import { BodySymptomInterface } from '../types/bodySymptom';
+import getBodySymptoms from '../lib/api/body/getBodySymptoms';
 import createBodySymptom from '../lib/api/body/createBodySymptom';
+import updateBodySymptom from '../lib/api/body/updateBodySymptom';
+import removeBodySymptom from '../lib/api/body/removeBodySymptom';
 
 
 export const useBodySymptom = () => {
@@ -15,10 +18,10 @@ export const useBodySymptom = () => {
         rating: 0,
         isResolved: false
     }
-    const [bodySymptom, setbodySymptom]=  useState<BodySymptomInterface>(INITIAL_BODY_SYMPTOM)
+    const [bodySymptom, setbodySymptom]=  useState(INITIAL_BODY_SYMPTOM)
     const [bodySymptoms, setbodySymptoms] = useState<BodySymptomInterface[]>([])
     const [loading, setLoading] = useState<boolean>(false)
-    const [success, setSuccess] = useState<boolean>(false)
+    const [success, setSuccess] = useState<string>("")
     const [trigger, setTrigger] = useState<boolean>(false)
     const [isEdit, setIsEdit] = useState<boolean>(false)
 
@@ -28,8 +31,6 @@ export const useBodySymptom = () => {
 
 
     const handleFieldChange =(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>{
-
-        console.log(e.target)
         const { name, value } = e.target;
         setbodySymptom(prev=>({
             ...prev,
@@ -53,9 +54,16 @@ export const useBodySymptom = () => {
 
     }
 
+    const handleResolvedStatus = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        setbodySymptom(prev=>({
+            ...prev,
+            isResolved: e.target.checked
+        }))
+    }
+
 
     const handleSymptomSelect= (id: string)=>{
-        if(isEdit && id===bodySymptom.id){
+        if(!id){
             setIsEdit(false)
             setbodySymptom(INITIAL_BODY_SYMPTOM)
             return;
@@ -65,13 +73,13 @@ export const useBodySymptom = () => {
         setIsEdit(true)
     }
 
-    //Create a health/wellness journey
-    const hanldleSymptomCreate = async (e: React.FormEvent) =>{
+    //Create a body symptom
+    const handleSymptomCreate = async (e: React.FormEvent) =>{
         e.preventDefault()
         setLoading(true)
         try{
             await createBodySymptom(bodySymptom)
-            setSuccess(true)
+            setSuccess("Body Symptom Created Successfully")
             setbodySymptom(INITIAL_BODY_SYMPTOM)
             handleRefetchData()
              
@@ -85,13 +93,13 @@ export const useBodySymptom = () => {
         
     }
 
-    //update a health/wellness journey
+    //update a body symptom
     const handleSymptomUpdate = async (e: React.FormEvent) =>{
         e.preventDefault()
         setLoading(true)
         try{
-            //  await updateJourney(journey)
-             setSuccess(true)
+             await updateBodySymptom(bodySymptom)
+             setSuccess("Body Symptom Updated Successfully")
              setIsEdit(false)
              setbodySymptom(INITIAL_BODY_SYMPTOM)
              handleRefetchData()
@@ -107,14 +115,14 @@ export const useBodySymptom = () => {
     }
 
 
-     //remove a health/wellness journey
-     const handleSymptomRemove = async (e: React.FormEvent) =>{
+     //remove a body Symptom
+    const handleSymptomRemove = async (e: React.FormEvent) =>{
 
         e.preventDefault()
         setLoading(true)
         try{
-            //  await removeJourney(journey.id)
-             setSuccess(true)
+             await removeBodySymptom(bodySymptom.id)
+             setSuccess("Body Symptom Deleted Successfully")
              setIsEdit(false)
              setbodySymptom(INITIAL_BODY_SYMPTOM)
              handleRefetchData()
@@ -135,8 +143,8 @@ export const useBodySymptom = () => {
         const handleFetchSymptoms = async()=>{
             try{
                 setLoading(true)
-                // const data: BodySymptomInterface[] = await getJourneys()
-                // setJourneys(data)
+                const data: BodySymptomInterface[] = await getBodySymptoms()
+                setbodySymptoms(data)
             }catch(err){
                 console.log('err:', err)
             }
@@ -164,8 +172,9 @@ export const useBodySymptom = () => {
         handleSymptomSelect,
         handleRatingChange,
         handleFieldChange,
+        handleResolvedStatus,
         handleDropdownFieldChange,
-        hanldleSymptomCreate,
+        handleSymptomCreate,
         handleSymptomUpdate,
         handleSymptomRemove
        

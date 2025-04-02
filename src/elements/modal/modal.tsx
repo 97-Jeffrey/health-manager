@@ -3,20 +3,26 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 interface EditModalInterface {
+  toDelete: boolean,
   title: string,
   open: boolean,
   handleClose: ()=> void,
   children: ReactNode,
   updateActionText: string,
-  asyncAction: (e: React.FormEvent)=> Promise<void>
+  deleteActionText: string,
+  asyncAction: (e: React.FormEvent)=> Promise<void>,
+  asyncDeleteAction? :(e: React.FormEvent)=> Promise<void>,
 }
 
 const ToggleModal: React.FC<EditModalInterface> =({ 
+  toDelete,
   title, 
   open, 
   handleClose, 
   asyncAction,
+  asyncDeleteAction,
   updateActionText,
+  deleteActionText,
   children })=> {
   
 
@@ -33,9 +39,11 @@ const ToggleModal: React.FC<EditModalInterface> =({
           {children}
         </Modal.Body>
         <Modal.Footer>
+
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
+
           <Button 
             variant="primary" 
             onClick={(e)=>{
@@ -45,6 +53,23 @@ const ToggleModal: React.FC<EditModalInterface> =({
           >
             {updateActionText}
           </Button>
+
+          { toDelete 
+              &&
+            <Button 
+              variant="danger" 
+              onClick={(e)=>{
+                if(asyncDeleteAction){
+                  asyncDeleteAction(e)
+                  handleClose()
+                }
+                else return
+              }}
+            >
+              {deleteActionText}
+            </Button>
+          }
+
         </Modal.Footer>
       </Modal>
     </>

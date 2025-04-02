@@ -8,12 +8,14 @@ interface EditModalInterface {
   handleClose: ()=> void,
   children: ReactNode,
   updateActionText: string,
+  asyncAction: (e: React.FormEvent)=> Promise<void>
 }
 
 const ToggleModal: React.FC<EditModalInterface> =({ 
   title, 
   open, 
   handleClose, 
+  asyncAction,
   updateActionText,
   children })=> {
   
@@ -34,7 +36,13 @@ const ToggleModal: React.FC<EditModalInterface> =({
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button 
+            variant="primary" 
+            onClick={(e)=>{
+              asyncAction(e)
+              handleClose()
+            }}
+          >
             {updateActionText}
           </Button>
         </Modal.Footer>

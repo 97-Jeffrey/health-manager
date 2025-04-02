@@ -1,14 +1,26 @@
 import { useState } from 'react';
 
 import * as STYLES from '../constants/styles'
-import Dropdown from '../elements/dropdown/dropdown'
 
 import BodyModal from '../components/body/bodyModal';
+import { useBodySymptom } from '../hooks/useBodySymptom';
+import Success from '../elements/banner/success';
 
 
-const Body = () => {
+const Body: React.FC = () => {
 
   const [open,setOpen] = useState<boolean>(false)
+
+
+  const  {
+    success,
+    setSuccess,
+    bodySymptom,  
+    handleFieldChange,
+    handleRatingChange,
+    handleDropdownFieldChange,
+    hanldleSymptomCreate
+} = useBodySymptom();
 
   const handleModalOpen = ()=> {
     setOpen(true)
@@ -19,7 +31,23 @@ const Body = () => {
 
   return (
     <>
-      <BodyModal open={open} handleClose={handleModalClose}/>
+      {
+        success 
+           &&
+        <Success
+          text={`Journey Created Successfully`}
+          onClose={()=>setSuccess(false)}
+        />
+      }
+      <BodyModal 
+          open={open} 
+          handleClose={handleModalClose}
+          bodySymptom={bodySymptom}
+          handleFieldChange={handleFieldChange}
+          handleRatingChange={handleRatingChange}
+          handleDropdownFieldChange={handleDropdownFieldChange}
+          hanldleSymptomCreate={hanldleSymptomCreate}
+      />
 
       <div className='w-100 bg-white p-3 rounded-lg flex flex-col gap-3'>
         <div className='flex flex-row justify-between items-center w-100'>
@@ -27,7 +55,7 @@ const Body = () => {
           <button className={STYLES.ACTION_BUTTON} onClick={handleModalOpen}>Update</button>
         </div>
 
-        <Dropdown data={['Face', 'Body']}/>
+        {/* <Dropdown data={['Face', 'Body']}/> */}
 
 
         

@@ -38,12 +38,12 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
   ];
 
   return (
-    <div className={`w-64 min-h-screen bg-gradient-to-b ${COLORS.ACTIONS_COLOR} via-blue-700 to-blue-800`}>
+    <div className={`fixed w-64 min-h-screen bg-gradient-to-b ${COLORS.ACTIONS_COLOR} via-blue-700 to-blue-800`}>
       <div className="p-6">
         <h1 className="text-xl font-bold text-white">Health Manager</h1>
       </div>
 
-      <div className={` min-h-96 flex flex-col justify-between items-start w-full flex-shrink-0`}>
+      <div className={`h-[600px] flex flex-col justify-between items-start w-full flex-shrink-0`}>
         <nav className="mt-6 w-full">
           {
           menuItems

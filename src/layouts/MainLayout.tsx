@@ -12,7 +12,7 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ signOutApp }) => {
       <Sidebar 
          signOutApp={signOutApp}
       />
-      <main className="flex-1 p-6 w-full">
+      <main className="flex-1 p-6 w-full ml-[270px]">
         <div className="w-full">
           <Outlet />
         </div>

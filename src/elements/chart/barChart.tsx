@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
+import { formatDateToMonthDayYear } from '../../lib/util/date';
 
 import {
     Chart as ChartJS,
@@ -23,31 +24,68 @@ ChartJS.register(
 
 );
 
+interface BarChartInterface {
+    text: string,
+    labels: string[],
+    values: number [],
+    selectTargetData: (date: string)=> void
+    handleOpen?:()=> void,
+}
 
 
-const BarChart: React.FC = () => {
+
+const BarChart: React.FC<BarChartInterface> = ({ text, labels, values, selectTargetData, handleOpen  }) => {
     const data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+      labels: labels,
       datasets: [
         {
-          label: 'Sales 2023',
-          data: [65, 59, 80, 81, 56, 55],
+          label: `${text}`,
+          data: values,
           backgroundColor: 'rgba(75, 192, 192, 0.6)',
           borderColor: 'rgba(75, 192, 192, 1)',
           borderWidth: 1,
+          barThickness: 40
         },
       ],
     };
   
     const options: ChartOptions<'bar'> = {
       responsive: true,
+      onClick: (_, elements) => {
+        const targetDate = labels[elements[0]?.index];
+        selectTargetData(targetDate)
+        if(handleOpen) handleOpen()
+
+      },
       plugins: {
         legend: {
           position: 'top',
         },
         title: {
           display: true,
-          text: 'Monthly Sales Data',
+          text: text,
+        },
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: {
+            color: 'rgba(0, 0, 0, 0.8)', // Customize tick color
+            callback: function(value) {
+              // Convert the label (e.g., "2024-01-01") to a formatted date
+              const date = new Date(this.getLabelForValue(value as number))
+              return formatDateToMonthDayYear(date);
+            }
+          }
+        },
+        y: {
+          grid: {
+            display: false, // Remove horizontal grid lines
+            // drawBorder: false, // Optional: remove y-axis line
+          },
+          ticks: {
+            color: 'rgba(0, 0, 0, 0.8)', // Customize tick color
+          }
         },
       },
     };

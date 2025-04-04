@@ -27,3 +27,8 @@ export const Issues: string[] = [
     'Eczema',
     'Psoriasis'
 ]
+
+
+export const Weight_Units: string[] = [
+    'Kg', 'Pound'
+]

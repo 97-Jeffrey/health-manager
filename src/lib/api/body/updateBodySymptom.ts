@@ -7,7 +7,7 @@ import { BodySymptomInterface } from '../../../types/bodySymptom';
 /**
  * update a body Symptom with @param bodySymptom for the current signed-in user.
  *
- * @param {BodySymtpom} journey
+ * @param {BodySymptomInterface} bodySymptom
  * @return {Promise<any>}
  */
 

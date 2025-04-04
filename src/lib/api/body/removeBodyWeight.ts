@@ -2,30 +2,32 @@ import axios from 'axios';
 import { getAuthSession } from '../../Auth';
 import { baseUrl } from '../../../config';
 import { AuthSessionInterface } from '../../../types/authInterface';
-import { BodySymptomInterface } from '../../../types/bodySymptom';
 
 /**
- * get All body symptoms for the current signed-in user.
+ * Remove a body Weight with @param bodyWeightId for the current signed-in user.
  *
+ * @param {string} bodyWeightId
  * @return {Promise<any>}
  */
 
 
-const getBodySymptoms = (): Promise<BodySymptomInterface[]> => {
+const removeBodyWeight = (bodyWeightId: string) => {
     return new Promise((resolve, reject) => {
         getAuthSession()
             .then((session: AuthSessionInterface ) => {
                 const { id, accessToken } = session;
+                const params = { bodyWeightId }
                 const reqBody = {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 }
 
                 axios
-                    .get(
-                        `${baseUrl}/body/${id}/symptoms`,
+                    .post(
+                        `${baseUrl}/body/${id}/weight/delete`,
+                        params,
                         reqBody
                     )
-                    .then((res) => resolve(res.data))
+                    .then((res) => resolve(res))
                     .catch((err) => reject(JSON.stringify(err)))
             })
             .catch((err) =>
@@ -34,5 +36,4 @@ const getBodySymptoms = (): Promise<BodySymptomInterface[]> => {
     })
 }
 
-export default getBodySymptoms
-
+export default removeBodyWeight

@@ -6,7 +6,7 @@ import BodyGlucose from "../components/body/bodyGlucose";
 
 const Body: React.FC = () => {
 
-  const [selectedSection, setSelectedSection] = useState<string>('Symptom')
+  const [selectedSection, setSelectedSection] = useState<string>('Weight')
 
 
   return (
@@ -15,6 +15,7 @@ const Body: React.FC = () => {
 
         {['Symptom', 'Weight', 'Glucose'].map(section=> (
           <div 
+            key={section}
             className={
             `${selectedSection ===section? 'bg-black': "bg-[#edebeb]"} 
             ${selectedSection ===section? 'text-white': "text-black"}

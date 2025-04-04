@@ -2,30 +2,33 @@ import axios from 'axios';
 import { getAuthSession } from '../../Auth';
 import { baseUrl } from '../../../config';
 import { AuthSessionInterface } from '../../../types/authInterface';
-import { BodySymptomInterface } from '../../../types/bodySymptom';
+import { BodyWeightInterface } from '../../../types/bodyWeight';
 
 /**
- * get All body symptoms for the current signed-in user.
+ * add a new body weight with @param bodyWeight for the current signed-in user.
  *
+ * @param {bodySymptom} bodyWeight
  * @return {Promise<any>}
  */
 
 
-const getBodySymptoms = (): Promise<BodySymptomInterface[]> => {
+const createBodyWeight = (bodyWeight: BodyWeightInterface) => {
     return new Promise((resolve, reject) => {
         getAuthSession()
             .then((session: AuthSessionInterface ) => {
                 const { id, accessToken } = session;
+                const params = { bodyWeight }
                 const reqBody = {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 }
 
                 axios
-                    .get(
-                        `${baseUrl}/body/${id}/symptoms`,
+                    .post(
+                        `${baseUrl}/body/${id}/weight/create`,
+                        params,
                         reqBody
                     )
-                    .then((res) => resolve(res.data))
+                    .then((res) => resolve(res))
                     .catch((err) => reject(JSON.stringify(err)))
             })
             .catch((err) =>
@@ -34,5 +37,5 @@ const getBodySymptoms = (): Promise<BodySymptomInterface[]> => {
     })
 }
 
-export default getBodySymptoms
+export default createBodyWeight
 

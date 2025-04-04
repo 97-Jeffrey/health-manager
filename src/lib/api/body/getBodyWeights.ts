@@ -2,16 +2,16 @@ import axios from 'axios';
 import { getAuthSession } from '../../Auth';
 import { baseUrl } from '../../../config';
 import { AuthSessionInterface } from '../../../types/authInterface';
-import { BodySymptomInterface } from '../../../types/bodySymptom';
+import { BodyWeightInterface } from '../../../types/bodyWeight';
 
 /**
- * get All body symptoms for the current signed-in user.
+ * get All body weights for the current signed-in user.
  *
  * @return {Promise<any>}
  */
 
 
-const getBodySymptoms = (): Promise<BodySymptomInterface[]> => {
+const getBodyWeights = (): Promise<BodyWeightInterface[]> => {
     return new Promise((resolve, reject) => {
         getAuthSession()
             .then((session: AuthSessionInterface ) => {
@@ -22,7 +22,7 @@ const getBodySymptoms = (): Promise<BodySymptomInterface[]> => {
 
                 axios
                     .get(
-                        `${baseUrl}/body/${id}/symptoms`,
+                        `${baseUrl}/body/${id}/weights`,
                         reqBody
                     )
                     .then((res) => resolve(res.data))
@@ -34,5 +34,5 @@ const getBodySymptoms = (): Promise<BodySymptomInterface[]> => {
     })
 }
 
-export default getBodySymptoms
+export default getBodyWeights
 

@@ -2,28 +2,29 @@ import axios from 'axios';
 import { getAuthSession } from '../../Auth';
 import { baseUrl } from '../../../config';
 import { AuthSessionInterface } from '../../../types/authInterface';
+import { BodyGlucoseInterface } from '../../../types/bodyGlucose';
 
 /**
- * Remove a body weight with @param bodyWeightId for the current signed-in user.
+ * update a body glucose with @param bodyGlucose for the current signed-in user.
  *
- * @param {string} bodyWeightId
+ * @param {BodyGlucoseInterface} bodyGlucose
  * @return {Promise<any>}
  */
 
 
-const removeBodyWeight = (bodyWeightId: string) => {
+const updateBodyGlucose = (bodyGlucose: BodyGlucoseInterface) => {
     return new Promise((resolve, reject) => {
         getAuthSession()
             .then((session: AuthSessionInterface ) => {
                 const { id, accessToken } = session;
-                const params = { bodyWeightId }
+                const params = { bodyGlucose }
                 const reqBody = {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 }
 
                 axios
-                    .post(
-                        `${baseUrl}/body/${id}/weight/delete`,
+                    .put(
+                        `${baseUrl}/body/${id}/glucose/edit/${bodyGlucose.id}`,
                         params,
                         reqBody
                     )
@@ -36,4 +37,4 @@ const removeBodyWeight = (bodyWeightId: string) => {
     })
 }
 
-export default removeBodyWeight
+export default updateBodyGlucose

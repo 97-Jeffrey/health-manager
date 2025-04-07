@@ -53,6 +53,7 @@ const BarChart: React.FC<BarChartInterface> = ({ text, labels, values, selectTar
       responsive: true,
       onClick: (_, elements) => {
         const targetDate = labels[elements[0]?.index];
+        console.log(targetDate)
         selectTargetData(targetDate)
         if(handleOpen) handleOpen()
 

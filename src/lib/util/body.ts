@@ -1,4 +1,5 @@
 import { BodyWeightInterface } from "../../types/bodyWeight"
+import { BodyGlucoseInterface } from "../../types/bodyGlucose"
 
 
 /** 
@@ -28,8 +29,12 @@ export const getBgColorBySeverity = (severity: number): string=> {
  *   
 */
 
-const sortByAscendingDate = (weights: BodyWeightInterface[]): BodyWeightInterface[] =>{
-    return [...weights].sort((a, b) => {
+interface DateObject {
+  date: string | Date; // Assuming date can be either a string or Date object
+}
+
+const sortByAscendingDate = <T extends DateObject>(data: T[]): T[] =>{
+    return [...data].sort((a, b) => {
       return new Date(a.date).getTime() - new Date(b.date).getTime();
     });
   }
@@ -66,5 +71,28 @@ export const  analyzeBodyWeight = (weights: BodyWeightInterface[]) =>{
        dates,
        data
     }
+
+}
+
+
+
+/** 
+ *  Analysize a given body glucose data into readable format for chart.js 
+ return with data and dates
+ *   
+*/
+
+
+export const  analyzeBodyGlucose = (glucoses: BodyGlucoseInterface[]) =>{
+
+  const sortedGlucoses = sortByAscendingDate(glucoses);
+  const dates = sortedGlucoses.map(glu=> glu.date);
+  const data = sortedGlucoses.map(glu=>glu.glucose)
+
+
+  return {
+     dates,
+     data
+  }
 
 }

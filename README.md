@@ -11,8 +11,26 @@ A health tracking application built with React, TypeScript, and Tailwind CSS tha
 ## Features
 
 - **Body Data Management**: Track and edit body measurements and health metrics
+
+  
+  ![body symptom](https://github.com/97-Jeffrey/health-manager/blob/master/Doc/Screenshot%202025-04-07%20at%201.59.50%E2%80%AFPM.png?raw=true)
+
+  ![body Weight](https://github.com/97-Jeffrey/health-manager/blob/master/Doc/Screenshot%202025-04-07%20at%202.00.22%E2%80%AFPM.png?raw=true)
+
+
 - **Health Journey Log**: Record phrased health activities and progress
+
+  ![Wellness Journey](https://github.com/97-Jeffrey/health-manager/blob/master/Doc/Screenshot%202025-04-07%20at%202.02.59%E2%80%AFPM.png?raw=true)
+
+
+
+
 - **Recipe Management**: Save and organize healthy recipes
+
+  ![recipe](https://github.com/97-Jeffrey/health-manager/blob/master/Doc/Screenshot%202025-04-07%20at%202.03.34%E2%80%AFPM.png?raw=true)
+
+  ![recipe creation](https://github.com/97-Jeffrey/health-manager/blob/master/Doc/Screenshot%202025-04-07%20at%202.04.07%E2%80%AFPM.png?raw=true)
+
 
 ## Tech Stack
 

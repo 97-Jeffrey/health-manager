@@ -84,7 +84,7 @@ function App() {
             />
 
             <Route 
-              path={ROUTES.WELLNESS} 
+              path={ROUTES.MIND_WELLNESS} 
               element={<ProtectedRoute><Wellness /></ProtectedRoute>} 
             />
             

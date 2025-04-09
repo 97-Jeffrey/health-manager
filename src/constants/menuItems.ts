@@ -1,6 +1,6 @@
 export const BODY: string = 'Body'
 export const PROFILE: string = 'Profile'
 export const HEALTH_JOURNEY: string = 'Health Journey'
-export const WELLNESS: string = 'Wellness'
+export const MIND_WELLNESS: string = 'Mind Wellness'
 export const RECIPES: string = 'Recipes'
 export const SIGN_OUT: string = 'Sign Out'

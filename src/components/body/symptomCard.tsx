@@ -15,11 +15,13 @@ const SymptomCard: React.FC<SymptomCardInterface> = ({
     setOpen ,
     handleSymptomSelect
 }) =>{
+
     return (
         <>
             <div 
+                style={{ backgroundColor: color }}
                 className={
-                    `cursor-pointer rounded-[15px] w-100 min-h-[80px] flex flex-row justify-around items-center p-2 border-[2px] border-black bg-[${color}]`}
+                    `cursor-pointer rounded-[15px] w-100 min-h-[80px] flex flex-row justify-around items-center p-2 border-[2px] border-black`}
                 onClick={()=>{
                     handleSymptomSelect(symptom.id)
                     setOpen(true)

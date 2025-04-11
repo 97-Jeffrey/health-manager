@@ -38,9 +38,9 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
   ];
 
   return (
-    <div className={`fixed w-64 min-h-screen bg-gradient-to-b ${COLORS.ACTIONS_COLOR} via-blue-700 to-blue-800`}>
+    <div className={`fixed w-64 min-h-screen bg-white `}>
       <div className="p-6">
-        <h1 className="text-xl font-bold text-white">Health Manager</h1>
+        <h1 className="text-xl font-bold text-black">Health Manager</h1>
       </div>
 
       <div className={`h-[600px] flex flex-col justify-between items-start w-full flex-shrink-0`}>
@@ -54,14 +54,14 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center px-6 py-2.5 text-sm transition-colors duration-200 font-bold  no-underline ${
+                className={`flex items-center px-6 py-3 text-sm transition-colors duration-200 font-bold  no-underline ${
                   isActive 
-                    ? 'bg-white/10 text-white border-r-4 border-white' 
-                    : 'text-blue-100 hover:bg-white/5'
+                    ? 'bg-grey text-[#A2A1A1] border-r-4 border-white hover:text-black' 
+                    : 'text-black hover:bg-white/10'
                 }`}
               >
                 <item.icon className="w-3.5 h-3.5 mr-3" />
-                <span className="font-heavy">{item.title}</span>
+                <span className="font-heavy text-[20px]">{item.title}</span>
               </Link>
             );
           })}
@@ -72,10 +72,10 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
             handleSignOut()
             navigate(ROUTES.SIGN_IN);
           }}
-          className={`font-bold text-white bg-inherit rounded-none w-full flex items-center px-6 py-2.5 text-sm transition-colors duration-200  hover:bg-white/5`}
+          className={`text-black bg-inherit rounded-none w-full flex items-center px-6 py-2.5 text-sm transition-colors duration-200 hover:no-underline`}
         >
           <ArrowLeftOnRectangleIcon className="w-3.5 h-3.5 mr-3" />
-          <span className="font-medium">{MENU_ITEMS.SIGN_OUT}</span>
+          <span className="font-bold text-[20px]">{MENU_ITEMS.SIGN_OUT}</span>
         </button>
       </div>
 

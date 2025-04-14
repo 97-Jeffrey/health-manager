@@ -5,48 +5,44 @@
  *   ex: 2025-03-25 -> March 25, 2025
 */
 
-export function formatDate(dateString: string| undefined): string {
-
-
+export function formatDate(dateString: string | undefined): string {
   if (!dateString) {
-    return new Date().toLocaleString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
-  }
-
-    // Check if it's a date-only string (YYYY-MM-DD)
-  const isDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(dateString);
-
-
-  let date: Date;
-    if (isDateOnly) {
-        // Manually parse YYYY-MM-DD in local time (no timezone shift)
-        const [year, month, day] = dateString.split('-').map(Number);
-        date = new Date(year, month - 1, day); // months are 0-indexed
-    } else {
-        // Parse normally (for ISO strings with time)
-        date = new Date(dateString);
-    }
-        
-    
-   return dateString?.includes('T')?
-    
-    date.toLocaleString('en-US', {
+    // Return local date without time
+    return new Date().toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    })
-    :
-    date.toLocaleString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
+      timeZone: 'UTC' // Force UTC to avoid timezone shifts
+    });
+  }
 
+  const isDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(dateString);
+  let date: Date;
+
+  if (isDateOnly) {
+    // Parse as UTC date to avoid timezone issues
+    date = new Date(dateString + 'T00:00:00Z');
+  } else {
+    // Parse ISO string directly
+    date = new Date(dateString);
+  }
+
+  // Format with explicit UTC timezone
+  return dateString.includes('T')
+    ? date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'UTC'
+      })
+    : date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'UTC'
+      });
 }
 
 

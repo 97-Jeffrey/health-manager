@@ -8,7 +8,8 @@ export const capitalizeFirstChar = (str: string): string=> {
 // remove extra characters by maxLength and replaced by Eclipsis:
 export const truncateString = (str: string, maxLength: number): string =>{
 
-    if (str.length > maxLength) {
+    if(maxLength ===0) return str
+    else if (str.length > maxLength) {
       return str.slice(0, maxLength) + '...';
     }
     return str;

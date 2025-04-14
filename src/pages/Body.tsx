@@ -6,7 +6,7 @@ import BodyGlucose from "../components/body/bodyGlucose";
 
 const Body: React.FC = () => {
 
-  const [selectedSection, setSelectedSection] = useState<string>('Weight')
+  const [selectedSection, setSelectedSection] = useState<string>('Symptom')
 
 
   return (

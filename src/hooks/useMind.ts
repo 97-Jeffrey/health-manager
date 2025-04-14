@@ -1,3 +1,5 @@
+import createMind from "../lib/api/mind/createMind"
+import getMinds from "../lib/api/mind/getMinds"
 import { mindInterface } from "../types/mindInterface"
 import { useState, useEffect } from "react"
 
@@ -5,11 +7,11 @@ import { useState, useEffect } from "react"
 
 export const useMind = () => {
 
-    const INITIAL_MIND: mindInterface = {
-        meditation: {
+    const MIND_DEDFAULT = {
+        meditation: { 
             "calm": 0,
             "relaxed": 0,
-            'energized':0
+            "energized":0
         },
         cognition: {
             'focus':0,
@@ -19,9 +21,8 @@ export const useMind = () => {
             'creativity':0,
             'alertness':0,
             'brain fog':0
-
         },
-        mood:{
+        mood: {
             'stress':0,
             'positivity':0,
             'sensivity':0,
@@ -30,6 +31,17 @@ export const useMind = () => {
             "anxiety":0,
             "irritability":0
         }
+    }
+
+    const INITIAL_MIND: mindInterface = {
+        date: '',
+        mindType: 'meditation',
+        data: {
+            "calm": 0,
+            "relaxed": 0,
+            'energized':0
+        },
+        note: '',
     }
 
     const [mind, setMind]=  useState(INITIAL_MIND)
@@ -43,109 +55,123 @@ export const useMind = () => {
         setTrigger(prev=>!prev)
     }
 
-    const handleValueChange =(
-        name: string,
-        groupName: keyof mindInterface,
-        value: number,
-    )=>{
+
+    const handleMindTypeChange = (type: 'meditation'| 'cognition' | 'mood') =>{
         setMind(prev=>({
             ...prev,
-            [groupName]: {
-                ...prev[groupName],
-                [name]: Number(value)
+            mindType: type,
+            data: MIND_DEDFAULT[type]
+            
+        }))
+    }
 
+    const handleMindValueChange =(name: string, rating: number )=>{
+        setMind(prev=>({
+            ...prev,
+            data: {
+                ...prev.data,
+                [name]: rating
             }
         
         }))
 
     }
 
+    const handleFieldChange =(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>{
+        const { name, value } = e.target;
+        setMind(prev=>({
+            ...prev,
+            [name]: value
+        }))
+    }
 
-        //Create a body symptom
-        const handleMindCreate = async (e: React.FormEvent) =>{
-            e.preventDefault()
-            setLoading(true)
-            try{
-                // await createBodySymptom(bodySymptom)
-                setSuccess("Body Symptom Created Successfully")
+
+    //Create a Mind Entry
+    const handleMindCreate = async (e: React.FormEvent) =>{
+        e.preventDefault()
+        setLoading(true)
+        try{
+            await createMind(mind)
+            setSuccess("Mind Entry Created Successfully")
+            setMind(INITIAL_MIND)
+            handleRefetchData()
+                
+            }
+            catch(err){
+                console.log('create mind failed:', err)
+            }
+            finally{
+                setLoading(false)
+            }
+        
+    }
+
+    //update a Mind Entry
+    const handleMindUpdate = async (e: React.FormEvent) =>{
+        e.preventDefault()
+        setLoading(true)
+        try{
+            //  await updateBodySymptom(bodySymptom)
+                setSuccess("Mind Updated Successfully")
+                setIsEdit(false)
                 setMind(INITIAL_MIND)
                 handleRefetchData()
-                 
-             }
-             catch(err){
-               console.log('create symptom failed:', err)
-             }
-             finally{
-                 setLoading(false)
-             }
-            
-        }
-    
-        //update a body symptom
-        const handleMindUpdate = async (e: React.FormEvent) =>{
-            e.preventDefault()
-            setLoading(true)
-            try{
-                //  await updateBodySymptom(bodySymptom)
-                 setSuccess("Mind Updated Successfully")
-                 setIsEdit(false)
-                 setMind(INITIAL_MIND)
-                 handleRefetchData()
-                 
-             }
-             catch(err){
-               console.log('update symptom failed:', err)
-             }
-             finally{
-                 setLoading(false)
-             }
-            
-        }
-    
-    
-         //remove a body Symptom
-        const handleMindRemove = async (e: React.FormEvent) =>{
-    
-            e.preventDefault()
-            setLoading(true)
-            try{
-                //  await removeBodySymptom(bodySymptom.id)
-                 setSuccess("Mind Deleted Successfully")
-                 setIsEdit(false)
-                 setMind(INITIAL_MIND)
-                 handleRefetchData()
-                 
-             }
-             catch(err){
-               console.log('create recipe failed:', err)
-             }
-             finally{
-                 setLoading(false)
-             }
-            
-        }
-    
-    
-        useEffect(()=>{
                 
-            const handleFetchMinds = async()=>{
-                try{
-                    setLoading(true)
-                    // const data: BodySymptomInterface[] = await getBodySymptoms()
-                    setMinds([])
-                }catch(err){
-                    console.log('err:', err)
-                }
-                finally{
-                    setLoading(false)
-                }
+            }
+            catch(err){
+            console.log('update symptom failed:', err)
+            }
+            finally{
+                setLoading(false)
+            }
         
+    }
+
+
+    //remove a Mind Entry
+    const handleMindRemove = async (e: React.FormEvent) =>{
+
+        e.preventDefault()
+        setLoading(true)
+        try{
+            //  await removeBodySymptom(bodySymptom.id)
+                setSuccess("Mind Deleted Successfully")
+                setIsEdit(false)
+                setMind(INITIAL_MIND)
+                handleRefetchData()
+                
+            }
+            catch(err){
+            console.log('create recipe failed:', err)
+            }
+            finally{
+                setLoading(false)
+            }
+        
+    }
+
+
+    useEffect(()=>{
+            
+        const handleFetchMinds = async()=>{
+            try{
+                setLoading(true)
+                const data: mindInterface[] = await getMinds(mind.mindType)
+                console.log('data', data)
+                setMinds([])
+            }catch(err){
+                console.log('err:', err)
+            }
+            finally{
+                setLoading(false)
             }
     
-            handleFetchMinds()
-    
-    
-        },[trigger])
+        }
+
+        handleFetchMinds()
+
+
+    },[trigger, mind])
 
 
         return  {
@@ -156,7 +182,9 @@ export const useMind = () => {
             success,
             setSuccess,
             setMind,
-            handleValueChange,
+            handleFieldChange,
+            handleMindTypeChange,
+            handleMindValueChange,
             handleMindCreate,
             handleMindUpdate,
             handleMindRemove

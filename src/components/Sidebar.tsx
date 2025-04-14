@@ -39,12 +39,13 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
 
   return (
     <div className={`fixed w-64 min-h-screen bg-white `}>
-      <div className="p-6">
-        <h1 className="text-xl font-bold text-black">Health Manager</h1>
+      <div className="p-4">
+        <h1 className="text-[25px] font-bold text-black">Health Manager</h1>
+        <h6 className='text-sm font-bold w-fit text-white bg-black px-2 py-1 rounded-lg'>Built For You</h6>
       </div>
 
-      <div className={`h-[600px] flex flex-col justify-between items-start w-full flex-shrink-0`}>
-        <nav className="mt-6 w-full">
+      <div className={`p-0 h-[600px] flex flex-col justify-between items-start w-full flex-shrink-0`}>
+        <nav className=" w-full">
           {
           menuItems
             .filter((eachItem)=> eachItem.title !==MENU_ITEMS.SIGN_OUT)
@@ -54,10 +55,10 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center px-6 py-3 text-sm transition-colors duration-200 font-bold  no-underline ${
+                className={` flex items-center px-6 py-3 text-sm transition-colors duration-200 font-bold  no-underline ${
                   isActive 
-                    ? 'bg-grey text-[#A2A1A1] border-r-4 border-white hover:text-black' 
-                    : 'text-black hover:bg-white/10'
+                    ? 'bg-[#e3e3e3] text-[#858585] border-r-4 border-white hover:text-black' 
+                    : 'text-black hover:text-[#858585]'
                 }`}
               >
                 <item.icon className="w-3.5 h-3.5 mr-3" />

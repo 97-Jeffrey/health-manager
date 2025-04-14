@@ -4,6 +4,7 @@ import { useProfile } from '../hooks/useProfile';
 import * as COLORS from '../constants/color'
 import * as STYLES from '../constants/styles'
 import Success from '../elements/banner/success';
+import Info from '../elements/info/info';
 
 
 
@@ -36,10 +37,17 @@ const Profile = () => {
           onClose={()=> setUpdateNotify(false)} 
         />
       }
+
       <div className="w-full bg-white rounded-lg shadow-md p-8">
         <h1 className="text-3xl font-bold mb-8">My Profile</h1>
+        <Info text={`
+          This section displays your account details and allows
+          seamless updates. Changes are automatically saved 
+          when you finish editing a field (on blur). No "Save" button needed!`
+          }
+        />
         
-        <div className="mb-8 flex flex-col justify-center items-center gap-2">
+        <div className="mt-3 mb-8 flex flex-col justify-center items-center gap-2">
             {
             image ?
               <img 

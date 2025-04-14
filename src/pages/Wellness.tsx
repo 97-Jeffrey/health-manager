@@ -1,21 +1,75 @@
+import MindModal from '../components/Mind/mindModal';
 import * as STYLES from '../constants/styles'
 import { useState } from 'react';
+import { useMind } from '../hooks/useMind';
+import Success from '../elements/banner/success';
+import { capitalizeFirstChar } from '../lib/util/string';
 
 const Wellness: React.FC = () => {
-  const [selectedSection, setSelectedSection] = useState<string>('Meditation')
+
+  const [selectedSection, setSelectedSection] = useState<string>('meditation')
+  const [open,setOpen] = useState<boolean>(false)
+
+  const handleModalOpen = ()=> {
+    setOpen(true)
+  }
+  const handleModalClose = ()=> {
+    setOpen(false)
+  }
+
+  const {
+    isEdit,
+    mind,
+    minds,
+    loading,
+    success,
+    setSuccess,
+    handleFieldChange,
+    handleMindTypeChange,
+    handleMindValueChange,
+    handleMindCreate,
+    handleMindUpdate,
+    handleMindRemove
+
+  } = useMind()
+
+
   return (
     <>
+      {
+          success 
+              &&
+          <Success
+            text={success}
+            onClose={()=>setSuccess('')}
+          />
+      }
+      <MindModal 
+        isEdit={isEdit}
+        toDelete={isEdit}
+        open={open} 
+        mind={mind}
+        handleClose={handleModalClose}
+        handleFieldChange={handleFieldChange}
+        handleMindValueChange={handleMindValueChange}
+        asyncAction={isEdit? handleMindUpdate:handleMindCreate}
+        asyncDeleteAction={handleMindRemove}
+      />
+
       <div className='w-100 flex flex-row justify-start items-center gap-2 mb-[20px]'>
-      {['Meditation', 'Cognition', 'Mood'].map(section=> (
+      {['meditation', 'cognition', 'mood'].map(section=> (
           <div 
             key={section}
             className={
             `${selectedSection ===section? 'bg-black': "bg-[#edebeb]"} 
             ${selectedSection ===section? 'text-white': "text-black"}
             rounded-[10px] p-3 font-bold cursor-pointer`}
-            onClick={()=> setSelectedSection(section)}
+            onClick={()=> {
+              setSelectedSection(section)
+              handleMindTypeChange(section as 'meditation'| 'cognition' | 'mood')
+            }}
           > 
-            {section}
+            {capitalizeFirstChar(section)}
           </div>
 
         ))}
@@ -27,7 +81,7 @@ const Wellness: React.FC = () => {
               <button 
                 className={STYLES.ACTION_BUTTON} 
                 onClick={()=>{
-                  
+                  handleModalOpen()
                 }}
               >
                 {`Add ${selectedSection}`}

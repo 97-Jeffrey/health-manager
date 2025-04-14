@@ -1,19 +1,20 @@
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-interface ProgressInterface{
+interface MindProgressInterface{
   value: number,
-  onChange:(rating: number,) => void
+  name: string, 
+  onChange:(name: string, rating: number) => void
 }
 
-const Progress: React.FC<ProgressInterface> = ({ value, onChange })=> {
+const MindProgress: React.FC<MindProgressInterface> = ({name, value, onChange })=> {
 
 
   const increaseProgress = () => {
-    onChange(Math.min(value + 1, 10)); // Increase by 10%, max 100%
+    onChange(name, Math.min(value + 1, 10)); // Increase by 10%, max 100%
   };
 
   const decreaseProgress = () => {
-    onChange(Math.max(value - 1, 0)); // Increase by 10%, max 100%
+    onChange(name, Math.max(value - 1, 0)); // Increase by 10%, max 100%
   };
   return (
     <div
@@ -26,4 +27,4 @@ const Progress: React.FC<ProgressInterface> = ({ value, onChange })=> {
   )
 }
 
-export default Progress;
+export default MindProgress;

@@ -1,18 +1,19 @@
 export interface mindInterface  {
-    meditation: meditationInterface,
-    cognition: cognitionInterface,
-    mood: moodInterface
+    date: string,
+    mindType: 'meditation'| 'cognition' | 'mood',
+    data:  meditationInterface | cognitionInterface | moodInterface,
+    note: string,
 }
 
 
 
-interface meditationInterface {
+export interface meditationInterface {
     "calm": number,
     "relaxed": number,
     "energized":number
 }
 
-interface cognitionInterface {
+export interface cognitionInterface {
     'focus':number,
     'productivity':number,
     'memory':number,
@@ -22,7 +23,7 @@ interface cognitionInterface {
     'brain fog':number
 }
 
-interface moodInterface {
+export interface moodInterface {
     'stress':number,
     'positivity':number,
     'sensivity':number,

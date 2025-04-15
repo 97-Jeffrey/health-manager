@@ -46,7 +46,7 @@ const MindModal : React.FC<MindModalInterface>= ({
                 <div className='flex flex-col gap-3'>
 
                     <div className='flex flex-col gap-2 '>
-                        <label className="block text-sm font-medium text-gray-700">Event Date</label>
+                        <label className="block text-sm font-medium text-gray-700">Date</label>
                         <input
                             type='date'
                             value={mind.date}
@@ -58,17 +58,7 @@ const MindModal : React.FC<MindModalInterface>= ({
                     </div>
 
                     <div className='flex flex-col gap-2 '>
-                        <label className="block text-sm font-medium text-gray-700">Rate the severity of the issue from a scale of 1 to 10:
-                        </label>
-                        <MindProgress 
-                           name='calm'
-                           value={(mind.data as meditationInterface).calm}
-                           onChange={handleMindValueChange}
-                        />
-                    </div>
-
-                    <div className='flex flex-col gap-2 '>
-                        <label className="block text-sm font-medium text-gray-700">Rate the severity of the issue from a scale of 1 to 10:
+                        <label className="block text-sm font-medium text-gray-700">Rate the "relaxed" level from a scale of 1 to 10:
                         </label>
                         <MindProgress 
                            name='relaxed'
@@ -78,7 +68,17 @@ const MindModal : React.FC<MindModalInterface>= ({
                     </div>
 
                     <div className='flex flex-col gap-2 '>
-                        <label className="block text-sm font-medium text-gray-700">Rate the severity of the issue from a scale of 1 to 10:
+                        <label className="block text-sm font-medium text-gray-700">Rate the "Calm" level from a scale of 1 to 10:
+                        </label>
+                        <MindProgress 
+                           name='calm'
+                           value={(mind.data as meditationInterface).calm}
+                           onChange={handleMindValueChange}
+                        />
+                    </div>
+
+                    <div className='flex flex-col gap-2 '>
+                        <label className="block text-sm font-medium text-gray-700">Rate the "energized" level from a scale of 1 to 10:
                         </label>
                         <MindProgress 
                            name='energized'

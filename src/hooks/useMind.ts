@@ -1,5 +1,7 @@
 import createMind from "../lib/api/mind/createMind"
+import removeMind from "../lib/api/mind/deleteMind"
 import getMinds from "../lib/api/mind/getMinds"
+import updateMind from "../lib/api/mind/updateMind"
 import { mindInterface } from "../types/mindInterface"
 import { useState, useEffect } from "react"
 
@@ -34,6 +36,7 @@ export const useMind = () => {
     }
 
     const INITIAL_MIND: mindInterface = {
+        mindId: '',
         date: '',
         mindType: 'meditation',
         data: {
@@ -45,7 +48,7 @@ export const useMind = () => {
     }
 
     const [mind, setMind]=  useState(INITIAL_MIND)
-    const [minds, setMinds] = useState<[]>([])
+    const [minds, setMinds] = useState<mindInterface[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const [success, setSuccess] = useState<string>("")
     const [trigger, setTrigger] = useState<boolean>(false)
@@ -85,6 +88,17 @@ export const useMind = () => {
         }))
     }
 
+     const handleMindSelect= (id: string)=>{
+        if(!id){
+            setIsEdit(false)
+            setMind(INITIAL_MIND)
+            return;
+        }
+        const newMind: mindInterface= minds.find(mind=> mind.mindId===id)!
+        setMind(newMind)
+        setIsEdit(true)
+    }
+
 
     //Create a Mind Entry
     const handleMindCreate = async (e: React.FormEvent) =>{
@@ -111,19 +125,19 @@ export const useMind = () => {
         e.preventDefault()
         setLoading(true)
         try{
-            //  await updateBodySymptom(bodySymptom)
-                setSuccess("Mind Updated Successfully")
-                setIsEdit(false)
-                setMind(INITIAL_MIND)
-                handleRefetchData()
-                
-            }
-            catch(err){
-            console.log('update symptom failed:', err)
-            }
-            finally{
-                setLoading(false)
-            }
+            await updateMind(mind)
+            setSuccess("Mind Updated Successfully")
+            setIsEdit(false)
+            setMind(INITIAL_MIND)
+            handleRefetchData()
+            
+        }
+        catch(err){
+            console.log('update mind failed:', err)
+        }
+        finally{
+            setLoading(false)
+        }
         
     }
 
@@ -134,19 +148,19 @@ export const useMind = () => {
         e.preventDefault()
         setLoading(true)
         try{
-            //  await removeBodySymptom(bodySymptom.id)
-                setSuccess("Mind Deleted Successfully")
-                setIsEdit(false)
-                setMind(INITIAL_MIND)
-                handleRefetchData()
+            await removeMind(mind.mindId, mind.mindType)
+            setSuccess("Mind Deleted Successfully")
+            setIsEdit(false)
+            setMind(INITIAL_MIND)
+            handleRefetchData()
                 
-            }
-            catch(err){
+        }
+        catch(err){
             console.log('create recipe failed:', err)
-            }
-            finally{
-                setLoading(false)
-            }
+        }
+        finally{
+            setLoading(false)
+        }
         
     }
 
@@ -157,8 +171,7 @@ export const useMind = () => {
             try{
                 setLoading(true)
                 const data: mindInterface[] = await getMinds(mind.mindType)
-                console.log('data', data)
-                setMinds([])
+                setMinds(data)
             }catch(err){
                 console.log('err:', err)
             }
@@ -171,7 +184,7 @@ export const useMind = () => {
         handleFetchMinds()
 
 
-    },[trigger, mind])
+    },[trigger, mind.mindType])
 
 
         return  {
@@ -182,6 +195,7 @@ export const useMind = () => {
             success,
             setSuccess,
             setMind,
+            handleMindSelect,
             handleFieldChange,
             handleMindTypeChange,
             handleMindValueChange,

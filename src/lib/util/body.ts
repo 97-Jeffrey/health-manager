@@ -33,7 +33,7 @@ interface DateObject {
   date: string | Date; // Assuming date can be either a string or Date object
 }
 
-const sortByAscendingDate = <T extends DateObject>(data: T[]): T[] =>{
+export const sortByAscendingDate = <T extends DateObject>(data: T[]): T[] =>{
     return [...data].sort((a, b) => {
       return new Date(a.date).getTime() - new Date(b.date).getTime();
     });

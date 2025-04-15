@@ -1,7 +1,8 @@
 export interface mindInterface  {
+    mindId: string,
     date: string,
     mindType: 'meditation'| 'cognition' | 'mood',
-    data:  meditationInterface | cognitionInterface | moodInterface,
+    data: { [key: string]: number;} & (meditationInterface | cognitionInterface | moodInterface),
     note: string,
 }
 

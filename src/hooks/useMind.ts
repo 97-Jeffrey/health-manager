@@ -7,7 +7,7 @@ import { useState, useEffect } from "react"
 
 
 
-export const useMind = () => {
+export const useMind = (section: 'meditation'| 'cognition' | 'mood') => {
 
     const MIND_DEDFAULT = {
         meditation: { 
@@ -36,14 +36,10 @@ export const useMind = () => {
     }
 
     const INITIAL_MIND: mindInterface = {
-        mindId: '',
+        id: '',
         date: '',
-        mindType: 'meditation',
-        data: {
-            "calm": 0,
-            "relaxed": 0,
-            'energized':0
-        },
+        mindType: section,
+        data: MIND_DEDFAULT[section],
         note: '',
     }
 
@@ -54,29 +50,23 @@ export const useMind = () => {
     const [trigger, setTrigger] = useState<boolean>(false)
     const [isEdit, setIsEdit] = useState<boolean>(false)
 
+
+
+
     const handleRefetchData = ()=>{
         setTrigger(prev=>!prev)
     }
 
+    const handleMindValueChange = (name: string, rating: number )=>{
+        setMind(prev=> {
+            const newData = { ...prev.data, [name]: rating };
+            return {
+                ...prev,
+                data: newData as typeof prev.data // Maintain the same type
+            };
 
-    const handleMindTypeChange = (type: 'meditation'| 'cognition' | 'mood') =>{
-        setMind(prev=>({
-            ...prev,
-            mindType: type,
-            data: MIND_DEDFAULT[type]
-            
-        }))
-    }
-
-    const handleMindValueChange =(name: string, rating: number )=>{
-        setMind(prev=>({
-            ...prev,
-            data: {
-                ...prev.data,
-                [name]: rating
-            }
+        })
         
-        }))
 
     }
 
@@ -94,7 +84,9 @@ export const useMind = () => {
             setMind(INITIAL_MIND)
             return;
         }
-        const newMind: mindInterface= minds.find(mind=> mind.mindId===id)!
+        console.log(id)
+        const newMind: mindInterface= minds.find(mind=> mind.id===id)!
+
         setMind(newMind)
         setIsEdit(true)
     }
@@ -148,7 +140,7 @@ export const useMind = () => {
         e.preventDefault()
         setLoading(true)
         try{
-            await removeMind(mind.mindId, mind.mindType)
+            await removeMind(mind.id, mind.mindType)
             setSuccess("Mind Deleted Successfully")
             setIsEdit(false)
             setMind(INITIAL_MIND)
@@ -170,7 +162,7 @@ export const useMind = () => {
         const handleFetchMinds = async()=>{
             try{
                 setLoading(true)
-                const data: mindInterface[] = await getMinds(mind.mindType)
+                const data: mindInterface[] = await getMinds(section)
                 setMinds(data)
             }catch(err){
                 console.log('err:', err)
@@ -184,10 +176,12 @@ export const useMind = () => {
         handleFetchMinds()
 
 
-    },[trigger, mind.mindType])
+    },[trigger, section])
 
 
-        return  {
+
+
+    return  {
             isEdit,
             mind,
             minds,
@@ -197,7 +191,6 @@ export const useMind = () => {
             setMind,
             handleMindSelect,
             handleFieldChange,
-            handleMindTypeChange,
             handleMindValueChange,
             handleMindCreate,
             handleMindUpdate,

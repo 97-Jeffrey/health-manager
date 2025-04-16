@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { useMind } from '../hooks/useMind';
+
 import { capitalizeFirstChar } from '../lib/util/string';
-import MindMeditation from '../components/Mind/mindMeditation';
+import MindMain from '../components/Mind/mindMain';
+import { useState } from 'react';
 
 const Wellness: React.FC = () => {
 
-  const [selectedSection, setSelectedSection] = useState<string>('meditation')
-  const { handleMindTypeChange } = useMind()
+
+  const [selectedSection, setSelectedSection] = useState<'meditation'| 'cognition' | 'mood'>("meditation");
+
 
   return (
     <>
@@ -21,8 +22,7 @@ const Wellness: React.FC = () => {
              rounded-[10px] p-3 font-bold cursor-pointer`
             }
             onClick={()=> {
-              setSelectedSection(section)
-              handleMindTypeChange(section as 'meditation'| 'cognition' | 'mood')
+              setSelectedSection(section as 'meditation'| 'cognition' | 'mood')
             }}
           > 
             {capitalizeFirstChar(section)}
@@ -30,7 +30,9 @@ const Wellness: React.FC = () => {
 
         ))}
       </div>
-      {selectedSection ==='meditation' && <MindMeditation section={selectedSection}/>}
+      <MindMain 
+          section={selectedSection}
+      />
     </>
   )
 };

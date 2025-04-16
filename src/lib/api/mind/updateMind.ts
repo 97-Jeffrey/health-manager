@@ -24,7 +24,7 @@ const updateMind = (mind: mindInterface) => {
 
                 axios
                     .put(
-                        `${baseUrl}/mind/${id}/${mind.mindId}/${mind.mindType}`,
+                        `${baseUrl}/mind/${id}/${mind.id}/${mind.mindType}`,
                         params,
                         reqBody
                     )

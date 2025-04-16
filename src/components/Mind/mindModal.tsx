@@ -1,10 +1,11 @@
 import ToggleModal from "../../elements/modal/modal"
 import * as STYLES from '../../constants/styles'
-import { meditationInterface, mindInterface } from "../../types/mindInterface"
-import MindProgress from "../../elements/progressBar/MindProgressBar"
+import { mindInterface } from "../../types/mindInterface"
+import MindFields from "./mindFields"
 
 
 interface MindModalInterface {
+    section: 'meditation'| 'cognition' | 'mood',
     open: boolean,
     isEdit: boolean,
     toDelete: boolean,
@@ -18,6 +19,7 @@ interface MindModalInterface {
 }
 
 const MindModal : React.FC<MindModalInterface>= ({ 
+    section,
     open,
     isEdit,
     toDelete,
@@ -30,11 +32,11 @@ const MindModal : React.FC<MindModalInterface>= ({
 
 }) =>{
 
-
+    console.log(mind)
     return (
         <>
             <ToggleModal 
-                title={`${isEdit? 'Update': 'Create'} Meditation`}
+                title={`${isEdit? 'Update': 'Create'} ${section}`}
                 open={open}
                 toDelete={toDelete}
                 handleClose={handleClose}
@@ -57,7 +59,13 @@ const MindModal : React.FC<MindModalInterface>= ({
                         />
                     </div>
 
-                    <div className='flex flex-col gap-2 '>
+                    <MindFields 
+                        section={section}
+                        mind={mind}
+                        handleMindValueChange={handleMindValueChange}
+                    />
+
+                    {/* <div className='flex flex-col gap-2 '>
                         <label className="block text-sm font-medium text-gray-700">Rate the "relaxed" level from a scale of 1 to 10:
                         </label>
                         <MindProgress 
@@ -85,7 +93,7 @@ const MindModal : React.FC<MindModalInterface>= ({
                            value={(mind.data as meditationInterface).energized}
                            onChange={handleMindValueChange}
                         />
-                    </div>
+                    </div> */}
         
                     <div className='flex flex-col gap-2 '>
                         <label className="block text-sm font-medium text-gray-700">Optional: Add a note to provide some context for this entry</label>

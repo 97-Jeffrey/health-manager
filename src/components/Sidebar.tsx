@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import {  HomeIcon, ChartBarIcon, UserIcon, HeartIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
+import { IoIosBody } from "react-icons/io";
+import { GiJourney } from "react-icons/gi";
+import { RiMentalHealthFill } from "react-icons/ri";
+import { IoRestaurant } from "react-icons/io5";
+import { FaUser, FaSignOutAlt } from "react-icons/fa";
+
+
 import { signout } from '../lib/Auth/index';
 
 import * as ROUTES from '../constants/routes';
 import * as MENU_ITEMS from '../constants/menuItems';
-import * as COLORS from '../constants/color'
 
 interface SidebarInterface{
   signOutApp: ()=> void
@@ -21,14 +26,14 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
   }
   
   const menuItems = [
-    { title: MENU_ITEMS.BODY, icon: HomeIcon, path: ROUTES.BODY },
-    { title: MENU_ITEMS.HEALTH_JOURNEY, icon: ChartBarIcon, path: ROUTES.HEALTH_JOURNEY },
-    { title: MENU_ITEMS.MIND_WELLNESS, icon: HeartIcon, path: ROUTES.MIND_WELLNESS },
-    { title: MENU_ITEMS.RECIPES, icon: HeartIcon, path: ROUTES.RECIPE},
-    { title: MENU_ITEMS.PROFILE, icon: UserIcon, path: ROUTES.PROFILE },
+    { title: MENU_ITEMS.BODY, icon: IoIosBody, path: ROUTES.BODY },
+    { title: MENU_ITEMS.HEALTH_JOURNEY, icon: GiJourney, path: ROUTES.HEALTH_JOURNEY },
+    { title: MENU_ITEMS.MIND_WELLNESS, icon: RiMentalHealthFill, path: ROUTES.MIND_WELLNESS },
+    { title: MENU_ITEMS.RECIPES, icon: IoRestaurant, path: ROUTES.RECIPE},
+    { title: MENU_ITEMS.PROFILE, icon: FaUser, path: ROUTES.PROFILE },
     { 
       title: MENU_ITEMS.SIGN_OUT, 
-      icon: ArrowLeftOnRectangleIcon, 
+      icon: FaSignOutAlt, 
       path: ROUTES.SIGN_IN,
       onClick: async () => {
         handleSignOut()
@@ -75,7 +80,7 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
           }}
           className={`text-black bg-inherit rounded-none w-full flex items-center px-6 py-2.5 text-sm transition-colors duration-200 hover:no-underline`}
         >
-          <ArrowLeftOnRectangleIcon className="w-3.5 h-3.5 mr-3" />
+          <FaSignOutAlt className="w-3.5 h-3.5 mr-3" />
           <span className="font-bold text-[20px]">{MENU_ITEMS.SIGN_OUT}</span>
         </button>
       </div>

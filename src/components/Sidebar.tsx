@@ -5,6 +5,7 @@ import { GiJourney } from "react-icons/gi";
 import { RiMentalHealthFill } from "react-icons/ri";
 import { IoRestaurant } from "react-icons/io5";
 import { FaUser, FaSignOutAlt } from "react-icons/fa";
+import { TbMessageChatbotFilled } from "react-icons/tb";
 
 
 import { signout } from '../lib/Auth/index';
@@ -31,6 +32,7 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
     { title: MENU_ITEMS.MIND_WELLNESS, icon: RiMentalHealthFill, path: ROUTES.MIND_WELLNESS },
     { title: MENU_ITEMS.RECIPES, icon: IoRestaurant, path: ROUTES.RECIPE},
     { title: MENU_ITEMS.PROFILE, icon: FaUser, path: ROUTES.PROFILE },
+    { title: MENU_ITEMS.VITA_BOT, icon: TbMessageChatbotFilled, path: ROUTES.VITA_BOT },
     { 
       title: MENU_ITEMS.SIGN_OUT, 
       icon: FaSignOutAlt, 
@@ -66,7 +68,7 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
                     : 'text-black hover:text-[#858585]'
                 }`}
               >
-                <item.icon className="w-3.5 h-3.5 mr-3" />
+                <item.icon className="w-[20px] h-[20px] mr-3" />
                 <span className="font-heavy text-[20px]">{item.title}</span>
               </Link>
             );

@@ -8,3 +8,4 @@ export const MIND_WELLNESS: string = '/mind-wellness';
 export const RECIPE: string='/recipes'
 export const RECIPE_CREATE: string = '/recipes/create';
 export const RECIPE_EDIT: string = '/recipes/edit/:id';
+export const VITA_BOT: string = '/vita_bot';

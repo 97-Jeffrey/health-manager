@@ -24,6 +24,7 @@
     "compressorjs": "^1.2.1",
     "install": "^0.13.0",
     "npm": "^11.2.0",
+    "openai": "^4.95.0",
     "postcss": "^8.4.49",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.9",
@@ -33,7 +34,8 @@
     "react-router-dom": "^7.1.1",
     "react-vertical-timeline-component": "^3.5.3",
     "tailwindcss": "^3.4.17",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.26.9",

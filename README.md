@@ -44,11 +44,13 @@ Record mental status and daily meditaiton, cognition and mood details.
 
 
 
-- **Recipe Management**: Save and organize healthy recipes
+- **Recipe Management**: Save and organize healthy recipes and get Nutrition analysis based on the recipe.
 
   ![recipe](https://github.com/97-Jeffrey/health-manager/blob/master/Doc/Screenshot%202025-04-17%20at%201.31.25%E2%80%AFPM.png?raw=true)
 
   ![recipe creation](https://github.com/97-Jeffrey/health-manager/blob/master/Doc/Screenshot%202025-04-17%20at%201.32.20%E2%80%AFPM.png?raw=true)
+
+  ![recipe nutrition](https://github.com/97-Jeffrey/health-manager/blob/master/Doc/Screenshot%202025-04-18%20at%2012.56.32%E2%80%AFPM.png?raw=true)
 
 
 ## Tech Stack

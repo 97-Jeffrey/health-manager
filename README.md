@@ -1,7 +1,7 @@
 
 # Health Manager
 
-## React + TypeScript + Tailwind + Vite
+## Deepseek + React + TypeScript + Tailwind
 
 ![DeepSeek](https://img.shields.io/badge/DeepSeek-0F52BA?style=for-the-badge&logo=ai&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)

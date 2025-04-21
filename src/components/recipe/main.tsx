@@ -2,11 +2,14 @@ import { useRecipe } from "../../hooks/useRecipe";
 import { useState } from "react";
 import RecipeList from "./recipeList";
 import RecipeAnalysis from "./recipeAnalysis";
+import MealList from "./mealList";
+import { useMeal } from "../../hooks/useMeal";
 
 const Main = () =>{
 
     const { recipes, loading } =useRecipe()
-    const [selectedSection, setSelectedSection] = useState<string>('Nutrient Analysis')
+    const { meals } = useMeal()
+    const [selectedSection, setSelectedSection] = useState<string>('Meal')
 
 
     return (
@@ -16,7 +19,7 @@ const Main = () =>{
         recipes.length>0 
           &&
         <div className='w-100 flex flex-row justify-start items-center gap-2 mb-[20px]'>
-            {['Recipe', 'Nutrient Analysis'].map(section=> (
+            {['Meal','Recipe', 'Nutrient Analysis'].map(section=> (
                 <div 
                     key={section}
                     className={
@@ -31,6 +34,7 @@ const Main = () =>{
          </div>
         }
         
+        { selectedSection==='Meal' && <MealList meals={meals}/>}
         { selectedSection==='Recipe' && <RecipeList loading={loading} recipes={recipes}/>}
         { selectedSection==='Nutrient Analysis' && <RecipeAnalysis recipes={recipes}/>}
 

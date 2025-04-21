@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoIosBody } from "react-icons/io";
 import { GiJourney } from "react-icons/gi";
 import { RiMentalHealthFill } from "react-icons/ri";
-import { IoRestaurant } from "react-icons/io5";
+import { IoRestaurant, IoFastFood } from "react-icons/io5";
 import { FaUser, FaSignOutAlt } from "react-icons/fa";
 import { TbMessageChatbotFilled } from "react-icons/tb";
 

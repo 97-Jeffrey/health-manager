@@ -54,7 +54,7 @@ const RecipeList: React.FC<RecipeListInterface> = ({ recipes, loading }) =>{
                     <div 
                         key={recipe.id} 
                         className={
-                            `p-3 bg-[#E7DDFF] w-[300px] min-h-[350px] rounded-lg cursor-pointer flex flex-col justify-around`
+                            `p-3 border border-1  border-lg shadow-custom bg-white w-[300px] min-h-[350px] rounded-lg cursor-pointer flex flex-col justify-around`
                         }
                         onClick={()=>handleEdit(recipe.id)}
                     >

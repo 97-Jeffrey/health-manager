@@ -7,12 +7,12 @@ import Profile from './pages/Profile';
 import  HealthJourney from './pages/HealthJourney';
 import Wellness from './pages/Wellness';
 import { ProtectedRoute } from './components/ProtectedRoute';
-import useAppData from './hooks/useApp';
-
-import { useCallback } from 'react';
-import * as ROUTES from './constants/routes'
 import Recipe from './pages/Recipe';
 import VitaBot from './pages/VitaBot';
+
+import useAppData from './hooks/useApp';
+import { useCallback } from 'react';
+import * as ROUTES from './constants/routes'
 
 
 function App() {

@@ -19,7 +19,7 @@ const MindDisplay: React.FC<MindDisplayInterface> =({
         <>
             <div 
                 key={mind.id} 
-                className=' cursor-pointer w-100 bg-[#eefceb] border border-black rounded-lg p-3 flex flex-col justify-center items-start gap-[10px]'
+                className=' cursor-pointer w-100 bg-white border border-black rounded-lg p-3 flex flex-col justify-center items-start gap-[10px]'
                 onClick={()=>{
                     handleMindSelect(mind.id)
                     handleModalOpen()
@@ -41,7 +41,7 @@ const MindDisplay: React.FC<MindDisplayInterface> =({
                         </div>
                     </div>
                 ))}
-                <div className='font-bold bg-white p-[10px] rounded-[10px]'>
+                <div className='mt-[20px] border border-1 border-black font-bold bg-white p-[10px] rounded-[10px]'>
                 {mind.note}
 
                 </div>

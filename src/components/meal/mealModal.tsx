@@ -40,6 +40,17 @@ const MealModal : React.FC<MealModalInterface>= ({
                 asyncDeleteAction={asyncDeleteAction}
             > 
                 <div className='flex flex-col gap-3'>
+
+                    <div className='flex flex-col gap-2 '>
+                        <label className="block text-sm font-medium text-gray-700">Name</label>
+                        <textarea
+                            value={meal.name}
+                            name='name'
+                            onBlur={()=>{}}
+                            onChange={handleFieldChange}
+                            className={STYLES.RECIPE_INPUT}
+                        />
+                    </div>
                     
                     <div className='flex flex-col gap-2 '>
                         <label className="block text-sm font-medium text-gray-700">Date</label>
@@ -56,6 +67,7 @@ const MealModal : React.FC<MealModalInterface>= ({
                     <div className='flex flex-col gap-2 '>
                         <label className="block text-sm font-medium text-gray-700">Start Time</label>
                         <input
+                            type='time'
                             value={meal.startTime}
                             name='startTime'
                             placeholder='when you start eating'
@@ -68,9 +80,21 @@ const MealModal : React.FC<MealModalInterface>= ({
                     <div className='flex flex-col gap-2 '>
                         <label className="block text-sm font-medium text-gray-700">End Time</label>
                         <input
+                            type='time'
                             value={meal.endTime}
                             name='endTime'
                             placeholder='When you finish your meal'
+                            onBlur={()=>{}}
+                            onChange={handleFieldChange}
+                            className={STYLES.RECIPE_INPUT}
+                        />
+                    </div>
+
+                    <div className='flex flex-col gap-2 '>
+                        <label className="block text-sm font-medium text-gray-700">Note</label>
+                        <textarea
+                            value={meal.note}
+                            name='note'
                             onBlur={()=>{}}
                             onChange={handleFieldChange}
                             className={STYLES.RECIPE_INPUT}

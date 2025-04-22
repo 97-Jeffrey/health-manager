@@ -142,7 +142,7 @@ const RecipeCreate = () =>{
                                             onChange={(e)=>{handleRecipeStep(index, e)}}
                                             className={STYLES.RECIPE_INPUT}
                                         />
-                                        {index >0
+                                        {steps.length > 1
                                            &&
                                         <DeleteIcon 
                                            onDelete={()=>handleStepRemove(index)}

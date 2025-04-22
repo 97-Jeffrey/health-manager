@@ -2,6 +2,7 @@ import { useState } from "react";
 import BodySymptom from "../components/body/bodySymptom";
 import BodyWeight from "../components/body/bodyWeight";
 import BodyGlucose from "../components/body/bodyGlucose";
+import SectionSelector from "../elements/tab/SectionSelector";
 
 
 const Body: React.FC = () => {
@@ -11,24 +12,11 @@ const Body: React.FC = () => {
 
   return (
     <>
-      <div className='w-100 flex flex-row justify-start items-center gap-2 mb-[20px]'>
-
-        {['Symptom', 'Weight', 'Glucose'].map(section=> (
-          <div 
-            key={section}
-            className={
-            `${selectedSection ===section? 'bg-black': "bg-[#edebeb]"} 
-            ${selectedSection ===section? 'text-white': "text-black"}
-            rounded-[10px] p-3 font-bold cursor-pointer`}
-            onClick={()=> setSelectedSection(section)}
-          > 
-            {section}
-          </div>
-
-        ))}
-         
-
-      </div>
+      <SectionSelector 
+         sections={['Symptom', 'Weight', 'Glucose']}
+         selectedSection={selectedSection}
+         setSelectedSection={setSelectedSection}
+      />
 
       {selectedSection === 'Symptom'? 
        <BodySymptom />:

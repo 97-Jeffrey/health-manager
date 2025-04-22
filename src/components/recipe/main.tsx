@@ -2,8 +2,9 @@ import { useRecipe } from "../../hooks/useRecipe";
 import { useState } from "react";
 import RecipeList from "./recipeList";
 import RecipeAnalysis from "./recipeAnalysis";
-import MealList from "./mealList";
+import MealList from "../meal/mealList";
 import { useMeal } from "../../hooks/useMeal";
+import SectionSelector from "../../elements/tab/SectionSelector";
 
 const Main = () =>{
 
@@ -11,32 +12,21 @@ const Main = () =>{
     const { meals } = useMeal()
     const [selectedSection, setSelectedSection] = useState<string>('Meal')
 
+    const sections = recipes.length>0 ? 
+    ['Meal','Recipe', 'Nutrient Analysis']:
+    ['Meal','Recipe']
 
     return (
         <>
-
-        {
-        recipes.length>0 
-          &&
-        <div className='w-100 flex flex-row justify-start items-center gap-2 mb-[20px]'>
-            {['Meal','Recipe', 'Nutrient Analysis'].map(section=> (
-                <div 
-                    key={section}
-                    className={
-                    `${selectedSection ===section? 'bg-black': "bg-[#edebeb]"} 
-                    ${selectedSection ===section? 'text-white': "text-black"}
-                    rounded-[10px] p-3 font-bold cursor-pointer`}
-                    onClick={()=> setSelectedSection(section)}
-                > 
-                    {section}
-                </div>
-            ))}
-         </div>
-        }
+            <SectionSelector 
+                sections={sections}
+                selectedSection={selectedSection}
+                setSelectedSection={setSelectedSection}
+            />
         
-        { selectedSection==='Meal' && <MealList meals={meals}/>}
-        { selectedSection==='Recipe' && <RecipeList loading={loading} recipes={recipes}/>}
-        { selectedSection==='Nutrient Analysis' && <RecipeAnalysis recipes={recipes}/>}
+            { selectedSection==='Meal' && <MealList/>}
+            { selectedSection==='Recipe' && <RecipeList loading={loading} recipes={recipes}/>}
+            { selectedSection==='Nutrient Analysis' && <RecipeAnalysis recipes={recipes}/>}
 
         </>
     )

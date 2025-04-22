@@ -3,6 +3,7 @@ import { MealInterface } from "../types/recipe"
 import createMeal from "../lib/api/meal/createMeal"
 import updateMeal from "../lib/api/meal/updateMeal"
 import removeMeal from "../lib/api/meal/removeMeal"
+import getMeals from "../lib/api/meal/getMeals"
 
 
 
@@ -113,8 +114,8 @@ export const useMeal = () =>{
         const handleFetchMeals = async()=>{
             try{
                 setLoading(true)
-                // const data: meal[] = await getMeals()
-                setMeals([])
+                const data: MealInterface[] = await getMeals()
+                setMeals(data)
             }catch(err){
                 console.log('err:', err)
             }

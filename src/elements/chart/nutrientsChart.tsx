@@ -16,10 +16,38 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Title);
 
 interface MicronutrientBarChartInterface {
     name: string,
-    micronutrients: MicronutrientsInterface
+    micronutrients: MicronutrientsInterface,
+    displayTitle: boolean,
+    displayLegend: boolean,
+    displayYGrid: boolean,
+    displayXGrid: boolean,
+    displayYTitle: boolean,
+    displayXTitle: boolean,
+    yBeginAtZero: boolean,
+    xBeginAtZero: boolean,
+    backgroundColor: string,
+    borderColor: string,
+    borderWidth: number,
+    barThickness: number
+
 }
 
-const MicronutrientBarChart: React.FC<MicronutrientBarChartInterface> = ({ name,  micronutrients }) => {
+const MicronutrientBarChart: React.FC<MicronutrientBarChartInterface> = ({ 
+  name,  
+  micronutrients,
+  displayTitle,
+  displayLegend,
+  displayYGrid,
+  displayXGrid,
+  displayYTitle,
+  displayXTitle,
+  yBeginAtZero,
+  xBeginAtZero,
+  backgroundColor,
+  borderColor,
+  borderWidth,
+  barThickness
+}) => {
     // Extract labels, data and units
     const labels = Object.keys(micronutrients);
     const dataValues = labels.map(key => micronutrients[key][0]);
@@ -31,10 +59,10 @@ const MicronutrientBarChart: React.FC<MicronutrientBarChartInterface> = ({ name,
         {
           label: "Micronutrients",
           data: dataValues,
-          backgroundColor: "rgba(75, 192, 192, 0.6)",
-          borderColor: "rgba(75, 192, 192, 1)",
-          borderWidth: 1,
-          barThickness: 15, // 👈 sets fixed bar width (in pixels)
+          backgroundColor: backgroundColor,
+          borderColor: borderColor,
+          borderWidth: borderWidth,
+          barThickness: barThickness
         },
       ],
     };
@@ -43,7 +71,7 @@ const MicronutrientBarChart: React.FC<MicronutrientBarChartInterface> = ({ name,
       responsive: true,
       plugins: {
         legend: {
-            display: false, 
+            display: displayLegend, 
         },
         tooltip: {
           callbacks: {
@@ -57,27 +85,28 @@ const MicronutrientBarChart: React.FC<MicronutrientBarChartInterface> = ({ name,
           },
         },
         title: {
-          display: true,
+          display: displayTitle,
           text: `Micronutrient Breakdown for "${name}"`,
         },
       },
       scales: {
         y: {
-          beginAtZero: true,
+          beginAtZero: yBeginAtZero,
           grid: {
-            display: false,
+            display: displayYGrid,
           },
           title: {
-            display: true,
+            display: displayYTitle,
             text: "Quantity",
           },
         },
         x: {
+          beginAtZero: xBeginAtZero,
           grid: {
-            display: false,
+            display: displayXGrid,
           },
           title: {
-            display: true,
+            display: displayXTitle,
             text: "Micronutrient",
           },
           ticks: {

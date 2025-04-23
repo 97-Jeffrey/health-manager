@@ -3,7 +3,6 @@ import { RecipeInterface } from "../../types/recipe"
 import MicronutrientBarChart from "../../elements/chart/nutrientsChart"
 import NutrientsTable from "../../elements/table/NutritionTable"
 import { GroupedMealsArray } from "../../lib/util/meal"
-import { formatDate } from "../../lib/util/date"
 import SectionSelector from "../../elements/tab/SectionSelector"
 
 
@@ -69,17 +68,29 @@ const RecipeAnalysis: React.FC<RecipeAnalysisInterface> = ({ recipes, meals }) =
                     micronutrients  
                         &&
                     <MicronutrientBarChart
-                        name={selectedRecipe}
+                        name={analyzeItem ==='recipe'? selectedRecipe: selectedMealName}
                         micronutrients={micronutrients}
+                        displayTitle={true}
+                        displayLegend={true}
+                        displayYGrid={false}
+                        displayXGrid={false}
+                        displayYTitle={true}
+                        displayXTitle={true}
+                        yBeginAtZero={true}
+                        xBeginAtZero={true}
+                        backgroundColor={"rgba(75, 192, 192, 0.6)"}
+                        borderColor={"rgba(75, 192, 192, 1)"}
+                        borderWidth={1}
+                        barThickness={15}
                     />
                 }
 
                 {
-                micronutrients  
-                    &&
-                <NutrientsTable 
-                   micronutrients={micronutrients}
-                />
+                    micronutrients  
+                        &&
+                    <NutrientsTable 
+                        micronutrients={micronutrients}
+                    />
                 }
 
 

@@ -38,13 +38,13 @@ const MealList: React.FC<MealListInterface> = () =>{
         meal,
         setSuccess,
         handleFieldsChange,
+        handleMealSelect,
         handleMealCreate,
         handleMealUpdate,
         handleMealRemove,
     } = useMeal();
     
     const mealSorted: GroupedMealsArray[] = sortedMeals(meals)
-    console.log(mealSorted)
     
     return (
         <>
@@ -79,8 +79,16 @@ const MealList: React.FC<MealListInterface> = () =>{
            
                           
                 <div className=' flex flex-row justify-between items-center mb-3'>
-                    <div className='font-bold text-[30px]'>My Meals 👨‍🍳</div>
-                    <button className={STYLES.ACTION_BUTTON} onClick={handleModalOpen}>Create Meal</button>
+                    <div className='font-bold text-[30px]'>My Meals 🍇 🍉 🍑 🥝 🍒</div>
+                    <button 
+                        className={STYLES.ACTION_BUTTON} 
+                        onClick={()=>{
+                            handleMealSelect('')
+                            handleModalOpen()
+                        }}
+                    >
+                        Create Meal
+                    </button>
                 </div>
 
                 <Info
@@ -92,15 +100,14 @@ const MealList: React.FC<MealListInterface> = () =>{
                 />
 
                 {
-                    loading ?
-                    <LoadingSpinner text={"Loading Recipes ..."}/>
-                        :
-                    <div className='flex flex-row flex-wrap justify-left items-start gap-5 mt-[30px] '>
-
+                    loading  
+                        &&
+                    <div className='mt-[25px] mb-[25px]'>
+                        <LoadingSpinner text={"Loading Recipes ..."}/>
                     </div>
                 }
 
-                <div className='flex flex-row flex-wrap justify-start items-center gap-[20px]'>
+                <div className='mt-[25px] flex flex-row flex-wrap justify-start items-center gap-[20px]'>
                     {mealSorted.map((meal: GroupedMealsArray)=>(
                         <div key={meal.date} className=' rounded-[20px] w-[300px] h-[240px] border border-1  border-lg shadow-custom bg-white'>
                             <div className={`
@@ -117,9 +124,17 @@ const MealList: React.FC<MealListInterface> = () =>{
                             <div className='h-[80px] overflow-y-scroll'>
                             {
                                 meal.data.map(meal=>(
-                                    <div className='w-100 flex flex-row justify-start items-center gap-[15px] text-start mt-[15px] font-bold  pl-[20px]'>
+                                    <div key={meal.id} className='w-100 flex flex-row justify-start items-center gap-[15px] text-start mt-[15px] font-bold  pl-[20px]'>
                                         <div>"{meal.name}" </div>
-                                        <div><FiEdit2 /></div>
+                                        <div 
+                                            className='cursor-pointer'
+                                            onClick={()=>{
+                                                handleMealSelect(meal.id)
+                                                handleModalOpen()
+                                            }}
+                                        >
+                                            <FiEdit2 />
+                                        </div>
                                     </div>
 
                                 ))

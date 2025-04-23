@@ -3,6 +3,7 @@ import { UserInterface } from '../types/userInterface';
 import getUser from '../lib/api/user/getUser';
 import updateUser from '../lib/api/user/updateUser';
 import uploadImage from '../lib/api/image/uploadImage';
+import { ImageInfo } from '../types/imageType';
 
 export const useProfile = () => {
   const [profile, setProfile] = useState<UserInterface>({
@@ -57,8 +58,11 @@ export const useProfile = () => {
 
     console.log('file', file)
 
-    const res = await uploadImage(imageType, file)
-    console.log(res)
+    const res: ImageInfo = await uploadImage(imageType, file)
+    await updateUser('image', res.fileUrl)
+    setUpdateNotify(true)
+
+   
     handleFetchData()
 
 

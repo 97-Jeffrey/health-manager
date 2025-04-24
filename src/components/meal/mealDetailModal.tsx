@@ -31,9 +31,10 @@ const MealDetailModal: React.FC<MealDetailModalInterface> = ({ meals, open, setO
                         <div 
                             className={' rounded-[10px] p-[15px] w-100 flex flex-row justify-between items-center gap-[15px]'}
                         >
-                            <div className='font-bold w-[150px] '>Meal name</div>
-                            <div className='font-bold '>Time to Finish </div>
-                            <div className='font-bold w-[200px] '>Meal Note</div>
+                            <div className='font-bold w-[150px]'>Name </div>
+                            <div className='font-bold w-[100px]'>Period </div> 
+                            <div className='font-bold w-[200px]'> Note</div>
+                            <div className='font-bold w-[150px]'> Image</div>
 
                         </div>
                         {meals.data.map(meal=> (

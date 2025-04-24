@@ -9,6 +9,8 @@ import { GroupedMealsArray, sortedMeals } from "../../lib/util/meal"
 import { formatDate } from "../../lib/util/date"
 import MealDetailModal from "./mealDetailModal"
 import { FiEdit2 } from "react-icons/fi";
+import { capitalizeFirstChar } from '../../lib/util/string'
+import MealCard from './mealCard'
 
 
 
@@ -39,6 +41,7 @@ const MealList: React.FC<MealListInterface> = () =>{
         setSuccess,
         handleFieldsChange,
         handleMealSelect,
+        handleUploadMealImage,
         handleMealCreate,
         handleMealUpdate,
         handleMealRemove,
@@ -55,6 +58,7 @@ const MealList: React.FC<MealListInterface> = () =>{
               handleClose={handleModalClose}
               meal={meal}
               handleFieldChange={handleFieldsChange}
+              handleUploadImage={handleUploadMealImage}
               asyncAction={isEdit? handleMealUpdate:handleMealCreate}
               asyncDeleteAction={handleMealRemove}  
            />
@@ -92,10 +96,9 @@ const MealList: React.FC<MealListInterface> = () =>{
                 </div>
 
                 <Info
-                    text={`Save, organize, and recreate your favorite dishes 
-                    effortlessly—whether it’s a family heirloom, 
-                    a restaurant-inspired creation, or a healthy meal 
-                    prep idea. A recipe that truly matters to you, and your health.
+                    text={`
+                        Log your meals effortlessly and stay on top of your dietary goals! 
+
                    `}
                 />
 
@@ -109,53 +112,13 @@ const MealList: React.FC<MealListInterface> = () =>{
 
                 <div className='mt-[25px] flex flex-row flex-wrap justify-start items-center gap-[20px]'>
                     {mealSorted.map((meal: GroupedMealsArray)=>(
-                        <div key={meal.date} className=' rounded-[20px] w-[300px] h-[240px] border border-1  border-lg shadow-custom bg-white'>
-                            <div className={`
-                                flex flex-row justify-center items-center font-bold 
-                                w-100 border border-black h-[40px] rounded-tl-[20px] rounded-tr-[20px] bg-black text-white`}
-                            >
-                                {formatDate(meal.date)}
-                            </div>
-
-                            <div className='text-start mt-[15px] pl-[20px]'>
-                                {meal.data.length} meal{meal.data.length==1? '':'s'}
-                            </div>
-
-                            <div className='h-[80px] overflow-y-scroll'>
-                            {
-                                meal.data.map(meal=>(
-                                    <div key={meal.id} className='w-100 flex flex-row justify-start items-center gap-[15px] text-start mt-[15px] font-bold  pl-[20px]'>
-                                        <div>"{meal.name}" </div>
-                                        <div 
-                                            className='cursor-pointer'
-                                            onClick={()=>{
-                                                handleMealSelect(meal.id)
-                                                handleModalOpen()
-                                            }}
-                                        >
-                                            <FiEdit2 />
-                                        </div>
-                                    </div>
-
-                                ))
-                        
-                            }
-                            </div>
-
-                            <div className='text-center mt-[20px] flex flex-row justify-center items-center gap-[10px]'>
-                                <button 
-                                    className='border-none bg-[#edebeb] text-center rounded-[20px]'
-                                    onClick={()=> {
-                                        setSelectedMeal(meal)
-                                        setOpenDetail(true)
-                                    }}
-                                >
-                                    View Detail
-                                </button>
-                            </div>
-
-
-                        </div>
+                        <MealCard 
+                            meal={meal}
+                            handleMealSelect={handleMealSelect}
+                            handleModalOpen={handleModalOpen}
+                            setSelectedMeal={setSelectedMeal}
+                            setOpenDetail={setOpenDetail}
+                        />
                     ))}
                 </div>
             </div>

@@ -9,6 +9,7 @@ interface MealModalInterface {
     handleClose: ()=> void,
     meal: MealInterface,
     handleFieldChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>void,
+    handleUploadImage: (e:React.ChangeEvent<HTMLInputElement>) => void,
     asyncAction: (e: React.FormEvent) => Promise<void>,
     asyncDeleteAction?: (e: React.FormEvent) => Promise<void>,
 }
@@ -20,6 +21,7 @@ const MealModal : React.FC<MealModalInterface>= ({
     handleClose,
     meal,
     handleFieldChange,
+    handleUploadImage,
     asyncAction,
     asyncDeleteAction
 
@@ -99,6 +101,31 @@ const MealModal : React.FC<MealModalInterface>= ({
                             onChange={handleFieldChange}
                             className={STYLES.RECIPE_INPUT}
                         />
+                    </div>
+
+                    <div className='flex flex-col gap-2 '>
+                        <input
+                            type="file"
+                            id="bootstrap-file-upload"
+                            onChange={handleUploadImage}
+                            className="d-none"
+                        />
+                    
+                        <label
+                            htmlFor="bootstrap-file-upload"
+                            className="btn btn-secondary"
+                        >
+                            {meal.image? 'Change Image': 'Upload Image'}
+                        </label>
+                        {
+                            meal.image   
+                                &&
+                            <img 
+                                src={meal.image} 
+                                alt="Meal Image" 
+                                className="w-100 rounded-[20px] object-cover"
+                            />
+                        }
                     </div>
 
                 </div>

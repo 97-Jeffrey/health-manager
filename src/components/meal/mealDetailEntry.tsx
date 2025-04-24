@@ -4,6 +4,7 @@ import { MealInterface } from "../../types/recipe"
 
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { convertTo12HourFormat } from "../../lib/util/date";
+import { capitalizeFirstChar } from "../../lib/util/string";
 
 interface MealDetailEntryInterface {
     meal: MealInterface
@@ -25,9 +26,18 @@ const MealDetailEntry: React.FC<MealDetailEntryInterface> = ({ meal }) =>{
                         
                         className={' rounded-[10px] p-[15px] w-100 flex flex-row justify-between items-center gap-[15px]'}
                     >
-                        <div className='w-[150px]'>{meal.name}</div>
-                        <div className='font-bold'>{convertTo12HourFormat(meal.startTime)} - {convertTo12HourFormat(meal.endTime)}</div>
-                        <div className='w-[200px]'>{meal.note}</div>
+                        <div className='font-bold w-[150px]'>{capitalizeFirstChar(meal.name)}</div>
+                        <div className='font-bold w-[100px]'>{convertTo12HourFormat(meal.startTime)} - {convertTo12HourFormat(meal.endTime)}</div>
+                        <div className='w-[200px]'>{capitalizeFirstChar(meal.note)}</div>
+                        {meal.image ?
+                            <img 
+                                src={meal.image} 
+                                alt="Meal Image" 
+                                className="w-[150px] rounded-[12px] object-cover"
+                            />:
+                            <div className='w-[150px]'>None</div>
+                        }
+
 
                     </div>
                     <div
@@ -45,6 +55,7 @@ const MealDetailEntry: React.FC<MealDetailEntryInterface> = ({ meal }) =>{
                     <NutrientsTable
                         micronutrients={meal.micronutrients}
                     />
+                    
                 }
                                 
             </div>

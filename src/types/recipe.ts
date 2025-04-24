@@ -16,6 +16,7 @@ export interface MealInterface {
     date: string,
     startTime: string,
     endTime: string,
+    image: string,
     lastUpdatedAt?: string,
     micronutrients?:MicronutrientsInterface
 }

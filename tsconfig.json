@@ -5,6 +5,7 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
+    "types": ["jest"],
     "target": "ESNext",
     "module": "ESNext",
     "jsx": "react-jsx",

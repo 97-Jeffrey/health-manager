@@ -14,3 +14,21 @@ export const truncateString = (str: string, maxLength: number): string =>{
     }
     return str;
   }
+
+
+
+/** 
+ *  get Greeting message based on local time
+ *   
+*/
+
+export const  getGreeting =() =>{
+  const hour = new Date().getHours();
+  //[☀️, 🌤️, 🌙, 🌃]
+
+  return `Good ${
+    hour >= 5 && hour < 12? "Morning ": 
+    hour >= 12 && hour < 17? "Afternoon": 
+    hour >= 17 && hour < 21? "Evening ": "Night "}, ` 
+
+}

@@ -30,7 +30,7 @@ const MealModal : React.FC<MealModalInterface>= ({
     return (
         <>
             <ToggleModal
-                title={`${isEdit? 'Update': 'Create'} A Meal`}
+                title={`${isEdit? `Update "${meal.name}"`: 'Create A Meal'}`}
                 open={open}
                 toDelete={toDelete}
                 handleClose={handleClose}

@@ -1,6 +1,7 @@
 import ToggleModal from "../../elements/modal/modal"
 import * as STYLES from '../../constants/styles'
 import { mindInterface } from "../../types/mindInterface"
+import { formatDate } from "../../lib/util/date"
 import MindFields from "./mindFields"
 
 
@@ -36,7 +37,7 @@ const MindModal : React.FC<MindModalInterface>= ({
     return (
         <>
             <ToggleModal 
-                title={`${isEdit? 'Update': 'Create'} ${section}`}
+                title={`${isEdit? 'Update': 'Add a'} ${section} ${isEdit? `on ${formatDate(mind.date)}`:"entry"} `}
                 open={open}
                 toDelete={toDelete}
                 handleClose={handleClose}

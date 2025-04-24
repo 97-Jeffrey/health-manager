@@ -63,3 +63,15 @@ export function formatDateToMonthDayYear(date: Date): string {
     
   return `${month} ${day}${suffix}, ${year}`;
 }
+
+
+
+/** 
+  convert a 24 hour time string into 12 hour time string
+  ex: 13:35 -> 1:35PM
+*/
+
+export const convertTo12HourFormat = (time24: string): string => {
+  const [h, m] = time24.split(':');
+  return `${(Number(h)% 12) || 12}:${m} ${Number(h) >= 12 ? 'PM' : 'AM'}`;
+};

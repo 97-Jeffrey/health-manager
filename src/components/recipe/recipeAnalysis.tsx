@@ -4,6 +4,7 @@ import MicronutrientBarChart from "../../elements/chart/nutrientsChart"
 import NutrientsTable from "../../elements/table/NutritionTable"
 import { GroupedMealsArray } from "../../lib/util/meal"
 import SectionSelector from "../../elements/tab/SectionSelector"
+import Info from "../../elements/info/info"
 
 
 interface RecipeAnalysisInterface {
@@ -63,6 +64,15 @@ const RecipeAnalysis: React.FC<RecipeAnalysisInterface> = ({ recipes, meals }) =
                     setSelectedSection={setSelectedMealName}
                 /> 
                 } 
+
+                {
+                    !micronutrients
+                        &&
+                    <Info text={`No Analysis of selected ${analyzeItem}`}/>
+                }
+
+            
+
 
                 {
                     micronutrients  

@@ -2,6 +2,7 @@ import { FiEdit2 } from "react-icons/fi"
 import { formatDate } from "../../lib/util/date"
 import { GroupedMealsArray } from "../../lib/util/meal"
 import { capitalizeFirstChar } from "../../lib/util/string"
+import TooltipGeneral from "../../elements/tooltip/tooltip"
 
 interface MealCardInterface {
     meal: GroupedMealsArray,
@@ -46,7 +47,11 @@ const MealCard : React.FC<MealCardInterface>= ({
                                     handleModalOpen()
                                 }}
                             >
-                                <FiEdit2 />
+                                <TooltipGeneral text='Edit the meal'> 
+                                    <div>
+                                        <FiEdit2 />
+                                    </div>
+                                </TooltipGeneral>
                             </div>
                         </div>
 

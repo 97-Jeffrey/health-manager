@@ -4,6 +4,7 @@ export interface RecipeInterface {
     description: string,
     ingredients: string[],
     steps: string[],
+    image: string,
     lastUpdatedAt?: string,
     micronutrients?:MicronutrientsInterface
 }

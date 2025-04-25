@@ -6,10 +6,7 @@ import Success from "../../elements/banner/success"
 import Info from "../../elements/info/info"
 import LoadingSpinner from "../../elements/loading/loadingSpinner"
 import { GroupedMealsArray, sortedMeals } from "../../lib/util/meal"
-import { formatDate } from "../../lib/util/date"
 import MealDetailModal from "./mealDetailModal"
-import { FiEdit2 } from "react-icons/fi";
-import { capitalizeFirstChar } from '../../lib/util/string'
 import MealCard from './mealCard'
 
 

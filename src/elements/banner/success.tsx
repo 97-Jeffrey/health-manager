@@ -1,4 +1,5 @@
 import React from 'react';
+import { CiCircleRemove } from "react-icons/ci";
 
 interface SuccessInterface{
   text: string,
@@ -8,7 +9,7 @@ interface SuccessInterface{
 const Success: React.FC<SuccessInterface> = ({ text, onClose }) => {
     return (
       <div className="fixed top-4 right-4 z-50">
-        <div className="bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center justify-between">
+        <div className="bg-black text-white px-6 py-4 rounded-lg shadow-lg flex items-center justify-between">
           <div className="flex items-center">
             <svg
               className="w-6 h-6 mr-2"
@@ -26,25 +27,11 @@ const Success: React.FC<SuccessInterface> = ({ text, onClose }) => {
             </svg>
             <span>{text}</span>
           </div>
-          <button
+
+          <CiCircleRemove 
             onClick={onClose}
-            className="ml-4 p-1 outline-none bg-green-600 hover:bg-green-600 rounded-full focus:outline-none"
-          >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              ></path>
-            </svg>
-          </button>
+            className='cursor-pointer text-[30px] ml-[10px]'
+          />
         </div>
       </div>
     );

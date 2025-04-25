@@ -7,6 +7,8 @@ import getRecipes from "../lib/api/recipe/getRecipes"
 import createRecipe from "../lib/api/recipe/createRecipe"
 import updateRecipe from "../lib/api/recipe/updateRecipe"
 import removeRecipe from "../lib/api/recipe/removeRecipe"
+import uploadImage from "../lib/api/image/uploadImage"
+import { ImageInfo } from "../types/imageType"
 
 export const useRecipe = () =>{
 
@@ -17,6 +19,7 @@ export const useRecipe = () =>{
         description:"",
         ingredients: [],
         steps:[""],
+        image: ""
     })
     const [recipes, setRecipes] = useState<RecipeInterface[]>([])
 
@@ -60,6 +63,18 @@ export const useRecipe = () =>{
         setRecipe(prev=>({
             ...prev, steps: prev.steps.filter((_, idx)=> idx !==index)
         }))
+    }
+
+    const handleUploadRecipeImage  = async (e:React.ChangeEvent<HTMLInputElement>) =>{
+        const files = e.target.files;
+        if (!files || files.length<1) return;
+    
+        const imageType = 'profile-photo';
+        const file: File = files[0];
+    
+        const res: ImageInfo = await uploadImage(imageType, file)
+        setRecipe(prev=> ({...prev, ['image']: res.fileUrl }))
+
     }
 
     const handleRecipeCreate = async (e: React.FormEvent) =>{
@@ -163,6 +178,7 @@ export const useRecipe = () =>{
         handleStepAdd,
         handleRecipeStep,
         handleIngredientRemove,
+        handleUploadRecipeImage,
         handleStepRemove,
         handleRecipeCreate,
         handleRecipeUpdate,

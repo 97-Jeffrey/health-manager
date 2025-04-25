@@ -85,7 +85,7 @@ const BodyModal : React.FC<BodyModalInterface>= ({
                     <div className='flex flex-col gap-2 '>
                         
                         <CheckBox
-                           text={'Is it Resolved?'}
+                           text={'Is the Symptom Resolved?'}
                            status={bodySymptom.isResolved}
                            onChange={handleResolvedStatus}
 

@@ -2,9 +2,8 @@
 import { Modal } from 'react-bootstrap';
 import { GroupedMealsArray } from '../../lib/util/meal';
 import { formatDate } from '../../lib/util/date';
-import MicronutrientBarChart from '../../elements/chart/nutrientsChart';
-import NutrientsTable from '../../elements/table/NutritionTable';
 import MealDetailEntry from './mealDetailEntry';
+import { IoIosClose } from "react-icons/io";
 
 interface MealDetailModalInterface {
     meals: GroupedMealsArray,
@@ -14,7 +13,6 @@ interface MealDetailModalInterface {
 
 const MealDetailModal: React.FC<MealDetailModalInterface> = ({ meals, open, setOpen }) =>{
 
-    console.log('meals', meals)
     return (
         <>
            <Modal
@@ -25,15 +23,22 @@ const MealDetailModal: React.FC<MealDetailModalInterface> = ({ meals, open, setO
                 centered 
             >
                 <Modal.Body>
-                    <h4 className='font-bold'>Meals Details At {formatDate(meals.date)}</h4>
+                    <div className='flex flex-row justify-between items-center'>
+                        <h4 className='font-bold'>Meals Details At {formatDate(meals.date)}</h4>
+                        <IoIosClose  
+                            className='text-[30px] cursor-pointer'
+                            onClick={()=>setOpen(false)}
+                        />
+                    </div>
 
                     <div className={`mt-[30px] w-100 flex flex-col justify-center items-center gap-[15px]`}>
                         <div 
                             className={' rounded-[10px] p-[15px] w-100 flex flex-row justify-between items-center gap-[15px]'}
                         >
-                            <div className='font-bold w-[150px] '>Meal name</div>
-                            <div className='font-bold '>Time to Finish </div>
-                            <div className='font-bold w-[200px] '>Meal Note</div>
+                            <div className='font-bold w-[150px]'>Name </div>
+                            <div className='font-bold w-[100px]'>Period </div> 
+                            <div className='font-bold w-[200px]'> Note</div>
+                            <div className='font-bold w-[150px]'> Image</div>
 
                         </div>
                         {meals.data.map(meal=> (

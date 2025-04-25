@@ -4,6 +4,8 @@ import createMeal from "../lib/api/meal/createMeal"
 import updateMeal from "../lib/api/meal/updateMeal"
 import removeMeal from "../lib/api/meal/removeMeal"
 import getMeals from "../lib/api/meal/getMeals"
+import { ImageInfo } from "../types/imageType"
+import uploadImage from "../lib/api/image/uploadImage"
 
 
 
@@ -16,7 +18,7 @@ export const useMeal = () =>{
         date: "",
         startTime: "",
         endTime: "",
-
+        image: ""
     }
     const [meal, setMeal] = useState<MealInterface>(INITIAL_MEAL)
     const [meals, setMeals] =useState<MealInterface[]>([])
@@ -47,6 +49,19 @@ export const useMeal = () =>{
         const newMeal: MealInterface= meals.find(meal=> meal.id===id)!
         setMeal(newMeal)
         setIsEdit(true)
+    }
+
+    const handleUploadMealImage  = async (e:React.ChangeEvent<HTMLInputElement>) =>{
+        const files = e.target.files;
+        if (!files || files.length<1) return;
+    
+        const imageType = 'meal-image';
+        const file: File = files[0];
+
+    
+        const res: ImageInfo = await uploadImage(imageType, file)
+        setMeal(prev=> ({ ...prev, ['image']: res.fileUrl}))
+    
     }
 
     const handleMealCreate = async (e: React.FormEvent)=>{
@@ -143,6 +158,7 @@ export const useMeal = () =>{
         setSuccess,
         handleFieldsChange,
         handleMealSelect,
+        handleUploadMealImage,
         handleMealCreate,
         handleMealUpdate,
         handleMealRemove

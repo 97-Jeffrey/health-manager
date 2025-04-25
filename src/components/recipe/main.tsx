@@ -12,7 +12,7 @@ const Main = () =>{
     const { recipes, loading } =useRecipe()
     const { meals } = useMeal();
     const mealSorted: GroupedMealsArray[] = sortedMeals(meals);
-    const [selectedSection, setSelectedSection] = useState<string>('Meal')
+    const [selectedSection, setSelectedSection] = useState<string>('Recipe')
 
     const sections = recipes.length || meals.length>0 ? 
     ['Meal','Recipe', 'Nutrient Analysis']:

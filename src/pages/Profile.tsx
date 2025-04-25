@@ -2,6 +2,7 @@ import { useProfile } from '../hooks/useProfile';
 import * as STYLES from '../constants/styles'
 import Success from '../elements/banner/success';
 import Info from '../elements/info/info';
+import { getGreeting } from '../lib/util/string';
 
 
 
@@ -28,13 +29,13 @@ const Profile = () => {
         updateNotify
           &&
         <Success  
-          text='Update Successful' 
+          text='Profile Update Successful' 
           onClose={()=> setUpdateNotify(false)} 
         />
       }
 
       <div className="w-full bg-white rounded-lg shadow-md p-8">
-        <h1 className="text-3xl font-bold mb-8">My Profile</h1>
+        <h1 className="text-3xl font-bold mb-8"> {getGreeting()} {name}</h1>
         <Info text={`
           This section displays your account details and allows
           seamless updates. Changes are automatically saved 

@@ -22,6 +22,7 @@ const RecipeEdit = () =>{
             setLoading,
             setSuccess,
             handleRecipeFieldsChange, 
+            handleUploadRecipeImage,
             handleIngredientAdd,
             handleStepAdd,
             handleRecipeStep,
@@ -110,6 +111,35 @@ const RecipeEdit = () =>{
                             onChange={handleRecipeFieldsChange}
                             className={STYLES.RECIPE_INPUT}
                         />
+                    </div>
+
+                    <div>
+                        <input
+                            type="file"
+                            id="bootstrap-file-upload"
+                            onChange={handleUploadRecipeImage}
+                            className="d-none"
+                        />
+                    
+                        <label
+                            htmlFor="bootstrap-file-upload"
+                            className="btn btn-secondary"
+                        >
+                            {recipe.image? 'Change Recipe Image': 'Upload Recipe Image'}
+                        </label>
+
+                        {
+                            recipe.image ?
+                            <img 
+                                src={recipe.image} 
+                                alt="Recipe Image" 
+                                className="mt-[20px] w-50 rounded-[20px] object-cover "
+                            />
+                                :
+                            <div className="mt-[20px] font-bold w-50 h-[300px] rounded-[20px] object-cover border border-black flex flex-row justify-center items-center">
+                                No Recipe Image Added
+                            </div>
+                            }
                     </div>
 
                     

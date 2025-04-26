@@ -1,5 +1,6 @@
 export const MainPart: string[] = ['Face', 'Body'];
 
+
 export const BodyArea : string[] = 
 ['Hair', 
  'ForeHead', 

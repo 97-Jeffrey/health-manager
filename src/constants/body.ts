@@ -3,6 +3,7 @@ export const MainPart: string[] = ['Face', 'Body'];
 
 export const BodyArea : string[] = 
 ['Hair', 
+ 'Lip',
  'ForeHead', 
  'T-zone', 
  'Left eye', 

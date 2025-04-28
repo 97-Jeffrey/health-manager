@@ -36,6 +36,7 @@ const BodySymptom: React.FC = () => {
     handleRatingChange,
     handleResolvedStatus,
     handleDropdownFieldChange,
+    handleUploadMealImage,
     handleSymptomCreate,
     handleSymptomUpdate,
     handleSymptomRemove
@@ -71,6 +72,7 @@ const BodySymptom: React.FC = () => {
           handleRatingChange={handleRatingChange}
           handleResolvedStatus={handleResolvedStatus}
           handleDropdownFieldChange={handleDropdownFieldChange}
+          handleUploadMealImage={handleUploadMealImage}
           asyncAction={isEdit? handleSymptomUpdate:handleSymptomCreate}
           asyncDeleteAction={handleSymptomRemove}
       />

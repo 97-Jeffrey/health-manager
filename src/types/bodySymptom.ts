@@ -6,5 +6,6 @@ export interface BodySymptomInterface {
     date: string,
     description: string,
     rating: number,
-    isResolved: boolean
+    isResolved: boolean,
+    image: string
 }

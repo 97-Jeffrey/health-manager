@@ -17,7 +17,8 @@ interface BodyModalInterface {
     handleFieldChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>void,
     handleRatingChange: (rating: number)=> void,
     handleResolvedStatus: (e: React.ChangeEvent<HTMLInputElement>)=> void,
-    handleDropdownFieldChange: (name: string, value: string| null)=> void
+    handleDropdownFieldChange: (name: string, value: string| null)=> void,
+    handleUploadMealImage: (e:React.ChangeEvent<HTMLInputElement>) => void,
     asyncAction: (e: React.FormEvent) => Promise<void>,
     asyncDeleteAction?: (e: React.FormEvent) => Promise<void>,
 
@@ -33,6 +34,7 @@ const BodyModal : React.FC<BodyModalInterface>= ({
     handleRatingChange,
     handleResolvedStatus,
     handleDropdownFieldChange,
+    handleUploadMealImage,
     asyncAction,
     asyncDeleteAction
 
@@ -42,7 +44,7 @@ const BodyModal : React.FC<BodyModalInterface>= ({
     return (
         <>
             <ToggleModal 
-                title={`${isEdit? 'Update': 'Create'} A Body Symptom`}
+                title={`${isEdit? 'Update the ': 'Create a'} Body Symptom`}
                 open={open}
                 toDelete={toDelete}
                 handleClose={handleClose}
@@ -123,6 +125,31 @@ const BodyModal : React.FC<BodyModalInterface>= ({
                             onChange={handleFieldChange}
                             className={STYLES.RECIPE_INPUT}
                         />
+                    </div>
+
+                    <div className='flex flex-col gap-2 '>
+                        <input
+                            type="file"
+                            id="bootstrap-file-upload"
+                            onChange={handleUploadMealImage}
+                            className="d-none"
+                        />
+                    
+                        <label
+                            htmlFor="bootstrap-file-upload"
+                            className="btn btn-secondary"
+                        >
+                            {bodySymptom.image? 'Change Image': 'Upload Image'}
+                        </label>
+                        {
+                            bodySymptom.image   
+                                &&
+                            <img 
+                                src={bodySymptom.image} 
+                                alt="Body Symptom Image" 
+                                className="w-100 rounded-[20px] object-cover"
+                            />
+                        }
                     </div>
                 </div>
             </ToggleModal>

@@ -4,6 +4,8 @@ import getBodySymptoms from '../lib/api/body/getBodySymptoms';
 import createBodySymptom from '../lib/api/body/createBodySymptom';
 import updateBodySymptom from '../lib/api/body/updateBodySymptom';
 import removeBodySymptom from '../lib/api/body/removeBodySymptom';
+import { ImageInfo } from '../types/imageType';
+import uploadImage from '../lib/api/image/uploadImage';
 
 
 export const useBodySymptom = () => {
@@ -16,7 +18,8 @@ export const useBodySymptom = () => {
         date: "",
         description: "",
         rating: 0,
-        isResolved: false
+        isResolved: false,
+        image: ""
     }
     const [bodySymptom, setbodySymptom]=  useState(INITIAL_BODY_SYMPTOM)
     const [bodySymptoms, setbodySymptoms] = useState<BodySymptomInterface[]>([])
@@ -71,6 +74,19 @@ export const useBodySymptom = () => {
         const newSymptom: BodySymptomInterface= bodySymptoms.find(sym=> sym.id===id)!
         setbodySymptom(newSymptom)
         setIsEdit(true)
+    }
+
+    const handleUploadMealImage  = async (e:React.ChangeEvent<HTMLInputElement>) =>{
+        const files = e.target.files;
+        if (!files || files.length<1) return;
+    
+        const imageType = 'meal-image';
+        const file: File = files[0];
+
+    
+        const res: ImageInfo = await uploadImage(imageType, file)
+        setbodySymptom(prev=> ({ ...prev, ['image']: res.fileUrl}))
+    
     }
 
     //Create a body symptom
@@ -174,6 +190,7 @@ export const useBodySymptom = () => {
         handleFieldChange,
         handleResolvedStatus,
         handleDropdownFieldChange,
+        handleUploadMealImage,
         handleSymptomCreate,
         handleSymptomUpdate,
         handleSymptomRemove

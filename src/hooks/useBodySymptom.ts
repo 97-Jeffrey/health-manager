@@ -80,7 +80,7 @@ export const useBodySymptom = () => {
         const files = e.target.files;
         if (!files || files.length<1) return;
     
-        const imageType = 'meal-image';
+        const imageType = 'body-symptom-image';
         const file: File = files[0];
 
     

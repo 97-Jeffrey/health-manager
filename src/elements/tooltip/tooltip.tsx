@@ -1,13 +1,15 @@
 import React, { ReactElement } from "react"
+import { Placement } from "react-bootstrap/esm/types";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 interface TooltipGeneralInterface {
     children: ReactElement,
-    text: string
+    text: string,
+    placement: Placement | undefined
 }
 
-const TooltipGeneral: React.FC<TooltipGeneralInterface>= ({  children, text }) =>{
+const TooltipGeneral: React.FC<TooltipGeneralInterface>= ({  children, text, placement }) =>{
     const renderTooltip = (props: any) => (
         <Tooltip id="button-tooltip" {...props}>
           {text}
@@ -16,7 +18,7 @@ const TooltipGeneral: React.FC<TooltipGeneralInterface>= ({  children, text }) =
 
     return (
         <OverlayTrigger
-          placement="right"
+          placement={placement}
           delay={{ show: 250, hide: 400 }}
           overlay={renderTooltip}
         >

@@ -10,11 +10,13 @@ import DropDown from '../../elements/dropdown/dropdown';
 import { getBgColorBySeverity } from '../../lib/util/body';
 import SymptomCard from '../../components/body/symptomCard';
 import Info from '../../elements/info/info';
+import BodySymptomDetailModal from './bodySymptomDetailModal';
 
 
 const BodySymptom: React.FC = () => {
 
   const [open,setOpen] = useState<boolean>(false)
+  const [detailOpen, setDetailOpen] = useState<boolean>(false)
   const [filteredBodyPart, setFilteredBodyPart] = useState<string>('Face');
 
   const handleFilteredBodyPart = (name: string, value: string| null) =>{
@@ -76,6 +78,7 @@ const BodySymptom: React.FC = () => {
           asyncAction={isEdit? handleSymptomUpdate:handleSymptomCreate}
           asyncDeleteAction={handleSymptomRemove}
       />
+
 
       <div className='w-100 bg-white p-3 rounded-lg flex flex-col gap-3'>
         <div className='flex flex-row justify-between items-center w-100'>

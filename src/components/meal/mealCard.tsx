@@ -47,7 +47,10 @@ const MealCard : React.FC<MealCardInterface>= ({
                                     handleModalOpen()
                                 }}
                             >
-                                <TooltipGeneral text='Edit the meal'> 
+                                <TooltipGeneral 
+                                    text='Edit the meal'
+                                    placement="right"
+                                > 
                                     <div>
                                         <FiEdit2 />
                                     </div>

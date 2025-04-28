@@ -41,7 +41,10 @@ const RecipeCard: React.FC<RecipeCardInterface> = ({
                             handleEdit(recipe.id)
                         }}
                     >
-                        <TooltipGeneral text='Edit the recipe'> 
+                        <TooltipGeneral 
+                            text='Edit the recipe'
+                            placement="right"
+                        > 
                             <div>
                                 <FiEdit2 />
                             </div>

@@ -13,6 +13,7 @@ import VitaBot from './pages/VitaBot';
 import useAppData from './hooks/useApp';
 import { useCallback } from 'react';
 import * as ROUTES from './constants/routes'
+import Fitness from './pages/Fitness';
 
 
 function App() {
@@ -70,6 +71,11 @@ function App() {
             <Route 
               path={ROUTES.BODY} 
               element={<ProtectedRoute><Body /></ProtectedRoute>} 
+            />
+
+            <Route 
+              path={ROUTES.FITNESS} 
+              element={<ProtectedRoute><Fitness /></ProtectedRoute>} 
             />
 
 

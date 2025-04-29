@@ -25,7 +25,7 @@ const DropDown: React.FC<DropdownInterface> = ({
                     {value}
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu className='w-100'>
+                <Dropdown.Menu className='w-100 max-h-[300px] overflow-y-scroll'>
                     {data.map((each, index)=>(
                         <Dropdown.Item
                             key={index}

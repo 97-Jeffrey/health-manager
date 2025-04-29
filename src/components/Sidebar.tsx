@@ -4,7 +4,7 @@ import { IoIosBody } from "react-icons/io";
 import { GiJourney } from "react-icons/gi";
 import { RiMentalHealthFill } from "react-icons/ri";
 import { IoRestaurant, IoFastFood } from "react-icons/io5";
-import { FaUser, FaSignOutAlt } from "react-icons/fa";
+import { FaUser, FaSignOutAlt, FaRunning } from "react-icons/fa";
 import { TbMessageChatbotFilled } from "react-icons/tb";
 
 
@@ -28,6 +28,7 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
   
   const menuItems = [
     { title: MENU_ITEMS.BODY, icon: IoIosBody, path: ROUTES.BODY },
+    { title: MENU_ITEMS.FITNESS, icon:FaRunning,path: ROUTES.FITNESS },
     { title: MENU_ITEMS.HEALTH_JOURNEY, icon: GiJourney, path: ROUTES.HEALTH_JOURNEY },
     { title: MENU_ITEMS.MIND_WELLNESS, icon: RiMentalHealthFill, path: ROUTES.MIND_WELLNESS },
     { title: MENU_ITEMS.RECIPES, icon: IoRestaurant, path: ROUTES.RECIPE},

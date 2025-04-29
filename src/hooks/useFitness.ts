@@ -73,13 +73,13 @@ export const useFitness = () => {
             setSport(INITIAL_SPORT)
             handleRefetchData()
                 
-            }
-            catch(err){
+        }
+        catch(err){
             console.log('create sport failed:', err)
-            }
-            finally{
-                setLoading(false)
-            }
+        }
+        finally{
+            setLoading(false)
+        }
         
     }
 
@@ -111,19 +111,19 @@ export const useFitness = () => {
         e.preventDefault()
         setLoading(true)
         try{
-                await removeSport(sport.id)
-                setSuccess("Sport Deleted Successfully")
-                setIsEdit(false)
-                setSport(INITIAL_SPORT)
-                handleRefetchData()
+            await removeSport(sport.id)
+            setSuccess("Sport Deleted Successfully")
+            setIsEdit(false)
+            setSport(INITIAL_SPORT)
+            handleRefetchData()
                 
-            }
-            catch(err){
+        }
+        catch(err){
             console.log('create sport failed:', err)
-            }
-            finally{
-                setLoading(false)
-            }
+        }
+        finally{
+            setLoading(false)
+        }
         
     }
 

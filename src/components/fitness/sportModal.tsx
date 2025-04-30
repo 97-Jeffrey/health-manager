@@ -31,7 +31,7 @@ const SportModal: React.FC<SportModalInterface> = ({
     return (
         <>
             <ToggleModal
-                title={`${isEdit? 'Update': 'Create'} A Body Glucose`}
+                title={`${isEdit? 'Update The': 'Add A'} Sport`}
                 open={open}
                 toDelete={toDelete}
                 handleClose={handleClose}
@@ -44,7 +44,7 @@ const SportModal: React.FC<SportModalInterface> = ({
 
 
                     <div className='flex flex-col gap-2 '>
-                        <label className="block text-sm font-medium text-gray-700">Select the area on your body you wish to report an issue for:</label>
+                        <label className="block text-sm font-medium text-gray-700">Select the Sport Type</label>
                         <Dropdown
                             data={SPORTS.sport}
                             name={'name'}
@@ -54,7 +54,7 @@ const SportModal: React.FC<SportModalInterface> = ({
                     </div>
                     
                     <div className='flex flex-col gap-2 '>
-                        <label className="block text-sm font-medium text-gray-700">Event Date</label>
+                        <label className="block text-sm font-medium text-gray-700">Date</label>
                         <input
                             type='date'
                             value={sport.date}
@@ -68,7 +68,8 @@ const SportModal: React.FC<SportModalInterface> = ({
                     <div className='flex flex-col gap-2 '>
                         <label className="block text-sm font-medium text-gray-700">Calories</label>
                         <input
-                            type='string'
+                            type='number'
+                            min={0}
                             value={sport.calories}
                             name='calories'
                             onBlur={()=>{}}
@@ -80,7 +81,7 @@ const SportModal: React.FC<SportModalInterface> = ({
                     <div className='flex flex-col gap-2 '>
                         <label className="block text-sm font-medium text-gray-700">Start Time</label>
                         <input
-                            type='string'
+                            type='time'
                             value={sport.startTime}
                             name='startTime'
                             onBlur={()=>{}}
@@ -92,7 +93,7 @@ const SportModal: React.FC<SportModalInterface> = ({
                     <div className='flex flex-col gap-2 '>
                         <label className="block text-sm font-medium text-gray-700">End Time</label>
                         <input
-                            type='string'
+                            type='time'
                             value={sport.endTime}
                             name='endTime'
                             onBlur={()=>{}}

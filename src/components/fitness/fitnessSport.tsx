@@ -4,6 +4,9 @@ import * as STYLES from '../../constants/styles'
 import { useFitness } from '../../hooks/useFitness'
 import Success from '../../elements/banner/success'
 import SportModal from './sportModal'
+import Info from '../../elements/info/info'
+import LoadingSpinner from '../../elements/loading/loadingSpinner'
+import SportCard from './sportCard'
 
 const FitnessSport: React.FC= () =>{
 
@@ -16,7 +19,6 @@ const FitnessSport: React.FC= () =>{
         loading,
         success,
         setSuccess,
-        setSport,
         handleSportSelect,
         handleFieldChange,
         handleDropdownFieldChange,
@@ -31,6 +33,8 @@ const FitnessSport: React.FC= () =>{
     const handleModalClose = ()=> {
     setOpen(false)
     }
+
+    console.log('sport', sports)
 
     
     return (
@@ -68,6 +72,29 @@ const FitnessSport: React.FC= () =>{
                        Create
                      </button>
                    </div>
+                    <Info
+                       text={`Effortlessly log your workouts, 
+                        monitor progress, and stay motivated with our 
+                        Fitness Activity Tracker. Whether you're running, 
+                        lifting weights, cycling, or doing yoga, record 
+                        every session with ease.`}
+                    />
+                    {
+                        loading
+                            &&
+                        <LoadingSpinner  text={'Loading Fitness Sport...'}/>
+                    
+                    }
+            </div>
+
+            <div className='mt-[20px] w-100 flex flex-row flex-wrap justify-start items-center gap-[20px]'>
+                {sports.map(sport=>(
+                    <SportCard 
+                        sport={sport}
+                        handleSportSelect={handleSportSelect}
+                        handleModalOpen={handleModalOpen}
+                    />
+                ))}
             </div>
         </>
     )

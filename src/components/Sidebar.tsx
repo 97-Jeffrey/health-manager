@@ -29,9 +29,9 @@ const Sidebar: React.FC<SidebarInterface> = ({ signOutApp }) => {
   const menuItems = [
     { title: MENU_ITEMS.BODY, icon: IoIosBody, path: ROUTES.BODY },
     { title: MENU_ITEMS.FITNESS, icon:FaRunning,path: ROUTES.FITNESS },
-    { title: MENU_ITEMS.HEALTH_JOURNEY, icon: GiJourney, path: ROUTES.HEALTH_JOURNEY },
     { title: MENU_ITEMS.MIND_WELLNESS, icon: RiMentalHealthFill, path: ROUTES.MIND_WELLNESS },
     { title: MENU_ITEMS.RECIPES, icon: IoRestaurant, path: ROUTES.RECIPE},
+    { title: MENU_ITEMS.HEALTH_JOURNEY, icon: GiJourney, path: ROUTES.HEALTH_JOURNEY },
     { title: MENU_ITEMS.PROFILE, icon: FaUser, path: ROUTES.PROFILE },
     { title: MENU_ITEMS.VITA_BOT, icon: TbMessageChatbotFilled, path: ROUTES.VITA_BOT },
     { 

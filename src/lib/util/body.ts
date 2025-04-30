@@ -14,9 +14,9 @@ import { BodyGlucoseInterface } from "../../types/bodyGlucose"
 export const getBgColorBySeverity = (severity: number): string=> {
     const color = 
     severity<=4? 
-    '#b0f7bd': 
+    'bg-symptom-mild': 
     severity<= 7? 
-    "#f7ddb0": '#f7b4b0'
+    "bg-symptom-medium": 'bg-symptom-serious'
 
     return color
 }

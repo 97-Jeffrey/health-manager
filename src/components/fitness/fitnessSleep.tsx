@@ -1,42 +1,41 @@
-
 import { useState } from 'react'
 import * as STYLES from '../../constants/styles'
-import { useFitness } from '../../hooks/useFitness'
 import Success from '../../elements/banner/success'
-import SportModal from './sportModal'
+import { useSleep } from '../../hooks/useSleep'
+import SleepModal from './sleepModal'
 import Info from '../../elements/info/info'
 import LoadingSpinner from '../../elements/loading/loadingSpinner'
-import SportCard from './sportCard'
+import SleepCard from './sleepCard'
 
-const FitnessSport: React.FC= () =>{
+
+const FitnessSleep: React.FC = () =>{
 
     const [open,setOpen] = useState<boolean>(false)
-
-    const {
-        isEdit,
-        sport,
-        sports,
-        loading,
-        success,
-        setSuccess,
-        handleSportSelect,
-        handleFieldChange,
-        handleDropdownFieldChange,
-        handleSportCreate,
-        handleSportUpdate,
-        handleSportRemove
-    } = useFitness()
 
     const handleModalOpen = ()=> {
         setOpen(true)
       }
     const handleModalClose = ()=> {
-    setOpen(false)
+        setOpen(false)
     }
 
-    console.log('sport', sports)
+     const {
+            isEdit,
+            sleep,
+            sleeps,
+            loading,
+            success,
+            setSuccess,
+            handleSleepSelect,
+            handleSleepQualityChange,
+            handleFieldChange,
+            handleDropdownFieldChange,
+            handleSleepCreate,
+            handleSleepUpdate,
+            handleSleepRemove
+        } = useSleep()
 
-    
+
     return (
         <>
             {
@@ -47,25 +46,25 @@ const FitnessSport: React.FC= () =>{
                     onClose={()=>setSuccess('')}
                 />
             }
-
-            <SportModal 
+            <SleepModal 
                 toDelete={isEdit}
                 isEdit={isEdit}
                 open={open} 
                 handleClose={handleModalClose}
-                sport={sport}
+                sleep={sleep}
                 handleFieldChange={handleFieldChange}
                 handleDropdownFieldChange={handleDropdownFieldChange}
-                asyncAction={isEdit? handleSportUpdate:handleSportCreate}
-                asyncDeleteAction={handleSportRemove}
+                handleSleepQualityChange={handleSleepQualityChange}
+                asyncAction={isEdit? handleSleepUpdate:handleSleepCreate}
+                asyncDeleteAction={handleSleepRemove}
             />
-           <div className='w-100 bg-white p-3 rounded-lg flex flex-col gap-3'>
+            <div className='w-100 bg-white p-3 rounded-lg flex flex-col gap-3'>
                    <div className='flex flex-row justify-between items-center w-100'>
-                     <div className='font-bold text-[30px]'>Sport 🏃🏻</div> 
+                     <div className='font-bold text-[30px]'>Sleep 😴</div> 
                      <button 
                        className={STYLES.ACTION_BUTTON} 
                        onClick={()=>{
-                            handleSportSelect('')
+                            handleSleepSelect('')
                             handleModalOpen()
                        }}
                      >
@@ -82,17 +81,17 @@ const FitnessSport: React.FC= () =>{
                     {
                         loading
                             &&
-                        <LoadingSpinner  text={'Loading Fitness Sport...'}/>
+                        <LoadingSpinner  text={'Loading Sleep data...'}/>
                     
                     }
             </div>
 
             <div className='mt-[20px] w-100 flex flex-row flex-wrap justify-start items-center gap-[20px]'>
-                {sports.map(sport=>(
-                    <SportCard 
-                        key={sport.id}
-                        sport={sport}
-                        handleSportSelect={handleSportSelect}
+                {sleeps.map(sleep=>(
+                    <SleepCard 
+                        key={sleep.id}
+                        sleep={sleep}
+                        handleSleepSelect={handleSleepSelect}
                         handleModalOpen={handleModalOpen}
                     />
                 ))}
@@ -101,4 +100,5 @@ const FitnessSport: React.FC= () =>{
     )
 }
 
-export default FitnessSport
+
+export default FitnessSleep

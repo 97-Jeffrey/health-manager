@@ -10,13 +10,11 @@ import DropDown from '../../elements/dropdown/dropdown';
 import { getBgColorBySeverity } from '../../lib/util/body';
 import SymptomCard from '../../components/body/symptomCard';
 import Info from '../../elements/info/info';
-import BodySymptomDetailModal from './bodySymptomDetailModal';
 
 
 const BodySymptom: React.FC = () => {
 
   const [open,setOpen] = useState<boolean>(false)
-  const [detailOpen, setDetailOpen] = useState<boolean>(false)
   const [filteredBodyPart, setFilteredBodyPart] = useState<string>('Face');
 
   const handleFilteredBodyPart = (name: string, value: string| null) =>{

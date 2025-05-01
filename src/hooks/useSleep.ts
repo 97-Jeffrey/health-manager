@@ -1,30 +1,27 @@
 import { useEffect, useState } from "react"
-import { SportInterface } from "../types/sport"
-import getSports from "../lib/api/fitness/getSports"
-import removeSport from "../lib/api/fitness/removeSport"
-import updateSport from "../lib/api/fitness/updateSport"
-import createSport from "../lib/api/fitness/createSport"
+import getSleeps from "../lib/api/fitness/getSleeps"
+import removeSleep from "../lib/api/fitness/removeSleep"
+import updateSleep from "../lib/api/fitness/updateSleep"
+import createSleep from "../lib/api/fitness/createSleep"
+import { SleepInterface } from "../types/sleep"
 
 
+export const useSleep = () => {
 
-
-export const useFitness = () => {
-
-    const INITIAL_SPORT: SportInterface = {
+    const INITIAL_SLEEP: SleepInterface = {
         id: "",
         date: "",
-        name: "",
-        calories: 0, 
         startTime: "",
         endTime: "",
-        intensity: "",
-        steps: 0,
+        note: "",
+        quality: 0,
+    
     }
 
 
 
-    const [sport, setSport]=  useState(INITIAL_SPORT)
-    const [sports, setSports] = useState<SportInterface[]>([])
+    const [sleep, setSleep]=  useState(INITIAL_SLEEP)
+    const [sleeps, setSleeps] = useState<SleepInterface[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const [success, setSuccess] = useState<string>("")
     const [trigger, setTrigger] = useState<boolean>(false)
@@ -37,7 +34,7 @@ export const useFitness = () => {
     
     const handleFieldChange =(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>{
         const { name, value } = e.target;
-        setSport(prev=>({
+        setSleep(prev=>({
             ...prev,
             [name]: value
         }))
@@ -45,38 +42,47 @@ export const useFitness = () => {
     }
 
     const handleDropdownFieldChange = (name: string, value: string| null) =>{
-        setSport(prev=>({
+        setSleep(prev=>({
             ...prev,
             [name]: value
         }))
     }
 
+    const handleSleepQualityChange = (name: string, quality: number )=>{
+        setSleep(prev=>({
+            ...prev,
+            [name]: quality
+        }))
+        
 
-    const handleSportSelect= (id: string)=>{
+    }
+
+
+    const handleSleepSelect= (id: string)=>{
         if(!id){
             setIsEdit(false)
-            setSport(INITIAL_SPORT)
+            setSleep(INITIAL_SLEEP)
             return;
         }
-        const newSport: SportInterface= sports.find(sport=> sport.id===id)!
-        setSport(newSport)
+        const newSleep: SleepInterface= sleeps.find(sleep=> sleep.id===id)!
+        setSleep(newSleep)
         setIsEdit(true)
     }
 
 
-    //Create a sport
-    const handleSportCreate = async (e: React.FormEvent) =>{
+    //Create a sleep
+    const handleSleepCreate = async (e: React.FormEvent) =>{
         e.preventDefault()
         setLoading(true)
         try{
-            await createSport(sport)
-            setSuccess("A Sport Entry Created Successfully")
-            setSport(INITIAL_SPORT)
+            await createSleep(sleep)
+            setSuccess("A Sleep Entry Created Successfully")
+            setSleep(INITIAL_SLEEP)
             handleRefetchData()
                 
         }
         catch(err){
-            console.log('create sport failed:', err)
+            console.log('create Sleep failed:', err)
         }
         finally{
             setLoading(false)
@@ -84,20 +90,20 @@ export const useFitness = () => {
         
     }
 
-    //update a sport
-    const handleSportUpdate = async (e: React.FormEvent) =>{
+    //update a sleep
+    const handleSleepUpdate = async (e: React.FormEvent) =>{
         e.preventDefault()
         setLoading(true)
         try{
-            await updateSport(sport)
-            setSuccess("Sport Entry Updated Successfully")
+            await updateSleep(sleep)
+            setSuccess("Sleep Entry Updated Successfully")
             setIsEdit(false)
-            setSport(INITIAL_SPORT)
+            setSleep(INITIAL_SLEEP)
             handleRefetchData()
             
         }
         catch(err){
-            console.log('Update Sport failed:', err)
+            console.log('Update Sleep failed:', err)
         }
         finally{
             setLoading(false)
@@ -106,21 +112,21 @@ export const useFitness = () => {
     }
 
 
-        //remove a sport
-    const handleSportRemove = async (e: React.FormEvent) =>{
+        //remove a sleep
+    const handleSleepRemove = async (e: React.FormEvent) =>{
 
         e.preventDefault()
         setLoading(true)
         try{
-            await removeSport(sport.id)
-            setSuccess("Sport Deleted Successfully")
+            await removeSleep(sleep.id)
+            setSuccess("Sleep Deleted Successfully")
             setIsEdit(false)
-            setSport(INITIAL_SPORT)
+            setSleep(INITIAL_SLEEP)
             handleRefetchData()
                 
         }
         catch(err){
-            console.log('create sport failed:', err)
+            console.log('delete sleep failed:', err)
         }
         finally{
             setLoading(false)
@@ -131,11 +137,11 @@ export const useFitness = () => {
 
     useEffect(()=>{
             
-        const handleFetchSports = async()=>{
+        const handleFetchSleeps = async()=>{
             try{
                 setLoading(true)
-                const data: SportInterface[] = await getSports()
-                setSports(data)
+                const data: SleepInterface[] = await getSleeps()
+                setSleeps(data)
             }catch(err){
                 console.log('err:', err)
             }
@@ -145,25 +151,25 @@ export const useFitness = () => {
     
         }
 
-        handleFetchSports()
+        handleFetchSleeps()
 
 
     },[trigger])
 
     return {
         isEdit,
-        sport,
-        sports,
+        sleep,
+        sleeps,
         loading,
         success,
         setSuccess,
-        setSport,
-        handleSportSelect,
+        handleSleepSelect,
         handleFieldChange,
         handleDropdownFieldChange,
-        handleSportCreate,
-        handleSportUpdate,
-        handleSportRemove
+        handleSleepQualityChange,
+        handleSleepCreate,
+        handleSleepUpdate,
+        handleSleepRemove
     }
     
 

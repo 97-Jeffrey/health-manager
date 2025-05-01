@@ -7,5 +7,6 @@ export interface SportInterface{
     startTime: string,
     endTime: string,
     intensity: string,
+    steps:number
 
 }

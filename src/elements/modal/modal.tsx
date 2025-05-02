@@ -45,13 +45,13 @@ const ToggleModal: React.FC<EditModalInterface> =({
           </Button>
 
           <Button 
-            variant="primary" 
+            className='bg-action-create'
             onClick={(e)=>{
               asyncAction(e)
               handleClose()
             }}
           >
-            {updateActionText}
+            {updateActionText} 
           </Button>
 
           { toDelete 

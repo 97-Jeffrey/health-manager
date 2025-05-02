@@ -5,7 +5,7 @@ import FitnessSleep from "../components/fitness/fitnessSleep"
 
 const Fitness: React.FC = () =>{
 
-     const [selectedSection, setSelectedSection] = useState<string>('Sleep')
+     const [selectedSection, setSelectedSection] = useState<string>('Sport')
     return (
         <>
            <SectionSelector

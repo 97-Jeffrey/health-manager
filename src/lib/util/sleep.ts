@@ -29,5 +29,5 @@ export const  calculateSleepHours = (bedTime: string, wakeUpTime: string)=> {
     // Convert minutes to hours + minutes (e.g., 7.5 hours)
     const sleepHours = sleepMinutes / 60;
   
-    return sleepHours;
+    return sleepHours.toFixed(1);
   }

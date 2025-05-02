@@ -72,11 +72,10 @@ const FitnessSleep: React.FC = () =>{
                      </button>
                    </div>
                     <Info
-                       text={`Effortlessly log your workouts, 
-                        monitor progress, and stay motivated with our 
-                        Fitness Activity Tracker. Whether you're running, 
-                        lifting weights, cycling, or doing yoga, record 
-                        every session with ease.`}
+                       text={`Effortlessly log your sleep patterns and gain 
+                        insights into your nightly rest with our Sleep Recording feature. 
+                        Whether you want to monitor duration, quality, or bedtime habits, 
+                        this tool helps you understand your sleep like never before.`}
                     />
                     {
                         loading

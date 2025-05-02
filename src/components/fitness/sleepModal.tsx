@@ -56,7 +56,7 @@ const SleepModal: React.FC<SleepModalInterface> = ({
                     </div>
 
                     <div className='flex flex-col gap-2 '>
-                        <label className="block text-sm font-medium text-gray-700">Start Time</label>
+                        <label className="block text-sm font-medium text-gray-700">Bed Time</label>
                         <input
                             type='time'
                             value={sleep.startTime}
@@ -68,7 +68,7 @@ const SleepModal: React.FC<SleepModalInterface> = ({
                     </div>
 
                     <div className='flex flex-col gap-2 '>
-                        <label className="block text-sm font-medium text-gray-700">End Time</label>
+                        <label className="block text-sm font-medium text-gray-700">Wake Up Time</label>
                         <input
                             type='time'
                             value={sleep.endTime}

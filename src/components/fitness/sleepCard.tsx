@@ -34,8 +34,11 @@ const SleepCard: React.FC<SleepCardInterface> = ({
                         
                         </div>
 
-                        <div className={'flex flex-row justify-start items-center gap-[15px] w-100'}>
-                            <div className="font-bold"><span className=' text-white bg-sport-steps p-[10px] rounded-[10px]'>{calculateSleepHours(sleep.startTime, sleep.endTime)}</span> hours</div>
+                        <div className={'flex flex-row justify-between items-center gap-[15px] w-100'}>
+                            <div className="font-bold"><span className=' text-white bg-sleep-hours p-[5px] rounded-[6px]'>
+                                {calculateSleepHours(sleep.startTime, sleep.endTime)}</span> hours
+                            </div>
+                            <div className="font-bold">Quality Score &nbsp;<span className=' text-white bg-sleep-hours py-[6px] px-[10px] rounded-[6px]'>{sleep.quality}</span></div>
                         </div>
 
                         <div className='flex flex-row justify-between items-center w-100'>

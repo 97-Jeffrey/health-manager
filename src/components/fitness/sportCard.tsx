@@ -44,9 +44,9 @@ const SportCard: React.FC<SportCardInterface> = ({
                         
                         <div className='flex flex-col justify-center items-start gap-[10px]'>
                             <div className='flex flex-row  justify-start items-center gap-[10px]'>
-                                <div className={`bg-sport-calories  h-[40px] 
-                                    rounded-[15px] flex flex-row justify-center 
-                                    items-center text-[25px] text-white font-bold px-[8px]`}>
+                                <div className={`bg-sport-calories  h-[25px] 
+                                    rounded-[8px] flex flex-row justify-center 
+                                    items-center text-[20px] text-white font-bold px-[8px]`}>
                                     {sport.calories}
 
                                 </div>
@@ -57,9 +57,9 @@ const SportCard: React.FC<SportCardInterface> = ({
 
                               &&
                             <div className='flex flex-row justify-start items-center gap-[10px]'>
-                                <div className={`bg-sport-steps  h-[40px] 
-                                    rounded-[15px] flex flex-row justify-center 
-                                    items-center text-[25px] text-white font-bold px-[8px]`}>
+                                <div className={`bg-sport-steps  h-[25px] 
+                                    rounded-[8px] flex flex-row justify-center 
+                                    items-center text-[20px] text-white font-bold px-[8px]`}>
                                     {sport.steps}
 
                                 </div>

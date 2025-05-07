@@ -29,7 +29,7 @@ const SportCard: React.FC<SportCardInterface> = ({
                         }}
                     >
                         <div className={'flex flex-col justify-center items-start gap-[5px]'}>
-                            <div className='font-bold text-sport-calories text-[30px] leading-[35px]'>{sport.name}</div>
+                            <div className='font-bold text-black text-[30px] leading-[35px]'>{sport.name}</div>
                             <div>On <span className='font-bold'>{formatDate(sport.date)}</span></div>
                             <div className=''>
                                 <span className='font-bold'>{convertTo12HourFormat(sport.startTime)}</span> 

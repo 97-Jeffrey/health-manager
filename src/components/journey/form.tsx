@@ -39,7 +39,7 @@ const HealthJourneyForm: React.FC<HealthJourneyFormInterface> = ({
 
                 <div className='font-bold text-[25px]'>{isEdit? `Edit "${journey.name}"`:'Add An Event'}</div>
                 <div className='flex flex-col gap-2 '>
-                  <label className="block text-sm font-medium text-gray-700">Event Name</label>
+                  <label className="block text-sm font-medium text-gray-700">Journey Name</label>
                   <input
                       type="name"
                       value={journey.name}
@@ -52,7 +52,7 @@ const HealthJourneyForm: React.FC<HealthJourneyFormInterface> = ({
                 </div>
 
                 <div className='flex flex-col gap-2 '>
-                  <label className="block text-sm font-medium text-gray-700">Event Description</label>
+                  <label className="block text-sm font-medium text-gray-700">Journey Description</label>
                   <textarea
                       value={journey.description}
                       name='description'
@@ -64,7 +64,7 @@ const HealthJourneyForm: React.FC<HealthJourneyFormInterface> = ({
                 </div>
 
                 <div className='flex flex-col gap-2 '>
-                  <label className="block text-sm font-medium text-gray-700">Event Date</label>
+                  <label className="block text-sm font-medium text-gray-700">Journey Date</label>
                   <input
                       type='date'
                       value={journey.date}
@@ -76,11 +76,11 @@ const HealthJourneyForm: React.FC<HealthJourneyFormInterface> = ({
                 </div>
 
                 <div className='flex flex-col gap-2 '>
-                  <label className="block text-sm font-medium text-gray-700">Event Tag</label>
+                  <label className="block text-sm font-medium text-gray-700">Journey Tag</label>
                   <input
                       value={tag}
                       name='tag'
-                      placeholder='reborn'
+                      placeholder='ex: reborn'
                       onBlur={()=>{}}
                       onChange={e=> setTag(e.target.value)}
                       className={STYLES.RECIPE_INPUT}
@@ -131,7 +131,7 @@ const HealthJourneyForm: React.FC<HealthJourneyFormInterface> = ({
                     <button
                         type="submit"
                         className={
-                        `px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${COLORS.ACTIONS_BG_COLOR} hover:bg-blue-700`}
+                        `px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-action-create hover:bg-blue-700`}
                         disabled={loading}
                     >
                         {

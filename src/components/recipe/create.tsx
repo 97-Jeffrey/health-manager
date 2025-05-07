@@ -205,7 +205,7 @@ const RecipeCreate = () =>{
                             <button
                                 type="submit"
                                 className={
-                                `px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${COLORS.ACTIONS_BG_COLOR} hover:bg-blue-700`}
+                                `px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-action-create hover:bg-blue-700`}
                                 disabled={loading}
                             >
                                 {loading ? 'Creating...':'Create'}

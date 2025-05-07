@@ -1,13 +1,16 @@
 import * as STYLES from '../../constants/styles'
 import MealModal from "./mealModal"
 import { useState } from "react"
-import { useMeal } from "../../hooks/useMeal"
 import Success from "../../elements/banner/success"
 import Info from "../../elements/info/info"
 import LoadingSpinner from "../../elements/loading/loadingSpinner"
 import { GroupedMealsArray, sortedMeals } from "../../lib/util/meal"
 import MealDetailModal from "./mealDetailModal"
 import MealCard from './mealCard'
+
+import { useMeal } from "../../hooks/useMeal"
+import { useHydration } from '../../hooks/useHydration'
+import HydrationModal from '../hydration/hydrationModal'
 
 
 
@@ -16,17 +19,26 @@ interface MealListInterface {
 
 
 const MealList: React.FC<MealListInterface> = () =>{
-
-    const [ open, setOpen] = useState<boolean>(false)
-    const [ openDetail, setOpenDetail] = useState<boolean>(false)
+ 
+    const [openMeal, setOpenMeal] = useState<boolean>(false)
+    const [openHydration, setOpenHydraton] = useState<boolean>(false)
+    const [openMealDetail, setOpenMealDetail] = useState<boolean>(false)
     const [selectedMeal, setSelectedMeal] = useState<GroupedMealsArray>({ date:"", data:[] })
 
-    const handleModalOpen = ()=> {
-        setOpen(true)
+    const handleMealModalOpen = ()=> {
+        setOpenMeal(true)
     }
 
-    const handleModalClose = ()=> {
-        setOpen(false)
+    const handleMealModalClose = ()=> {
+        setOpenMeal(false)
+    }
+
+    const handleHydrationModalOpen = ()=> {
+        setOpenHydraton(true)
+    }
+
+    const handleHydrationModalClose = ()=> {
+        setOpenHydraton(false)
     }
 
     const  {
@@ -43,26 +55,52 @@ const MealList: React.FC<MealListInterface> = () =>{
         handleMealUpdate,
         handleMealRemove,
     } = useMeal();
+
+    const {
+        isEdit: isHydrationEdit,
+        success: hydrationSuccess,
+        hydrations,
+        hydration,
+        setSuccess: setHydrationSuccess,
+        handleFieldsChange: handleHydrationFieldsChange,
+        handleHydrationSelect,
+        handleHydrationCreate,
+        handleHydrationUpdate,
+        handleHydrationRemove,
+    } = useHydration()
     
+    console.log('hydrations', hydrations)
+
     const mealSorted: GroupedMealsArray[] = sortedMeals(meals)
     
     return (
         <>
            <MealModal 
-              toDelete={isEdit}
-              isEdit={isEdit}
-              open={open} 
-              handleClose={handleModalClose}
-              meal={meal}
-              handleFieldChange={handleFieldsChange}
-              handleUploadImage={handleUploadMealImage}
-              asyncAction={isEdit? handleMealUpdate:handleMealCreate}
-              asyncDeleteAction={handleMealRemove}  
+                toDelete={isEdit}
+                isEdit={isEdit}
+                open={openMeal} 
+                handleClose={handleMealModalClose}
+                meal={meal}
+                handleFieldChange={handleFieldsChange}
+                handleUploadImage={handleUploadMealImage}
+                asyncAction={isEdit? handleMealUpdate:handleMealCreate}
+                asyncDeleteAction={handleMealRemove}  
            />
 
+            <HydrationModal
+                toDelete={isHydrationEdit}
+                isEdit={isHydrationEdit}
+                open={openHydration} 
+                hydration={hydration}
+                handleClose={handleHydrationModalClose}
+                handleFieldChange={handleHydrationFieldsChange}
+                asyncAction={isEdit? handleHydrationUpdate:handleHydrationCreate}
+                asyncDeleteAction={handleHydrationRemove}  
+            />
+
            <MealDetailModal 
-              open={openDetail}
-              setOpen={setOpenDetail}
+              open={openMealDetail}
+              setOpen={setOpenMealDetail}
               meals={selectedMeal}
            />
 
@@ -75,21 +113,41 @@ const MealList: React.FC<MealListInterface> = () =>{
                 />
             }
 
+            {   
+                hydrationSuccess 
+                   &&
+                <Success
+                  text={hydrationSuccess}
+                  onClose={()=>setHydrationSuccess('')}
+                />
+            }
+
 
            <div className="w-full bg-white rounded-lg shadow-md p-8">
            
                           
                 <div className=' flex flex-row justify-between items-center mb-3'>
                     <div className='font-bold text-[30px]'>My Meals 🍇 🍉 🍑 🥝 🍒</div>
+                    <div className='flex flex-row gap-[20px]'>
                     <button 
                         className={STYLES.ACTION_BUTTON} 
                         onClick={()=>{
                             handleMealSelect('')
-                            handleModalOpen()
+                            handleMealModalOpen()
                         }}
                     >
-                        Create Meal
+                        Add Meal
                     </button>
+                    <button 
+                        className={STYLES.ACTION_BUTTON} 
+                        onClick={()=>{
+                            handleHydrationSelect('')
+                            handleHydrationModalOpen()
+                        }}
+                    >
+                        Add Hydration
+                    </button>
+                    </div>
                 </div>
 
                 <Info
@@ -110,11 +168,12 @@ const MealList: React.FC<MealListInterface> = () =>{
                 <div className='mt-[25px] flex flex-row flex-wrap justify-start items-center gap-[20px]'>
                     {mealSorted.map((meal: GroupedMealsArray)=>(
                         <MealCard 
+                            key={meal.date}
                             meal={meal}
                             handleMealSelect={handleMealSelect}
-                            handleModalOpen={handleModalOpen}
+                            handleModalOpen={handleMealModalOpen}
                             setSelectedMeal={setSelectedMeal}
-                            setOpenDetail={setOpenDetail}
+                            setOpenDetail={setOpenMealDetail}
                         />
                     ))}
                 </div>

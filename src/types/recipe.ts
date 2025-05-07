@@ -22,6 +22,15 @@ export interface MealInterface {
     micronutrients?:MicronutrientsInterface
 }
 
+export interface HydrationInterface {
+    id: string,
+    time: string,
+    date: string,
+    type: string,
+    volume: number,
+    note: string,
+}
+
 export interface MicronutrientsInterface {
     [nutrientName: string]: [number, string]; // [quantity, unit]
 }

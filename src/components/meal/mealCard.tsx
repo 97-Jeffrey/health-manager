@@ -3,11 +3,16 @@ import { formatDate } from "../../lib/util/date"
 import { GroupedMealsArray } from "../../lib/util/meal"
 import { capitalizeFirstChar } from "../../lib/util/string"
 import TooltipGeneral from "../../elements/tooltip/tooltip"
+import { HydrationInterface } from "../../types/recipe"
+import { useState } from "react"
 
 interface MealCardInterface {
     meal: GroupedMealsArray,
+    hydrations: HydrationInterface[],
     handleModalOpen: ()=> void,
+    handleHydrationModalOpen: ()=> void,
     handleMealSelect: (id: string)=> void,
+    handleHydrationSelect: (id: string)=> void,
     setSelectedMeal: (meal: GroupedMealsArray)=> void,
     setOpenDetail: (open: boolean)=> void
 
@@ -16,11 +21,17 @@ interface MealCardInterface {
 
 const MealCard : React.FC<MealCardInterface>= ({ 
     meal,
+    hydrations,
     handleMealSelect,
+    handleHydrationSelect,
     handleModalOpen,
+    handleHydrationModalOpen,
     setSelectedMeal,
     setOpenDetail
 }) =>{
+
+    const [selectedEntry, setSelectedEntry] = useState<string>(meal?.data.length? 'meal': 'hydration')
+
     return (
         <>
             <div key={meal.date} className=' rounded-[20px] w-[300px] h-[240px] border border-1  border-lg shadow-custom bg-white'>
@@ -31,12 +42,38 @@ const MealCard : React.FC<MealCardInterface>= ({
                     {formatDate(meal.date)}
                 </div>
 
-                <div className='text-start mt-[15px] pl-[20px]'>
-                    {meal.data.length} meal{meal.data.length==1? '':'s'}
+                <div className="flex flex-row justiy-start gap-[10px] pl-[20px] mt-[15px]">
+
+                    {
+                    meal.data.length> 0
+                      &&
+                    <div 
+                        className={`cursor-pointer ${selectedEntry === 'meal'? 'font-bold': ""} `}
+                        onClick={()=>{
+                            setSelectedEntry('meal')
+                        }}
+                    >
+                        {meal.data.length} meal{meal.data.length==1? '':'s'}
+                    </div>
+                    }
+                    
+                    {
+                    hydrations.length>0
+                       &&
+                    <div 
+                        className={`cursor-pointer ${selectedEntry === 'hydration'? 'font-bold': ""} `}
+                        onClick={()=>{
+                            setSelectedEntry('hydration')
+                        }}
+                    >
+                        {hydrations.length} hydration{hydrations.length==1? '':'s'}
+                    </div>
+                    }
                 </div>
 
                 <div className='h-[80px] overflow-y-scroll'>
                 {
+                   selectedEntry === 'meal' ? 
                     meal.data.map(meal=>(
                         <div key={meal.id} className='w-100 flex flex-row justify-start items-center gap-[15px] text-start mt-[15px] font-bold  pl-[20px]'>
                             <div>"{capitalizeFirstChar(meal.name)}" </div>
@@ -49,6 +86,28 @@ const MealCard : React.FC<MealCardInterface>= ({
                             >
                                 <TooltipGeneral 
                                     text='Edit the meal'
+                                    placement="right"
+                                > 
+                                    <div>
+                                        <FiEdit2 />
+                                    </div>
+                                </TooltipGeneral>
+                            </div>
+                        </div>
+
+                    )):
+                    hydrations.map(hydration=>(
+                        <div key={hydration.id} className='w-100 flex flex-row justify-start items-center gap-[15px] text-start mt-[15px] font-bold  pl-[20px]'>
+                            <div>"{capitalizeFirstChar(hydration.type)}" </div>
+                            <div 
+                                className='cursor-pointer'
+                                onClick={()=>{
+                                    handleHydrationSelect(hydration.id)
+                                    handleHydrationModalOpen()
+                                }}
+                            >
+                                <TooltipGeneral 
+                                    text='Edit the hydration'
                                     placement="right"
                                 > 
                                     <div>

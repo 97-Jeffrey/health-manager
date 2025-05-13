@@ -69,7 +69,7 @@ export const useHydration = () =>{
         e.preventDefault()
         setLoading(true)
         try{
-             await updateHydration(hydration)
+            await updateHydration(hydration)
             setSuccess("Hydration Updated Successfully")
             setIsEdit(false)
             setHydration(INITIAL_HYDRATION)

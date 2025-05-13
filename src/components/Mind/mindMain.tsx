@@ -76,6 +76,13 @@ const MindMeditation: React.FC<MindMeditationInterface> = ({  section }) =>{
                     </button>
                 </div>
 
+                <Info
+                    text={`
+                        Log your ${section} entry effortlessly and stay on top of your mental-health goals! 
+
+                   `}
+                />
+
                 {
                     loading
                     &&

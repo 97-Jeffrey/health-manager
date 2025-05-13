@@ -24,11 +24,11 @@ const MealDetailEntry: React.FC<MealDetailEntryInterface> = ({ meal }) =>{
                 <div className="bg-[#f5f5f5] flex flex-col items-center">
                     <div 
                         
-                        className={' rounded-[10px] p-[15px] w-100 flex flex-row justify-between items-center gap-[15px]'}
+                        className={' rounded-[10px] p-[15px] w-100 flex flex-row justify-between items-start gap-[15px]'}
                     >
                         <div className='font-bold w-[150px]'>{capitalizeFirstChar(meal.name)}</div>
                         <div className='font-bold w-[100px]'>{convertTo12HourFormat(meal.startTime)} - {convertTo12HourFormat(meal.endTime)}</div>
-                        <div className='w-[200px]'>{capitalizeFirstChar(meal.note)}</div>
+                        <div className='w-[200px] overflow-y-scroll'>{capitalizeFirstChar(meal.note)}</div>
                         {meal.image ?
                             <img 
                                 src={meal.image} 

@@ -68,8 +68,6 @@ const MealList: React.FC<MealListInterface> = () =>{
         handleHydrationUpdate,
         handleHydrationRemove,
     } = useHydration()
-    
-    console.log('hydrations', hydrations)
 
     const mealSorted: GroupedMealsArray[] = sortedMeals(meals)
     
@@ -94,7 +92,7 @@ const MealList: React.FC<MealListInterface> = () =>{
                 hydration={hydration}
                 handleClose={handleHydrationModalClose}
                 handleFieldChange={handleHydrationFieldsChange}
-                asyncAction={isEdit? handleHydrationUpdate:handleHydrationCreate}
+                asyncAction={isHydrationEdit? handleHydrationUpdate:handleHydrationCreate}
                 asyncDeleteAction={handleHydrationRemove}  
             />
 
@@ -102,6 +100,7 @@ const MealList: React.FC<MealListInterface> = () =>{
               open={openMealDetail}
               setOpen={setOpenMealDetail}
               meals={selectedMeal}
+              hydrations={hydrations.filter(hydr=>hydr.date === selectedMeal.date)}
            />
 
             {
@@ -166,16 +165,23 @@ const MealList: React.FC<MealListInterface> = () =>{
                 }
 
                 <div className='mt-[25px] flex flex-row flex-wrap justify-start items-center gap-[20px]'>
-                    {mealSorted.map((meal: GroupedMealsArray)=>(
-                        <MealCard 
-                            key={meal.date}
-                            meal={meal}
-                            handleMealSelect={handleMealSelect}
-                            handleModalOpen={handleMealModalOpen}
-                            setSelectedMeal={setSelectedMeal}
-                            setOpenDetail={setOpenMealDetail}
-                        />
-                    ))}
+                    {mealSorted.map((meal: GroupedMealsArray)=>{
+                        const hydration = hydrations.filter(hydra => hydra.date ===meal.date);
+
+                        return (
+                            <MealCard 
+                                key={meal.date}
+                                meal={meal}
+                                hydrations={hydration}
+                                handleHydrationSelect={handleHydrationSelect}
+                                handleMealSelect={handleMealSelect}
+                                handleModalOpen={handleMealModalOpen}
+                                handleHydrationModalOpen={handleHydrationModalOpen}
+                                setSelectedMeal={setSelectedMeal}
+                                setOpenDetail={setOpenMealDetail}
+                            />
+                        )
+                    })}
                 </div>
             </div>
         </>
